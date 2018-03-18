@@ -1,0 +1,13 @@
+<div *ngIf="hero">
+  <h2>{{ hero.name | uppercase }} details</h2>
+  <div><span>id: </span>{{hero._id}}</div>
+  <div>
+    <label>
+        name:
+        <input [(ngModel)]="hero.name" placeholder="name">
+    </label>
+  </div>
+  <button (click)="onClickGoBack()">Back</button>
+  <button (click)="onClickDeleteHero()">Delete Hero</button>
+  <button (click)="onClickSaveHero()">Save Hero</button>
+</div>
