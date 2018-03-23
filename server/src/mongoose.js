@@ -19,7 +19,10 @@ module.exports.connect = function init(callback) {
     .then(function (connection) {
       // Enabling mongoose debug mode if required
       mongoose.set('debug', config.db.debug);
-      seedTools.seedHeroesData();
+
+      //Seed sample data used on development mode.
+      seedTools.seedSampleData();
+
       // Call callback FN
       if (callback) callback(connection.db);
     })
