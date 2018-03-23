@@ -21,6 +21,7 @@ import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './login/register/register.component';
 import { GlobalsService } from './globals/globals.service';
 import { AuthGuard } from './auth/auth.guard';
+import { AccountsComponent } from './components/main/accounts/accounts.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AuthGuard } from './auth/auth.guard';
     DashboardComponent,
     HeroSearchComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AccountsComponent
   ],
 
   imports: [
