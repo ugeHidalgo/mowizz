@@ -8,20 +8,25 @@ import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { ToastrCustomOptions } from './messages/toastrCustomOptions';
 
 import { AppComponent } from './app.component';
+
+import { AccountsComponent } from './components/main/accounts/accounts.component';
 import { HeroesComponent } from './heroes/heroes/heroes.component';
 import { HeroDetailComponent } from './heroes/hero-detail/hero-detail.component';
-import { UserService } from './services/user/user.service';
-import { HeroService } from './services/hero/hero.service';
-import { MessagesComponent } from './messages/messages.component';
-import { MessageService } from './services/message/message.service';
-import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './login/register/register.component';
+
+import { UserService } from './services/user/user.service';
+import { HeroService } from './services/hero/hero.service';
+import { MessageService } from './services/message/message.service';
+
+import { MessagesComponent } from './messages/messages.component';
+import { AppRoutingModule } from './/app-routing.module';
 import { GlobalsService } from './globals/globals.service';
 import { AuthGuard } from './auth/auth.guard';
-import { AccountsComponent } from './components/main/accounts/accounts.component';
+import { AccountService } from './services/account/account.service';
+
 
 @NgModule({
   declarations: [
@@ -49,6 +54,7 @@ import { AccountsComponent } from './components/main/accounts/accounts.component
     AuthGuard,
     UserService,
     HeroService,
+    AccountService,
     MessageService,
     {provide: ToastOptions, useClass: ToastrCustomOptions },
     GlobalsService

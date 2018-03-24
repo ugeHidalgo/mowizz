@@ -1,3 +1,7 @@
-<p>
-  accounts works!
-</p>
+<ul class="accounts">
+  <li *ngFor="let account of accounts">
+    <a routerLink="/accounts/{{account._id}}">
+      <span class="badge">*</span> {{account.name}}
+    </a>
+  </li>
+</ul>
