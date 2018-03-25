@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   model: any = {};
   loading = false;
+  showLoginWindow: boolean;
 
   constructor(
     private router: Router,
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
  }
 
   ngOnInit() {
+    this.showLoginWindow = !this.showLoginWindow;
   }
 
   onLogin() {
@@ -46,12 +48,4 @@ export class LoginComponent implements OnInit {
         }
       );
   }
-
-  /* onCancel() {
-    this.router.navigate(['/']);
-  }
-
-  onRegister() {
-    this.router.navigate(['/register']);
-  } */
 }
