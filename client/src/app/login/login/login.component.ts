@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  login() {
+  onLogin() {
     const me = this;
 
     me.loading = true;
@@ -46,4 +46,12 @@ export class LoginComponent implements OnInit {
         }
       );
   }
+
+  /* onCancel() {
+    this.router.navigate(['/']);
+  }
+
+  onRegister() {
+    this.router.navigate(['/register']);
+  } */
 }

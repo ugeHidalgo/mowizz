@@ -19,10 +19,11 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "./sass/styles.scss",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
-        "./sass/styles.scss",
-        "../node_modules/amexio-ng-extensions/styles/mda/at-md-blue.scss"
+        "../node_modules/font-awesome/scss/font-awesome.scss",
+        "../node_modules/amexio-ng-extensions/styles/mda/at-md-navy-egyptian.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
