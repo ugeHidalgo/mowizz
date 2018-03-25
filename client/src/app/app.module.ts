@@ -4,8 +4,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
+import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr'; // Toaster library used to messaging
 import { ToastrCustomOptions } from './messages/toastrCustomOptions';
+import {AmexioWidgetModule} from 'amexio-ng-extensions'; // Amexio API components library
 
 import { AppComponent } from './app.component';
 
@@ -47,7 +48,8 @@ import { AccountService } from './services/account/account.service';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    ToastModule.forRoot()
+    ToastModule.forRoot(),
+    AmexioWidgetModule
   ],
 
   providers: [

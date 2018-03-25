@@ -21,7 +21,8 @@
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
-        "./sass/styles.scss"
+        "./sass/styles.scss",
+        "../node_modules/amexio-ng-extensions/styles/mda/at-md-blue.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
