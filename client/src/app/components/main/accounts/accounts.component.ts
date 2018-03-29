@@ -2,7 +2,6 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Account } from '../../../models/account';
 import { AccountService } from '../../../services/account/account.service';
 import { ToastsManager } from 'ng2-toastr';
 
@@ -13,14 +12,16 @@ import { ToastsManager } from 'ng2-toastr';
 })
 export class AccountsComponent implements OnInit {
 
-  accounts: Account[];
+  accounts: any;
 
   constructor(private accountService: AccountService, public toastr: ToastsManager, vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
+
+    this.accounts = [];
+    this.getAccounts();
   }
 
   ngOnInit() {
-    this.getAccounts();
   }
 
   getAccounts(): void {
