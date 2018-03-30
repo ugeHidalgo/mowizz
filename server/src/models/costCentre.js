@@ -1,10 +1,9 @@
 var moongoose = require ('mongoose'),
     Schema = moongoose.Schema,
-    AccountSchema = new Schema ({
+    CostCentreSchema = new Schema ({
         id : Number,
         name : String,
         description: String,
-        iban: String,
         active : { type : Boolean, default : true },
         created : { type : Date, default : Date.now },
         updated : { type : Date, default : Date.now },
@@ -12,4 +11,4 @@ var moongoose = require ('mongoose'),
         username : String
     });
 
-module.exports = moongoose.model ('Accounts', AccountSchema);
+module.exports = moongoose.model ('CostCentres', CostCentreSchema);

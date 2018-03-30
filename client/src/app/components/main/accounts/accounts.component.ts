@@ -26,7 +26,8 @@ export class AccountsComponent {
     this.gridOptions = <GridOptions>{};
     this.columnDefs = [
         { headerName: 'Active', field: 'active', width: 40, valueFormatter: this.booleanFormatter },
-        { headerName: 'Name', field: 'name', width: 100 },
+        { headerName: 'Name', field: 'name', width: 50 },
+        { headerName: 'Description', field: 'description', width: 120 },
         { headerName: 'IBAN', field: 'iban', width: 150 },
         { headerName: 'Comments', field: 'comments' }
     ];
