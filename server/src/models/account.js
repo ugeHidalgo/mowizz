@@ -7,7 +7,7 @@ var moongoose = require ('mongoose'),
         active : { type : Boolean, default : true },
         created : { type : Date, default : Date.now },
         updated : { type : Date, default : Date.now },
-        comment: String,
+        comments: String,
         username : String
     });
 

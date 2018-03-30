@@ -15,6 +15,7 @@ module.exports.seedAccountsData = function (defaultUser) {
                 console.log ('Data seed tool: Seeding accounts data into database.');
                 accountsSeedData.initialAccounts.forEach (function (account) {
                     newAccount = new Account(account);
+                    newAccount.username = defaultUser;
                     newAccount.save(function (error){
                         if (error){
                             console.log (`Data seed tool: Failed to insert account ${account.name} in database: ${error}`);

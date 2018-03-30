@@ -2,7 +2,7 @@ export class Account {
     _id: string;
     name: string;
     iban: string;
-    comment: string;
+    comments: string;
     active: boolean;
     created: Date;
     updated: Date;

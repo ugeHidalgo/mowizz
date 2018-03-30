@@ -28,7 +28,7 @@ export class AccountsComponent {
         { headerName: 'Active', field: 'active', width: 40, valueFormatter: this.booleanFormatter },
         { headerName: 'Name', field: 'name', width: 100 },
         { headerName: 'IBAN', field: 'iban', width: 150 },
-        { headerName: 'Comment', field: 'comment' }
+        { headerName: 'Comments', field: 'comments' }
     ];
   }
 
@@ -49,7 +49,7 @@ export class AccountsComponent {
       });
   }
 
-  booleanFormatter(value) {
-    return (value) ? 'X' : '';
+  booleanFormatter(row) {
+    return (row.data.active === true) ? 'X' : '';
   }
 }
