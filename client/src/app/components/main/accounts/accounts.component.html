@@ -7,8 +7,23 @@
 </ul> -->
 
 <div class="accounts-grid"> 
+  <ag-grid-angular style="width: 800px; height: 200px;"
+                  class="ag-fresh"
+                  [rowData]="rowData"
+                  [columnDefs]="columnDefs"
+                  [gridOptions]="gridOptions"
+                  (gridReady)="onGridReady($event)"
+                  [pagination]="true"
+                  [paginationPageSize]="10"
+                  [enableColResize]="true"
+                  [enableSorting]="true"
+                  [enableFilter]="true">
+  </ag-grid-angular>
+</div>
+
+<!-- <div class="accounts-grid table table-striped"> 
   <amexio-datagrid
-    [class]="'.table .table-striped .table-condensed'"
+    class="table table-striped table-sm"
     [enable-column-fiter]="true"
     [height]="200"
     title="Accounts"
@@ -31,4 +46,4 @@
                               [text]="'Comment'">
     </amexio-data-table-column>
   </amexio-datagrid>
-</div>
+</div> -->

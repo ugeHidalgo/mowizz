@@ -6,7 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr'; // Toaster library used to messaging
 import { ToastrCustomOptions } from './messages/toastrCustomOptions';
-import {AmexioWidgetModule} from 'amexio-ng-extensions'; // Amexio API components library
+import { AmexioWidgetModule } from 'amexio-ng-extensions'; // Amexio API components library
+import { AgGridModule } from 'ag-grid-angular/main'; // AgGrid component library
 
 import { AppComponent } from './app.component';
 
@@ -49,7 +50,8 @@ import { AccountService } from './services/account/account.service';
     AppRoutingModule,
     HttpClientModule,
     ToastModule.forRoot(),
-    AmexioWidgetModule
+    AmexioWidgetModule,
+    AgGridModule.withComponents([])
   ],
 
   providers: [

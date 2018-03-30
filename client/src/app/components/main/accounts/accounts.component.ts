@@ -4,24 +4,40 @@ import { Location } from '@angular/common';
 
 import { AccountService } from '../../../services/account/account.service';
 import { ToastsManager } from 'ng2-toastr';
+import { GridOptions } from 'ag-grid/main';
+
 
 @Component({
   selector: 'app-accounts',
   templateUrl: './accounts.component.html',
   styleUrls: ['./accounts.component.scss']
 })
-export class AccountsComponent implements OnInit {
+export class AccountsComponent {
 
-  accounts: any;
+  gridOptions: GridOptions;
+  columnDefs: any[];
+  rowData: any[];
 
-  constructor(private accountService: AccountService, public toastr: ToastsManager, vcr: ViewContainerRef) {
+  constructor(private accountService: AccountService, public toastr: ToastsManager, vcr: ViewContainerRef ) {
+
     this.toastr.setRootViewContainerRef(vcr);
-
-    this.accounts = [];
     this.getAccounts();
+
+    this.gridOptions = <GridOptions>{};
+    this.columnDefs = [
+        { headerName: 'Active', field: 'active', width: 40, valueFormatter: this.booleanFormatter },
+        { headerName: 'Name', field: 'name', width: 100 },
+        { headerName: 'IBAN', field: 'iban', width: 150 },
+        { headerName: 'Comment', field: 'comment' }
+    ];
   }
 
-  ngOnInit() {
+  onGridReady(params) {
+      params.api.sizeColumnsToFit();
+  }
+
+  selectAllRows() {
+      this.gridOptions.api.selectAll();
   }
 
   getAccounts(): void {
@@ -29,8 +45,11 @@ export class AccountsComponent implements OnInit {
 
     me.accountService.getAccounts()
       .subscribe(accounts => {
-        me.accounts = accounts;
+        me.rowData = accounts;
       });
   }
 
+  booleanFormatter(value) {
+    return (value) ? 'X' : '';
+  }
 }
