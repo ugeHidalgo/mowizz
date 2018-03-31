@@ -15,13 +15,13 @@ var url = require ('url'),
 
 module.exports.init = function (app) {
     // (POST)http:localhost:3000/api/accounts body: {name: 'a name', username:'ugeHidalgo'}
-    app.post('/api/accounts', auth.isUserAuthenticated, function(request, response, next){
+    app.post('/api/account', auth.isUserAuthenticated, function(request, response, next){
 
         var accountToUpdate =  request.body;
 
         accountManager.updateAccount ( accountToUpdate, function(error, updatedAccount){
              if (error){
-                response.status(400).send('Failed to save account: ' + updatedAccount.name);
+                response.status(400).send('Failed to save account: ' + accountToUpdate.name);
             } else {
                 response.set('Content-Type','application/json');
                 response.status(201).send(updatedAccount);

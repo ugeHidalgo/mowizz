@@ -1,3 +1,25 @@
-<p>
-  account-detail works!
-</p>
+<div *ngIf="account">
+  <h2>{{ account.name | uppercase }} details</h2>
+  <div><span>id: </span>{{account.name}}</div>
+  <div>
+    <label>
+      Name:
+      <input [(ngModel)]="account.name" placeholder="name">
+    </label>
+    <label>
+      Description:
+      <input [(ngModel)]="account.description" placeholder="description">
+    </label>
+  </div>
+  <div>
+    <label>
+      IBAN:
+      <input [(ngModel)]="account.iban" placeholder="iban">
+    </label><label>
+      Comments:
+      <input [(ngModel)]="account.comments" placeholder="comments">
+    </label>
+  </div>
+  <button (click)="onClickGoBack()">Back</button>
+  <button (click)="onClickSave()">Save</button>
+</div>

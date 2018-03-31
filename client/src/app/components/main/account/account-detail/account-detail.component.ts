@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+
+import { ToastsManager } from 'ng2-toastr';
+import { Account } from '../../../../models/account';
+import { AccountService } from '../../../../services/account/account.service';
 
 @Component({
   selector: 'app-account-detail',
@@ -7,9 +13,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountDetailComponent implements OnInit {
 
-  constructor() { }
+  account: Account;
+
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    private accountService: AccountService,
+    public toastr: ToastsManager, vcr: ViewContainerRef) {
+      this.toastr.setRootViewContainerRef(vcr);
+   }
 
   ngOnInit() {
+    const me = this,
+      id = me.route.snapshot.paramMap.get('id');
+
+    me.getAccountById(id);
+  }
+
+  getAccountById(id: string): void {
+    const me = this;
+
+    me.accountService.getAccountById(id)
+      .subscribe( account => {
+          me.account = account[0];
+      });
+  }
+
+  // Buttons actions
+
+  onClickGoBack() {
+    this.location.back();
+  }
+
+  onClickSave(): void {
+    const me = this;
+
+    me.accountService.updateAccount(me.account)
+      .subscribe( () => {
+          me.toastr.success('Successfully saved.', 'Saved!');
+          me.location.back();
+        }
+      );
   }
 
 }

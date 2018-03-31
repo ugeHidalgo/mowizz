@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { AccountService } from '../../../../services/account/account.service';
 import { ToastsManager } from 'ng2-toastr';
@@ -18,7 +18,11 @@ export class AccountsComponent {
   columnDefs: any[];
   rowData: any[];
 
-  constructor(private accountService: AccountService, public toastr: ToastsManager, vcr: ViewContainerRef ) {
+  constructor(
+    private router: Router,
+    private accountService: AccountService,
+    public toastr: ToastsManager,
+    vcr: ViewContainerRef ) {
 
     this.toastr.setRootViewContainerRef(vcr);
     this.getAccounts();
@@ -36,6 +40,12 @@ export class AccountsComponent {
   onGridReady(params) {
       params.api.sizeColumnsToFit();
   }
+
+  private onRowDoubleClicked($event) {
+    const pathToAccountDetail = `/account/${$event.node.data._id}`;
+
+    this.router.navigate([pathToAccountDetail]);
+}
 
   selectAllRows() {
       this.gridOptions.api.selectAll();

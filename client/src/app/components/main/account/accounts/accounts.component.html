@@ -17,7 +17,9 @@
                   [paginationPageSize]="10"
                   [enableColResize]="true"
                   [enableSorting]="true"
-                  [enableFilter]="true">
+                  [enableFilter]="true"
+                  
+                  (cellDoubleClicked)="onRowDoubleClicked($event)">
   </ag-grid-angular>
 </div>
 

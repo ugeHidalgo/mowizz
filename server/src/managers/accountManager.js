@@ -32,10 +32,12 @@ module.exports.updateAccount = function (account, callbackFn) {
     if (account._id) {
         //Update existing.
         updatedValues = {
+            active: account.active,
             name: account.name,
+            description: account.description,
             iban: account.iban,
-            comment: account.comment,
-            updated: Date.now
+            comments: account.comments,
+            updated: new Date
         };
  
          Account.findOneAndUpdate(
