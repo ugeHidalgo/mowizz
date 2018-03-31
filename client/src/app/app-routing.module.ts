@@ -8,7 +8,7 @@ import { RegisterComponent } from './login/register/register.component';
 import { HeroesComponent } from './heroes/heroes/heroes.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroDetailComponent } from './heroes/hero-detail/hero-detail.component';
-import { AccountsComponent } from './components/main/accounts/accounts.component';
+import { AccountsComponent } from './components/main/account/accounts/accounts.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full'},

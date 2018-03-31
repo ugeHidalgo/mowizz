@@ -2,7 +2,7 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { AccountService } from '../../../services/account/account.service';
+import { AccountService } from '../../../../services/account/account.service';
 import { ToastsManager } from 'ng2-toastr';
 import { GridOptions } from 'ag-grid/main';
 

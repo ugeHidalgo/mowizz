@@ -11,7 +11,8 @@ import { AgGridModule } from 'ag-grid-angular/main'; // AgGrid component library
 
 import { AppComponent } from './app.component';
 
-import { AccountsComponent } from './components/main/accounts/accounts.component';
+import { AccountsComponent } from './components/main/account/accounts/accounts.component';
+import { AccountDetailComponent } from './components/main/account/account-detail/account-detail.component';
 import { HeroesComponent } from './heroes/heroes/heroes.component';
 import { HeroDetailComponent } from './heroes/hero-detail/hero-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -20,6 +21,7 @@ import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './login/register/register.component';
 
 import { UserService } from './services/user/user.service';
+import { AccountService } from './services/account/account.service';
 import { HeroService } from './services/hero/hero.service';
 import { MessageService } from './services/message/message.service';
 
@@ -27,7 +29,6 @@ import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { GlobalsService } from './globals/globals.service';
 import { AuthGuard } from './auth/auth.guard';
-import { AccountService } from './services/account/account.service';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { AccountService } from './services/account/account.service';
     HeroSearchComponent,
     LoginComponent,
     RegisterComponent,
-    AccountsComponent
+    AccountsComponent,
+    AccountDetailComponent
   ],
 
   imports: [
