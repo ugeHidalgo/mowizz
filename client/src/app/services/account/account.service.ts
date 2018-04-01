@@ -26,11 +26,12 @@ export class AccountService {
   ) { }
 
   /**.*/
-  getAccounts(): Observable<Account[]> {
+  getAccounts(userName: string): Observable<Account[]> {
     const me = this,
+          getUserNameAccountsUrl = `${me.accountsUrl}/?username=${userName}`,
           httpOptions = me.createHttpOptionsWithToken();
 
-    return me.http.get<Account[]>(me.accountsUrl, httpOptions)
+    return me.http.get<Account[]>(getUserNameAccountsUrl, httpOptions)
               .pipe(
                 tap(accounts => me.log('Accounts fetched.')),
                 catchError(me.handleError('getAccounts', []))

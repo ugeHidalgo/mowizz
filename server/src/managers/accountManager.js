@@ -8,9 +8,9 @@ var defaultUserName = 'ugehidalgo',
     mongoose = require ('mongoose'),
     Account = require ('../models/account');
 
-module.exports.getAccounts = function (callbackFn) {
+module.exports.getAccounts = function (userName, callbackFn) {
 
-    Account.find({username: defaultUserName}, callbackFn);
+    Account.find({username: userName}, callbackFn);
 };
 
 module.exports.getAccountById = function (id, callbackFn) {

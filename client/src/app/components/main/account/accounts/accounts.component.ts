@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AccountService } from '../../../../services/account/account.service';
 import { ToastsManager } from 'ng2-toastr';
 import { GridOptions } from 'ag-grid/main';
+import { GlobalsService } from '../../../../globals/globals.service';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class AccountsComponent {
 
   constructor(
     private router: Router,
+    protected globals: GlobalsService,
     private accountService: AccountService,
     public toastr: ToastsManager,
     vcr: ViewContainerRef ) {
@@ -61,7 +63,7 @@ export class AccountsComponent {
   private getAccounts(): void {
     const me = this;
 
-    me.accountService.getAccounts()
+    me.accountService.getAccounts(me.globals.userNameLogged)
       .subscribe(accounts => {
         me.rowData = accounts;
       });

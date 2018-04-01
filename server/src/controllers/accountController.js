@@ -30,23 +30,49 @@ module.exports.init = function (app) {
     });
 
     app.get ('/api/accounts', auth.isUserAuthenticated, function (req, res, next) {
+        var queryString = url.parse(req.url, true).query,
+            userName = queryString.username, 
+            id = queryString.id;
+
         // (GET)http:localhost:3000/api/accounts
         if (res.error) {
             res.status(401).send(res.error);
         }
-        accountManager.getAccounts (function(error, data){
-            if (error){
-                console.log('accounts controller returns an error (400)');
-                res.status(400).send(error);
-            } else {
-                console.log(`accounts controller returns ${data.length} accounts successfully`);
-                res.set('Content-Type','application/json');
-                res.status(200).send(data);
-            }
-        });
+
+        if (userName) {
+            accountManager.getAccounts (userName, function(error, data){
+                if (error){
+                    console.log('accounts controller returns an error (400)');
+                    res.status(400).send(error);
+                } else {
+                    console.log(`accounts controller returns ${data.length} accounts successfully`);
+                    res.set('Content-Type','application/json');
+                    res.status(200).send(data);
+                }
+            });
+        }
+
+        if (id) {
+            accountManager.getAccountById ( id, function(error, account){
+                if (error){
+                    console.log('accounts controller returns an error (400)');
+                    res.status(400).send(error);
+                } else {
+                    res.set('Content-Type','application/json');
+                    if (account.length === 0 ) {
+                        msg = `No account found with id: ${id}`;
+                        console.log(msg);
+                        res.status(200).send([msg]);
+                    } else {
+                        console.log(`accounts controller returns account ${id} successfully.`);
+                        res.send(account);
+                    }
+                }
+            });
+        }
     });
 
-    app.get ('/api/accounts/:id', auth.isUserAuthenticated, function (req, res, next) {
+    /* app.get ('/api/accounts/:id', auth.isUserAuthenticated, function (req, res, next) {
         var id = req.params.id,
             msg;
 
@@ -67,7 +93,7 @@ module.exports.init = function (app) {
                 }
             }
         });
-    });
+    }); */
 
     app.get ('/api/account', auth.isUserAuthenticated, function (req, res, next) {
         // By name: (GET)http:localhost:3000/api/account/?name=superman
