@@ -12,6 +12,7 @@ import { GridOptions } from 'ag-grid/main';
   templateUrl: './accounts.component.html',
   styleUrls: ['./accounts.component.scss']
 })
+
 export class AccountsComponent {
 
   gridOptions: GridOptions;
@@ -45,13 +46,19 @@ export class AccountsComponent {
     const pathToAccountDetail = `/account/${$event.node.data._id}`;
 
     this.router.navigate([pathToAccountDetail]);
-}
+  }
 
-  selectAllRows() {
+  private onClickAddButton() {
+    const pathToAccountDetail = `/account/-1`;
+
+    this.router.navigate([pathToAccountDetail]);
+  }
+
+  private selectAllRows() {
       this.gridOptions.api.selectAll();
   }
 
-  getAccounts(): void {
+  private getAccounts(): void {
     const me = this;
 
     me.accountService.getAccounts()
@@ -60,7 +67,7 @@ export class AccountsComponent {
       });
   }
 
-  booleanFormatter(row) {
+  private booleanFormatter(row) {
     return (row.data.active === true) ? 'X' : '';
   }
 }

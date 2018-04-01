@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr';
 import { Account } from '../../../../models/account';
 import { AccountService } from '../../../../services/account/account.service';
+import { GlobalsService } from '../../../../globals/globals.service';
 
 @Component({
   selector: 'app-account-detail',
@@ -18,6 +19,7 @@ export class AccountDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private location: Location,
+    protected globals: GlobalsService,
     private accountService: AccountService,
     public toastr: ToastsManager, vcr: ViewContainerRef) {
       this.toastr.setRootViewContainerRef(vcr);
@@ -27,7 +29,12 @@ export class AccountDetailComponent implements OnInit {
     const me = this,
       id = me.route.snapshot.paramMap.get('id');
 
-    me.getAccountById(id);
+    if (id === '-1') {
+      me.account = new Account();
+      me.account.username = me.globals.userNameLogged;
+    } else {
+      me.getAccountById(id);
+    }
   }
 
   getAccountById(id: string): void {
