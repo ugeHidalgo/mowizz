@@ -11,7 +11,6 @@ var url = require ('url'),
 module.exports.init = function (app) {
     // (POST)http:localhost:3000/api/accounts body: {name: 'a name', username:'ugeHidalgo'}
     app.post('/api/account', auth.isUserAuthenticated, function(req, res, next){
-
         var accountToUpdate =  req.body;
 
         accountManager.updateAccount ( accountToUpdate, function(error, updatedAccount){
@@ -24,11 +23,11 @@ module.exports.init = function (app) {
         });
     });
 
+    // (GET)http:localhost:3000/api/accounts/?username=pepe
     app.get ('/api/accounts', auth.isUserAuthenticated, function (req, res, next) {
         var queryString = url.parse(req.url, true).query,
             userName = queryString.username;
 
-        // (GET)http:localhost:3000/api/accounts/?username=pepe
         if (res.error) {
             res.status(401).send(res.error);
         }
@@ -38,8 +37,8 @@ module.exports.init = function (app) {
         }
     });
 
+    // (GET)http:localhost:3000/api/account/?id=5a78a8fe458a4c457a3b4969    
     app.get ('/api/account', auth.isUserAuthenticated, function (req, res, next) {
-        // (GET)http:localhost:3000/api/account/?id=5a78a8fe458a4c457a3b4969
         var queryString = url.parse(req.url, true).query,
             id = queryString.id;
 
@@ -76,6 +75,7 @@ function getAccountById(id, res) {
 }
 
 function getUserAccounts(userName, res) {
+    
     accountManager.getAccounts (userName, function(error, data){
         if (error){
             console.log('accounts controller returns an error (400)');
