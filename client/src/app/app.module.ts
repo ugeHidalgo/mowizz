@@ -29,6 +29,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { GlobalsService } from './globals/globals.service';
 import { AuthGuard } from './auth/auth.guard';
+import { CostCentresComponent } from './components/main/costcentres/costcentres/costcentres.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { AuthGuard } from './auth/auth.guard';
     LoginComponent,
     RegisterComponent,
     AccountsComponent,
-    AccountDetailComponent
+    AccountDetailComponent,
+    CostCentresComponent
   ],
 
   imports: [

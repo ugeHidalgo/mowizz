@@ -10,16 +10,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroDetailComponent } from './heroes/hero-detail/hero-detail.component';
 import { AccountsComponent } from './components/main/account/accounts/accounts.component';
 import { AccountDetailComponent } from './components/main/account/account-detail/account-detail.component';
+import { CostCentresComponent } from './components/main/costcentres/costcentres/costcentres.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'heroes', component: HeroesComponent, canActivate: [AuthGuard]},
   { path: 'accounts', component: AccountsComponent, canActivate: [AuthGuard]},
   { path: 'account/:id', component: AccountDetailComponent, canActivate: [AuthGuard] },
-  { path: 'heroes/:id', component: HeroDetailComponent, canActivate: [AuthGuard] }
+  { path: 'costcentres', component: CostCentresComponent, canActivate: [AuthGuard]},
+  { path: 'costcentres/:id', component: HeroDetailComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
