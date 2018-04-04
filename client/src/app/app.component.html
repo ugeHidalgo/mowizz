@@ -20,7 +20,7 @@
     </ul>
     </ng-template>
 </nav> -->
-<div class="main-nav-bar">
+<div>
 <amexio-nav [enable-side-nav-position]="false"
   [title]="'MoWiZZ'"	
   [logo]="'assets/images/logos/mowizz-logo.png'">
@@ -64,7 +64,10 @@
     </ng-template>
 </amexio-nav>
 </div>
-<app-messages></app-messages>
-<router-outlet></router-outlet>
+
+<div classs="container">
+    <app-messages></app-messages>
+    <router-outlet></router-outlet>
+</div>
 
 
