@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+// External libraries
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr'; // Toaster library used to messaging
 import { ToastrCustomOptions } from './messages/toastrCustomOptions';
 import { AmexioWidgetModule } from 'amexio-ng-extensions'; // Amexio API components library

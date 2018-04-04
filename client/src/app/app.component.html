@@ -20,8 +20,8 @@
     </ul>
     </ng-template>
 </nav> -->
-
-<amexio-nav [enable-side-nav-position]="false" 
+<div class="main-nav-bar">
+<amexio-nav [enable-side-nav-position]="false"
   [title]="'MoWiZZ'"	
   [logo]="'assets/images/logos/mowizz-logo.png'">
     <amexio-nav-item position-left
@@ -29,11 +29,14 @@
       [title]="'Dashboard'"
       [routerLink]="['/dashboard']">
     </amexio-nav-item>
-    <amexio-nav-item position-left
-      [type]="'link'" 
-      [title]="'Accounts'"
-      [routerLink]="['/accounts']">
+
+    <amexio-nav-item position-left *ngFor="let menus of topMenuData" 
+      [type]="'menu'" 
+      [title]="menus.text"
+      [data]="menus.submenus"
+      (onNavItemClick)="onClick($event.data.node.routerLink)">
     </amexio-nav-item>
+
     <amexio-nav-item *ngIf="globals.userNameLogged else notUserLogged" position-right
         [type]="'link'"
         [title]='globals.userNameLogged'
@@ -60,7 +63,7 @@
         </amexio-nav-item>
     </ng-template>
 </amexio-nav>
-
+</div>
 <app-messages></app-messages>
 <router-outlet></router-outlet>
 

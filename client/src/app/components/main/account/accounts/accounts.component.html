@@ -5,8 +5,9 @@
     </a>
   </li>
 </ul> -->
+
 <div>
-  <button (click)="onClickAddButton()">Back</button>
+  <button (click)="onClickAddButton()">New</button>
 </div>
 <div class="accounts-grid"> 
   <ag-grid-angular style="width: 900px; height: 200px;"
@@ -24,6 +25,8 @@
                   (cellDoubleClicked)="onRowDoubleClicked($event)">
   </ag-grid-angular>
 </div>
+
+
 
 <!-- <div class="accounts-grid table table-striped"> 
   <amexio-datagrid
