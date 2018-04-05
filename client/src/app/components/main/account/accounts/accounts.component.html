@@ -7,24 +7,29 @@
 </ul> -->
 
 <div class="accounts-grid">
-  <div>
-    <button (click)="onClickAddButton()">Add account</button>
-  </div>
-  <div>
-    <ag-grid-angular style="width: 900px; height: 200px;"
-                    class="ag-fresh"
-                    [rowData]="rowData"
-                    [columnDefs]="columnDefs"
-                    [gridOptions]="gridOptions"
-                    (gridReady)="onGridReady($event)"
-                    [pagination]="true"
-                    [paginationPageSize]="10"
-                    [enableColResize]="true"
-                    [enableSorting]="true"
-                    [enableFilter]="true"
-                    
-                    (cellDoubleClicked)="onRowDoubleClicked($event)">
-    </ag-grid-angular>
+  <div class="center">
+    <div>
+      <ag-grid-angular style="width: 1000px; height: 400px;"
+                      class="ag-fresh"
+                      [rowData]="rowData"
+                      [columnDefs]="columnDefs"
+                      [gridOptions]="gridOptions"
+                      (gridReady)="onGridReady($event)"
+                      [pagination]="true"
+                      [paginationPageSize]="10"
+                      [enableColResize]="true"
+                      [enableSorting]="true"
+                      [enableFilter]="true"
+                      
+                      (cellDoubleClicked)="onRowDoubleClicked($event)">
+      </ag-grid-angular>
+    </div>
+    <div>
+      <button type="button" class="btn btn-primary">
+        <span class="fas fa-pluss"></span> 
+        Add Account
+      </button>
+    </div>
   </div>
 </div>
 
