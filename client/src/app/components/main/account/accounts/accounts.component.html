@@ -1,11 +1,3 @@
-<!-- <ul class="accounts">
-  <li *ngFor="let account of accounts">
-    <a routerLink="/accounts/{{account._id}}">
-      <span class="badge">*</span> {{account.name}}
-    </a>
-  </li>
-</ul> -->
-
 <div class="accounts-grid">
   <div class="center">
     <div>
@@ -32,33 +24,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-<!-- <div class="accounts-grid table table-striped"> 
-  <amexio-datagrid
-    class="table table-striped table-sm"
-    [enable-column-fiter]="true"
-    [height]="200"
-    title="Accounts"
-    [data]="accounts"
-    [page-size] = "10">
-    <amexio-data-table-column [data-index]="'name'"
-                              [data-type]="'string'"
-                              [hidden]="false"
-                              [text]="'Name'"
-                              [width]="18">
-    </amexio-data-table-column>
-    <amexio-data-table-column [data-index]="'iban'"
-                              [data-type]="'string'"
-                              [hidden]="false"
-                              [text]="'IBan'"
-                              [width]="30">
-    </amexio-data-table-column>
-    <amexio-data-table-column [data-index]="'comment'"
-                              [data-type]="'string'" [hidden]="false"
-                              [text]="'Comment'">
-    </amexio-data-table-column>
-  </amexio-datagrid>
-</div> -->

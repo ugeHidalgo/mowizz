@@ -1,9 +1,9 @@
-<!-- <nav class="navbar navbar-expand-sm bg-light">
-    <a class="navbar-brand" [routerLink]="['/']">TotalHero</a>
+<nav class="navbar navbar-expand-sm bg-light">
+    <a class="navbar-brand" [routerLink]="['/']">MoWizz</a>
     <ul *ngIf="globals.userNameLogged" class="nav navbar-nav">
         <li class="nav-item"><a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a></li>
         <li class="nav-item"><a class="nav-link" [routerLink]="['/accounts']">Accounts</a></li>
-        <li class="nav-item"><a class="nav-link" [routerLink]="['/heroes']">Heroes</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/costcentres']">Cost centres</a></li>
     </ul>
     <ul *ngIf="globals.userNameLogged else notUserLogged" class="nav navbar-nav ml-auto">
         <li class="nav-item"><a class="nav-link" [routerLink]="['/login']">{{globals.userNameLogged}}</a></li>
@@ -19,53 +19,9 @@
         <li class="nav-item"><a class="nav-link" [routerLink]="['/register']">Register</a></li>
     </ul>
     </ng-template>
-</nav> -->
-<div>
-<amexio-nav [enable-side-nav-position]="false"
-  [title]="'MoWiZZ'"	
-  [logo]="'assets/images/logos/mowizz-logo.png'">
-    <amexio-nav-item position-left
-      [type]="'link'" 
-      [title]="'Dashboard'"
-      [routerLink]="['/dashboard']">
-    </amexio-nav-item>
+</nav>
 
-    <amexio-nav-item position-left *ngFor="let menus of topMenuData" 
-      [type]="'menu'" 
-      [title]="menus.text"
-      [data]="menus.submenus"
-      (onNavItemClick)="onClick($event.data.node.routerLink)">
-    </amexio-nav-item>
-
-    <amexio-nav-item *ngIf="globals.userNameLogged else notUserLogged" position-right
-        [type]="'link'"
-        [title]='globals.userNameLogged'
-        [routerLink]="['/login']">
-    </amexio-nav-item>
-    <amexio-nav-item *ngIf="globals.userNameLogged" position-right
-        [type]="'link'"
-        [title]="'Logout'"
-        [routerLink]="['/']"
-        (click)="logout()">
-    </amexio-nav-item>
-
-
-    <ng-template #notUserLogged>
-        <amexio-nav-item position-right
-        [type]="'link'" 
-        [title]="'Login'"
-        [routerLink]="['/login']">
-        </amexio-nav-item>
-        <amexio-nav-item position-right
-        [type]="'link'" 
-        [title]="'Register'"
-        [routerLink]="['/register']">
-        </amexio-nav-item>
-    </ng-template>
-</amexio-nav>
-</div>
-
-<div classs="container">
+<div class="container">
     <app-messages></app-messages>
     <router-outlet></router-outlet>
 </div>
