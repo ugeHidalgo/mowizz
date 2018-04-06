@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr'; // Toaster library used to messaging
 import { ToastrCustomOptions } from './messages/toastrCustomOptions';
 import { AgGridModule } from 'ag-grid-angular/main'; // AgGrid component library
+import { MDBBootstrapModule } from 'angular-bootstrap-md'; // MDBootstrap
 
 // App modules
 import { AppRoutingModule } from './/app-routing.module';
@@ -56,6 +57,7 @@ import { CostCentresComponent } from './components/main/costcentres/costcentres/
     AppRoutingModule,
     HttpClientModule,
     ToastModule.forRoot(),
+    MDBBootstrapModule.forRoot(),
     AgGridModule.withComponents([])
   ],
 
