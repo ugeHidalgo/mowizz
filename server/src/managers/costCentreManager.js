@@ -8,7 +8,7 @@ var defaultUserName = 'ugehidalgo',
     mongoose = require ('mongoose'),
     CostCentre = require ('../models/costCentre');
 
-module.exports.getCostCentres = function (callbackFn) {
+module.exports.getCostCentres = function (userName, callbackFn) {
 
     CostCentre.find({username: defaultUserName}, callbackFn);
 };

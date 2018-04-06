@@ -1,5 +1,26 @@
 <div class="costcentres-grid">
-  <p>
-    costcentres works!
-  </p>
+    <div class="center">
+        <div>
+          <ag-grid-angular style="width: 1000px; height: 400px;"
+                          class="ag-fresh"
+                          [rowData]="rowData"
+                          [columnDefs]="columnDefs"
+                          [gridOptions]="gridOptions"
+                          (gridReady)="onGridReady($event)"
+                          [pagination]="true"
+                          [paginationPageSize]="10"
+                          [enableColResize]="true"
+                          [enableSorting]="true"
+                          [enableFilter]="true"
+                          
+                          (cellDoubleClicked)="onRowDoubleClicked($event)">
+          </ag-grid-angular>
+        </div>
+        <div>
+          <button type="button" class="btn btn-primary" (click)="onClickAddButton()">
+            <span class="fas fa-pluss"></span> 
+            Add Cost Centre
+          </button>
+        </div>
+      </div>
 </div>

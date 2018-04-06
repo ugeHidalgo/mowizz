@@ -1,0 +1,22 @@
+<div *ngIf="costCentre" class="costcentre-detail">
+    <h2>{{ costCentre.name | uppercase }} details</h2>
+    <div><span>id: </span>{{costCentre.name}}</div>
+    <div>
+      <label>
+        Name:
+        <input [(ngModel)]="costCentre.name" placeholder="name">
+      </label>
+      <label>
+        Description:
+        <input [(ngModel)]="costCentre.description" placeholder="description">
+      </label>
+    </div>
+    <div>
+      <label>
+        Comments:
+        <input [(ngModel)]="costCentre.comments" placeholder="comments">
+      </label>
+    </div>
+    <button (click)="onClickGoBack()">Back</button>
+    <button (click)="onClickSave()">Save</button>
+  </div>

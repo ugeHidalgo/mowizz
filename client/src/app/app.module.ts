@@ -33,6 +33,8 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './login/register/register.component';
 import { CostCentresComponent } from './components/main/costcentres/costcentres/costcentres.component';
+import { CostCentreService } from './services/costcentre/costcentre.service';
+import { CostCentreDetailComponent } from './components/main/costcentres/costcentre-detail/costcentre-detail.component';
 
 
 @NgModule({
@@ -47,7 +49,8 @@ import { CostCentresComponent } from './components/main/costcentres/costcentres/
     RegisterComponent,
     AccountsComponent,
     AccountDetailComponent,
-    CostCentresComponent
+    CostCentresComponent,
+    CostCentreDetailComponent
   ],
 
   imports: [
@@ -66,6 +69,7 @@ import { CostCentresComponent } from './components/main/costcentres/costcentres/
     UserService,
     HeroService,
     AccountService,
+    CostCentreService,
     MessageService,
     {provide: ToastOptions, useClass: ToastrCustomOptions },
     GlobalsService
