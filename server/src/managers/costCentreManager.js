@@ -34,7 +34,7 @@ module.exports.updateCostCentre = function (costCentre, callbackFn) {
             name: costCentre.name,
             description: costCentre.description,
             comment: costCentre.comment,
-            updated: Date.now,
+            updated: new Date,
             active: costCentre.active
         };
  
