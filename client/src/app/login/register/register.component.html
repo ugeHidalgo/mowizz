@@ -44,43 +44,41 @@
             <div class="modal-body">                
                 <div class="container-fluid">
                     
-                    <div class="row">                        
-                        <div class="md-form form-lg col-md-6">
-                            <i class="fa fa-user prefix"></i>                            
+                    <div class="row">
+                        <div class="md-form form-sm col-md-4">
+                            <input mdbActive type="text" id="username" class="form-control" 
+                                [(ngModel)]="user.username">
+                            <label for="username">Your user name</label>
+                        </div>
+                        <div class="md-form form-sm col-md-4">
                             <input mdbActive type="text" id="firstname" class="form-control" 
                                 [(ngModel)]="user.firstName">
                             <label for="firstname">Your first name</label>
                         </div>
-                        <div class="md-form form-lg col-md-6">
-                            <i class="fa fa-user prefix"></i>
+                        <div class="md-form form-sm col-md-4">
                             <input mdbActive type="text" id="lastname" class="form-control" 
                                 [(ngModel)]="user.lastName">
                             <label for="lastname">Your last name</label>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <!-- <div class="md-form form-lg col-md-6">
-                            <input mdbActive type="text" id="username" class="form-control" 
-                                [(ngModel)]="user.userName">
-                            <label for="username">Your user name</label>
-                        </div> -->
+                    <div class="row">                        
                         <div class="md-form form-lg col-md-12">
                             <i class="fa fa-envelope prefix"></i>
                             <input mdbActive type="text" id="email" class="form-control"
-                                [(ngModel)]="user.username">
-                            <label for="email">Your email</label>
+                                [(ngModel)]="user.eMail">
+                            <label for="email">Your e-mail</label>
                         </div>                        
                     </div>
 
                     <div class="row">
-                        <div class="md-form form-lg col-md-6">
+                        <div class="md-form form-sm col-md-6">
                             <i class="fa fa-lock prefix"></i>
                             <input mdbActive type="password" id="password" class="form-control" 
                                 [(ngModel)]="user.password">
                             <label for="password">Your password</label>  
                         </div>
-                        <div class="md-form form-lg col-md-6">
+                        <div class="md-form form-sm col-md-6">
                             <i class="fa fa-lock prefix"></i>
                             <input mdbActive type="password" id="password2" class="form-control">
                             <label for="password2">Repeat password</label>

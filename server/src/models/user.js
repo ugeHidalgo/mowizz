@@ -6,7 +6,8 @@ var moongoose = require ('mongoose'),
         password: String,
         salt: String,
         firstName: String,
-        lastName: String
+        lastName: String,
+        eMail: String
     });
 
 module.exports = moongoose.model ('Users', UserSchema);

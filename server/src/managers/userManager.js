@@ -62,7 +62,8 @@ function updateExistingUser (user, callbackFn) {
     var updatedValues = {
         firstName: user.firstName,
         lastName: user.lastName,
-        password: user.password,
+        eMail: user.eMail,
+        password: user.password
     };
 
     User.findOneAndUpdate(
