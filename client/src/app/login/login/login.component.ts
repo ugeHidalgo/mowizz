@@ -5,17 +5,16 @@ import { ToastsManager } from 'ng2-toastr';
 import { UserService } from '../../services/user/user.service';
 import { GlobalsService } from '../../globals/globals.service';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   model: any = {};
+  angular: any;
   loading = false;
-  showLoginWindow: boolean;
 
   constructor(
     private router: Router,
@@ -23,11 +22,7 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     public toastr: ToastsManager,
     vcr: ViewContainerRef ) {
-    this.toastr.setRootViewContainerRef(vcr);
- }
-
-  ngOnInit() {
-    this.showLoginWindow = !this.showLoginWindow;
+      this.toastr.setRootViewContainerRef(vcr);
   }
 
   onLogin() {
