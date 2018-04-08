@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr';
 
@@ -11,18 +12,29 @@ import { User } from '../../models/user';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+
   user: User = new User();
   loading = false;
+  validatingForm: FormGroup;
 
   constructor(
     private router: Router,
     private userService: UserService,
     public toastr: ToastsManager,
+    private fb: FormBuilder,
     vcr: ViewContainerRef ) {
     this.toastr.setRootViewContainerRef(vcr);
+    this.createForm();
  }
 
   ngOnInit() {
+  }
+
+  createForm() {
+    this.validatingForm = this.fb.group({
+      username: [ '', Validators.required ],
+      email: [ '', Validators.email ]
+    });
   }
 
   register() {
