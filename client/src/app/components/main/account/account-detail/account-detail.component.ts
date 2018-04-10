@@ -60,8 +60,7 @@ export class AccountDetailComponent implements OnInit, OnChanges {
     me.account = this.getFormData();
     me.accountService.updateAccount(me.account)
       .subscribe( () => {
-          me.toastr.success('Successfully saved.', 'Saved!');
-          me.location.back();
+          me.toastr.success('Successfully saved.');
         }
       );
     me.rebuildForm();
@@ -73,6 +72,7 @@ export class AccountDetailComponent implements OnInit, OnChanges {
     const me = this;
 
     me.validatingForm = me.fb.group({
+      active: '',
       name: [ '', Validators.required ],
       description: '',
       iban: '',
@@ -84,6 +84,7 @@ export class AccountDetailComponent implements OnInit, OnChanges {
     const me = this;
 
     me.validatingForm.reset({
+      active: me.account.active,
       name: me.account.name,
       description: me.account.description,
       iban: me.account.iban,
@@ -96,6 +97,7 @@ export class AccountDetailComponent implements OnInit, OnChanges {
           formModel = me.validatingForm.value,
           newAccount: Account = me.account;
 
+    newAccount.active = formModel.active;
     newAccount.name = formModel.name;
     newAccount.description = formModel.description;
     newAccount.iban = formModel.iban;

@@ -46,7 +46,6 @@ export class CostCentreDetailComponent implements OnInit {
   }
 
   // Buttons actions
-
   onClickGoBack() {
     this.location.back();
   }
@@ -57,7 +56,6 @@ export class CostCentreDetailComponent implements OnInit {
     me.costCentreService.updateCostCentre(me.costCentre)
       .subscribe( () => {
           me.toastr.success('Successfully saved.', 'Saved!');
-          me.location.back();
         }
       );
   }
