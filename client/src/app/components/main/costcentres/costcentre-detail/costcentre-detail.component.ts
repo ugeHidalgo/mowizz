@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, OnChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,16 +13,22 @@ import { GlobalsService } from '../../../../globals/globals.service';
   templateUrl: './costcentre-detail.component.html',
   styleUrls: ['./costcentre-detail.component.scss']
 })
-export class CostCentreDetailComponent implements OnInit {
+export class CostCentreDetailComponent implements OnInit, OnChanges {
+
   costCentre: CostCentre;
+  validatingForm: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     protected globals: GlobalsService,
     private costCentreService: CostCentreService,
+    private fb: FormBuilder,
     public toastr: ToastsManager, vcr: ViewContainerRef) {
-      this.toastr.setRootViewContainerRef(vcr);
+      const me = this;
+
+      me.toastr.setRootViewContainerRef(vcr);
+      me.createForm();
    }
 
   ngOnInit() {
@@ -36,13 +43,8 @@ export class CostCentreDetailComponent implements OnInit {
     }
   }
 
-  getCostCentreById(id: string): void {
-    const me = this;
-
-    me.costCentreService.getCostCentreById(id)
-      .subscribe( costCentre => {
-          me.costCentre = costCentre[0];
-      });
+  ngOnChanges() {
+    this.rebuildForm();
   }
 
   // Buttons actions
@@ -50,14 +52,66 @@ export class CostCentreDetailComponent implements OnInit {
     this.location.back();
   }
 
+  onClickRefresh() {
+    this.rebuildForm();
+  }
+
   onClickSave(): void {
     const me = this;
 
+    me.costCentre = this.getFormData();
     me.costCentreService.updateCostCentre(me.costCentre)
       .subscribe( () => {
-          me.toastr.success('Successfully saved.', 'Saved!');
+          me.toastr.success('Successfully saved.');
         }
       );
+    me.rebuildForm();
   }
 
+  // FormModel methods
+  createForm() {
+    const me = this;
+
+    me.validatingForm = me.fb.group({
+      active: '',
+      name: [ '', Validators.required ],
+      description: '',
+      comments: ''
+    });
+  }
+
+  rebuildForm() {
+    const me = this;
+
+    me.validatingForm.reset({
+      active: me.costCentre.active,
+      name: me.costCentre.name,
+      description: me.costCentre.description,
+      comments: me.costCentre.comments
+    });
+  }
+
+  getFormData(): CostCentre {
+    const me = this,
+          formModel = me.validatingForm.value,
+          newCostCentre: CostCentre = me.costCentre;
+
+    newCostCentre.active = formModel.active;
+    newCostCentre.name = formModel.name;
+    newCostCentre.description = formModel.description;
+    newCostCentre.comments = formModel.comments;
+
+    return newCostCentre;
+  }
+
+  // Private Methods
+  getCostCentreById(id: string): void {
+    const me = this;
+
+    me.costCentreService.getCostCentreById(id)
+      .subscribe( costCentre => {
+          me.costCentre = costCentre[0];
+          me.rebuildForm();
+      });
+  }
 }

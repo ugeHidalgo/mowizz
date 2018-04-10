@@ -1,4 +1,4 @@
-<div *ngIf="costCentre" class="costcentre-detail">
+<!-- <div *ngIf="costCentre" class="costcentre-detail">
     <h2>{{ costCentre.name | uppercase }} details</h2>
     <div><span>id: </span>{{costCentre.name}}</div>
     <div>
@@ -19,4 +19,44 @@
     </div>
     <button (click)="onClickGoBack()">Back</button>
     <button (click)="onClickSave()">Save</button>
+  </div> -->
+
+  <div *ngIf="costCentre" class="costcentre-detail">
+      <form [formGroup]="validatingForm">                        
+          <div class="row">
+              <div class="md-form form-sm col-md-3">
+                  <input mdbActive type="text" id="name" class="form-control" required formControlName="name">
+                  <label for="name">Name:</label>
+                  <div *ngIf="validatingForm.controls['name'].touched">
+                      <div class="alert alert-danger" *ngIf="validatingForm.controls['name'].errors?.name">Name is required</div>
+                  </div>
+              </div>
+              <div class="md-form form-sm col-md-3">
+                  <input mdbActive type="text" id="description" class="form-control" formControlName="description">
+                  <label for="description">Description: </label>
+              </div>   
+              <div class="md-form form-sm col-md-1">
+                  <input type="checkbox" id="active" class="form-control" formControlName="active" 
+                      value="validatingForm.controls['active'].value">
+                  <label for="active">Active: </label>
+              </div> 
+          </div>          
+  
+          <div class="row">
+              <div class="md-form form-sm col-md-8">
+                  <textarea mdbActive type="text" id="comments" class="md-textarea form-control" rows="3"
+                      formControlName="comments"></textarea>                
+                  <label for="comments">Comments:</label>  
+              </div>                       
+          </div>
+      </form>
+      <button class="btn btn-sm btn-outline-elegant" (click)="onClickGoBack()">
+          <i class="fa fa-arrow-left ml-1"> Back</i>
+      </button>
+      <button class="btn btn-sm btn-outline-danger" (click)="onClickRefresh()" [disabled]="validatingForm.pristine">
+          <i class="fa fa-refresh ml-1"> Refresh</i>
+      </button>  
+      <button class="btn btn-sm btn-outline-dark-green" (click)="onClickSave()" [disabled]="validatingForm.pristine">
+          <i class="fa fa-save ml-1"> Save</i>
+      </button>
   </div>

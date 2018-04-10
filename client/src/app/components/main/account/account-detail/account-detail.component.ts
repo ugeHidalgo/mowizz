@@ -25,8 +25,10 @@ export class AccountDetailComponent implements OnInit, OnChanges {
     private accountService: AccountService,
     private fb: FormBuilder,
     public toastr: ToastsManager, vcr: ViewContainerRef) {
-      this.toastr.setRootViewContainerRef(vcr);
-      this.createForm();
+      const me = this;
+
+      me.toastr.setRootViewContainerRef(vcr);
+      me.createForm();
    }
 
   ngOnInit() {
@@ -65,7 +67,6 @@ export class AccountDetailComponent implements OnInit, OnChanges {
       );
     me.rebuildForm();
   }
-
 
   // FormModel methods
   createForm() {

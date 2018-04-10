@@ -12,7 +12,7 @@ import { GlobalsService } from '../../../../globals/globals.service';
   templateUrl: './costcentres.component.html',
   styleUrls: ['./costcentres.component.scss']
 })
-export class CostCentresComponent implements OnInit {
+export class CostCentresComponent {
 
   gridOptions: GridOptions;
   columnDefs: any[];
@@ -37,14 +37,11 @@ export class CostCentresComponent implements OnInit {
     ];
   }
 
-  ngOnInit() {
-
-  }
-
   onGridReady(params) {
       params.api.sizeColumnsToFit();
   }
 
+  // Actions
   private onRowDoubleClicked($event) {
     const pathToAccountDetail = `/costcentre/${$event.node.data._id}`;
 
@@ -57,10 +54,15 @@ export class CostCentresComponent implements OnInit {
     this.router.navigate([pathToAccountDetail]);
   }
 
+  private onClickRefreshButton() {
+    this.getCostCentres();
+  }
+
   private selectAllRows() {
       this.gridOptions.api.selectAll();
   }
 
+  // Private Methods
   private getCostCentres(): void {
     const me = this;
 
