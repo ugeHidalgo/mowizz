@@ -16,11 +16,13 @@
                       (cellDoubleClicked)="onRowDoubleClicked($event)">
       </ag-grid-angular>
     </div>
-    <div>
-      <button type="button" class="btn btn-primary" (click)="onClickAddButton()">
-        <span class="fas fa-pluss"></span> 
-        Add Account
-      </button>
+    <div>      
+      <button class="btn btn-sm btn-outline-danger" (click)="onClickRefreshButton()">
+          <i class="fa fa-refresh ml-1"> Refresh</i>
+      </button>  
+      <button class="btn btn-sm btn-outline-dark-green" (click)="onClickAddButton()">
+          <i class="fa fa-save ml-1"> Add Account</i>
+      </button>  
     </div>
   </div>
 </div>

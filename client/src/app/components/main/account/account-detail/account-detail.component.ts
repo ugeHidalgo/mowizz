@@ -50,7 +50,7 @@ export class AccountDetailComponent implements OnInit, OnChanges {
     this.location.back();
   }
 
-  onClickRestore() {
+  onClickRefresh() {
     this.rebuildForm();
   }
 

@@ -44,6 +44,7 @@ export class AccountsComponent {
       params.api.sizeColumnsToFit();
   }
 
+  // Actions
   private onRowDoubleClicked($event) {
     const pathToAccountDetail = `/account/${$event.node.data._id}`;
 
@@ -56,10 +57,15 @@ export class AccountsComponent {
     this.router.navigate([pathToAccountDetail]);
   }
 
+  private onClickRefreshButton() {
+    this.getAccounts();
+  }
+
   private selectAllRows() {
       this.gridOptions.api.selectAll();
   }
 
+  // Private Methods
   private getAccounts(): void {
     const me = this;
 
