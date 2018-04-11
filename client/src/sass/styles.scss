@@ -1,6 +1,17 @@
 /* Application-wide Styles */
 @import './variables';
 
+/* ag-grid styles */
+.ag-row-hover {
+  /* putting in !important so it overrides the theme's styling as it hovers the row also */
+  background-color: #dfdfff !important;
+}
+
+.ag-column-hover {
+  background-color: #dfffdf;
+}
+/* ag-grid styles */
+
 h1 {
   color: #369;
   font-family: Arial, Helvetica, sans-serif;

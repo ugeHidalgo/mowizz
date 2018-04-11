@@ -8,21 +8,12 @@ import { ICellRendererAngularComp } from 'ag-grid-angular/main';
     `,
     styles: [
         `
-            ::ng-deep
-            .mat-checkbox-layout {
-                /* horizontally align the checkbox */
-                width: 100%;
-                display: inline-block !important;
-                text-align: center;
-                margin-top: -4px; /* to offset the cells internal padding - could be done in cells CSS instead*/
-
-                /* vertically align the checkbox when not using the ag-material theme - should be the same as the 
-                rowHeight - cell padding
-                   (you can of course alter the cell padding via CSS instead if you'd prefer)
-                line-height: 42px;
-                 */
-            }
-        `
+        :host ::ng-deep .mat-checkbox-layout {
+            width: 100%;
+            display: inline-block !important;
+            text-align: center;
+            margin-top: -4px;
+        }`
     ]
 })
 export class MatCheckboxComponent implements ICellRendererAngularComp {
