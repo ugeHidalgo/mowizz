@@ -13,9 +13,12 @@
                 <label for="description">Description: </label>
             </div>   
             <div class="md-form form-sm col-md-1">
-                <input type="checkbox" id="active" class="form-control" formControlName="active" 
-                    value="validatingForm.controls['active'].value">
-                <label for="active">Active: </label>
+<!--                 <input type="checkbox" id="active" class="form-control" formControlName="active" 
+                    value="validatingForm.controls['active'].value"> 
+                <label for="active">Active: </label> -->
+                <mat-checkbox id="active" class="form-control" formControlName="active" 
+                                value="validatingForm.controls['active'].value">Active
+                </mat-checkbox>
             </div> 
         </div>
 

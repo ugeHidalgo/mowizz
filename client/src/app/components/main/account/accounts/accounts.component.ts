@@ -7,6 +7,8 @@ import { ToastsManager } from 'ng2-toastr';
 import { GridOptions } from 'ag-grid/main';
 import { GlobalsService } from '../../../../globals/globals.service';
 
+import { MatCheckboxComponent } from '../../../grid/checkbox/mat-checkbox.component';
+
 
 @Component({
   selector: 'app-accounts',
@@ -19,6 +21,7 @@ export class AccountsComponent {
   gridOptions: GridOptions;
   columnDefs: any[];
   rowData: any[];
+  frameworkComponents: any;
 
   constructor(
     private router: Router,
@@ -32,12 +35,16 @@ export class AccountsComponent {
 
     this.gridOptions = <GridOptions>{};
     this.columnDefs = [
-        { headerName: 'Active', field: 'active', width: 34, valueFormatter: this.booleanFormatter },
+        { headerName: 'On', field: 'active', width: 20, cellRenderer: 'checkboxRenderer' },
+        { headerName: 'On', field: 'active', width: 20, valueFormatter: this.booleanFormatter },
         { headerName: 'Name', field: 'name', width: 50 },
         { headerName: 'Description', field: 'description', width: 120 },
         { headerName: 'IBAN', field: 'iban', width: 150 },
         { headerName: 'Comments', field: 'comments' }
     ];
+    this.frameworkComponents = {
+        checkboxRenderer: MatCheckboxComponent
+    };
   }
 
   onGridReady(params) {

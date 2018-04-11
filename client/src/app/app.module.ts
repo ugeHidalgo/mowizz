@@ -10,6 +10,7 @@ import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr'; // Toaster li
 import { ToastrCustomOptions } from './messages/toastrCustomOptions';
 import { AgGridModule } from 'ag-grid-angular/main'; // AgGrid component library
 import { MDBBootstrapModule } from 'angular-bootstrap-md'; // MDBootstrap
+import { MatCheckboxModule } from '@angular/material'; // Angular material desing components https://material.angular.io/
 
 // App modules
 import { AppRoutingModule } from './/app-routing.module';
@@ -36,6 +37,7 @@ import { RegisterComponent } from './login/register/register.component';
 import { CostCentresComponent } from './components/main/costcentres/costcentres/costcentres.component';
 import { CostCentreService } from './services/costcentre/costcentre.service';
 import { CostCentreDetailComponent } from './components/main/costcentres/costcentre-detail/costcentre-detail.component';
+import { MatCheckboxComponent } from './components/grid/checkbox/mat-checkbox.component';
 
 
 @NgModule({
@@ -51,7 +53,8 @@ import { CostCentreDetailComponent } from './components/main/costcentres/costcen
     AccountsComponent,
     AccountDetailComponent,
     CostCentresComponent,
-    CostCentreDetailComponent
+    CostCentreDetailComponent,
+    MatCheckboxComponent
   ],
 
   imports: [
@@ -63,7 +66,8 @@ import { CostCentreDetailComponent } from './components/main/costcentres/costcen
     HttpClientModule,
     ToastModule.forRoot(),
     MDBBootstrapModule.forRoot(),
-    AgGridModule.withComponents([])
+    MatCheckboxModule,
+    AgGridModule.withComponents([MatCheckboxComponent])
   ],
 
   providers: [
