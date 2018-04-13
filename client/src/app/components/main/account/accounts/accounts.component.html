@@ -1,28 +1,33 @@
 <div class="accounts-grid">
   <div class="center">
-    <div>
-      <ag-grid-angular style="width: 1000px; height: 400px;"
-                      class="ag-fresh"
-                      [rowData]="rowData"
-                      [columnDefs]="columnDefs"
-                      [gridOptions]="gridOptions"
-                      (gridReady)="onGridReady($event)"
-                      [pagination]="true"
-                      [paginationPageSize]="10"
-                      [enableColResize]="true"
-                      [enableSorting]="true"
-                      [enableFilter]="true"
-                      [frameworkComponents]="frameworkComponents"
-                      (cellDoubleClicked)="onRowDoubleClicked($event)">
-      </ag-grid-angular>
-    </div>
-    <div>      
-      <button class="btn btn-sm btn-outline-danger" (click)="onClickRefreshButton()">
-          <i class="fa fa-refresh ml-1"> Refresh</i>
-      </button>  
-      <button class="btn btn-sm btn-outline-dark-green" (click)="onClickAddButton()">
-          <i class="fa fa-plus ml-1"> Add Account</i>
-      </button>  
-    </div>
+      <div class="card">
+          <div class="card-header indigo lighten-1 white-text">
+              <h4>Accounts</h4>
+          </div>
+          <div class="card-body">
+            <ag-grid-angular style="width: 1000px; height: 400px;"
+                            class="ag-fresh"
+                            [rowData]="rowData"
+                            [columnDefs]="columnDefs"
+                            [gridOptions]="gridOptions"
+                            (gridReady)="onGridReady($event)"
+                            [pagination]="true"
+                            [paginationPageSize]="10"
+                            [enableColResize]="true"
+                            [enableSorting]="true"
+                            [enableFilter]="true"
+                            [frameworkComponents]="frameworkComponents"
+                            (cellDoubleClicked)="onRowDoubleClicked($event)">
+            </ag-grid-angular>
+          </div>
+          <div class="card-footer">      
+            <button class="btn btn-sm btn-outline-danger" (click)="onClickRefreshButton()">
+                <i class="fa fa-refresh ml-1"> Refresh</i>
+            </button>  
+            <button class="btn btn-sm btn-outline-dark-green" (click)="onClickAddButton()">
+                <i class="fa fa-plus ml-1"> Add Account</i>
+            </button>  
+          </div>
+      </div>
   </div>
 </div>

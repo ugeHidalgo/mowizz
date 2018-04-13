@@ -7,7 +7,7 @@ import { ToastsManager } from 'ng2-toastr';
 import { GridOptions } from 'ag-grid/main';
 import { GlobalsService } from '../../../../globals/globals.service';
 
-
+import { MatCheckboxComponent } from '../../../grid/checkbox/mat-checkbox.component';
 
 @Component({
   selector: 'app-costcentres',
@@ -19,6 +19,7 @@ export class CostCentresComponent {
   gridOptions: GridOptions;
   columnDefs: any[];
   rowData: any[];
+  frameworkComponents: any;
 
   constructor(
     private router: Router,
@@ -32,11 +33,14 @@ export class CostCentresComponent {
 
     this.gridOptions = <GridOptions>{};
     this.columnDefs = [
-        { headerName: 'Active', field: 'active', width: 34, valueFormatter: this.booleanFormatter },
+        { headerName: 'On', field: 'active', width: 30, cellRenderer: 'checkboxRenderer' },
         { headerName: 'Name', field: 'name', width: 50 },
         { headerName: 'Description', field: 'description', width: 120 },
         { headerName: 'Comments', field: 'comments' }
     ];
+    this.frameworkComponents = {
+      checkboxRenderer: MatCheckboxComponent
+  };
   }
 
   onGridReady(params) {
@@ -73,9 +77,4 @@ export class CostCentresComponent {
         me.rowData = costCentres;
       });
   }
-
-  private booleanFormatter(row) {
-    return (row.data.active === true) ? 'X' : '';
-  }
-
 }

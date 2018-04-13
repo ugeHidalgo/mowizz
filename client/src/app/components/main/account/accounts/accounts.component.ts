@@ -36,7 +36,6 @@ export class AccountsComponent {
     this.gridOptions = <GridOptions>{};
     this.columnDefs = [
         { headerName: 'On', field: 'active', width: 30, cellRenderer: 'checkboxRenderer' },
-        // { headerName: 'On', field: 'active', width: 20, valueFormatter: this.booleanFormatter },
         { headerName: 'Name', field: 'name', width: 50 },
         { headerName: 'Description', field: 'description', width: 120 },
         { headerName: 'IBAN', field: 'iban', width: 150 },
@@ -80,9 +79,5 @@ export class AccountsComponent {
       .subscribe(accounts => {
         me.rowData = accounts;
       });
-  }
-
-  private booleanFormatter(row) {
-    return (row.data.active === true) ? 'X' : '';
   }
 }
