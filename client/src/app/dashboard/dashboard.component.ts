@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HeroService } from '../services/hero/hero.service';
-import { Hero } from '../models/hero';
 import { GlobalsService } from '../globals/globals.service';
-
 
 @Component({
   selector: 'app-dashboard',
@@ -12,22 +9,10 @@ import { GlobalsService } from '../globals/globals.service';
 })
 export class DashboardComponent implements OnInit {
 
-  heroes: Hero[] = [];
-
   constructor(
-    protected globals: GlobalsService,
-    private heroService: HeroService
+    protected globals: GlobalsService
   ) { }
 
   ngOnInit() {
-    this.getHeroes();
   }
-
-  getHeroes() {
-    const me = this;
-
-    me.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes.slice(1, 5));
-  }
-
 }

@@ -8,8 +8,6 @@ import { RegisterComponent } from './login/register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './components/main/not-found/not-found.component';
 
-import { HeroesComponent } from './heroes/heroes/heroes.component';
-import { HeroDetailComponent } from './heroes/hero-detail/hero-detail.component';
 import { AccountsRoutingModule } from './components/main/account/account-routing.module';
 import { CostCentresRoutingModule } from './components/main/costcentres/costcentres-routing.module';
 
