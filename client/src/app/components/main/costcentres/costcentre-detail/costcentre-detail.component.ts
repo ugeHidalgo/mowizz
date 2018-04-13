@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewContainerRef, OnChanges, HostBinding } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { ComponentCanDeactivate } from '../../../../guards/pending-changes.guard';
 
 import { ToastsManager } from 'ng2-toastr';
 import { CostCentre } from '../../../../models/costcentre';
@@ -16,7 +18,7 @@ import { slideInDownAnimation } from '../../../../animations';
   styleUrls: ['./costcentre-detail.component.scss'],
   animations: [ slideInDownAnimation ]
 })
-export class CostCentreDetailComponent implements OnInit, OnChanges {
+export class CostCentreDetailComponent implements OnInit, OnChanges, ComponentCanDeactivate {
 
   @HostBinding('@routeAnimation') routeAnimation = true;
   @HostBinding('style.display') display = 'block';
@@ -52,6 +54,10 @@ export class CostCentreDetailComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.rebuildForm();
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+    return this.validatingForm.pristine;
   }
 
   // Buttons actions

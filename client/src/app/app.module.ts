@@ -14,7 +14,11 @@ import { MatCheckboxModule } from '@angular/material'; // Angular material desin
 
 // App modules
 import { AppRoutingModule } from './/app-routing.module';
-import { AuthGuard } from './auth/auth.guard';
+import { AppComponent } from './app.component';
+
+// Guards
+import { AuthGuard } from './guards/auth.guard';
+import { PendingChangesGuard } from './guards/pending-changes.guard';
 
 // Services
 import { UserService } from './services/user/user.service';
@@ -23,7 +27,6 @@ import { MessageService } from './services/message/message.service';
 import { GlobalsService } from './globals/globals.service';
 
 // App components
-import { AppComponent } from './app.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AccountsComponent } from './components/main/account/accounts/accounts.component';
 import { AccountDetailComponent } from './components/main/account/account-detail/account-detail.component';
@@ -67,6 +70,7 @@ import { PageNotFoundComponent } from './components/main/not-found/not-found.com
 
   providers: [
     AuthGuard,
+    PendingChangesGuard,
     UserService,
     AccountService,
     CostCentreService,
