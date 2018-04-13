@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef, OnChanges } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, OnChanges, HostBinding } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
@@ -8,12 +8,19 @@ import { CostCentre } from '../../../../models/costcentre';
 import { CostCentreService } from '../../../../services/costcentre/costcentre.service';
 import { GlobalsService } from '../../../../globals/globals.service';
 
+import { slideInDownAnimation } from '../../../../animations';
+
 @Component({
   selector: 'app-costcentre-detail',
   templateUrl: './costcentre-detail.component.html',
-  styleUrls: ['./costcentre-detail.component.scss']
+  styleUrls: ['./costcentre-detail.component.scss'],
+  animations: [ slideInDownAnimation ]
 })
 export class CostCentreDetailComponent implements OnInit, OnChanges {
+
+  @HostBinding('@routeAnimation') routeAnimation = true;
+  @HostBinding('style.display') display = 'block';
+  @HostBinding('style.position') position = 'relative';
 
   costCentre: CostCentre;
   validatingForm: FormGroup;

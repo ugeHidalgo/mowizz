@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef, OnChanges } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, OnChanges, HostBinding } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
@@ -8,12 +8,19 @@ import { Account } from '../../../../models/account';
 import { AccountService } from '../../../../services/account/account.service';
 import { GlobalsService } from '../../../../globals/globals.service';
 
+import { slideInDownAnimation } from '../../../../animations';
+
 @Component({
   selector: 'app-account-detail',
   templateUrl: './account-detail.component.html',
-  styleUrls: ['./account-detail.component.scss']
+  styleUrls: ['./account-detail.component.scss'],
+  animations: [ slideInDownAnimation ]
 })
 export class AccountDetailComponent implements OnInit, OnChanges {
+
+  @HostBinding('@routeAnimation') routeAnimation = true;
+  @HostBinding('style.display') display = 'block';
+  @HostBinding('style.position') position = 'relative';
 
   account: Account;
   validatingForm: FormGroup;
