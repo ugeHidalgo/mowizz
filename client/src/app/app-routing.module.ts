@@ -12,16 +12,18 @@ import { AccountsComponent } from './components/main/account/accounts/accounts.c
 import { AccountDetailComponent } from './components/main/account/account-detail/account-detail.component';
 import { CostCentresComponent } from './components/main/costcentres/costcentres/costcentres.component';
 import { CostCentreDetailComponent } from './components/main/costcentres/costcentre-detail/costcentre-detail.component';
+import { PageNotFoundComponent } from './components/main/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'accounts', component: AccountsComponent, canActivate: [AuthGuard]},
   { path: 'account/:id', component: AccountDetailComponent, canActivate: [AuthGuard] },
   { path: 'costcentres', component: CostCentresComponent, canActivate: [AuthGuard]},
-  { path: 'costcentre/:id', component: CostCentreDetailComponent, canActivate: [AuthGuard] }
+  { path: 'costcentre/:id', component: CostCentreDetailComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

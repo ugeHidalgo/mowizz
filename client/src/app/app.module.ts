@@ -38,11 +38,13 @@ import { CostCentresComponent } from './components/main/costcentres/costcentres/
 import { CostCentreService } from './services/costcentre/costcentre.service';
 import { CostCentreDetailComponent } from './components/main/costcentres/costcentre-detail/costcentre-detail.component';
 import { MatCheckboxComponent } from './components/grid/checkbox/mat-checkbox.component';
+import { PageNotFoundComponent } from './components/main/not-found/not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    PageNotFoundComponent,
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
