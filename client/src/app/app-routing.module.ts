@@ -3,19 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthGuard } from './guards/auth.guard';
 
-import { LoginComponent } from './login/login/login.component';
-import { RegisterComponent } from './login/register/register.component';
-import { UserComponent } from './login/user/user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './components/main/not-found/not-found.component';
 
+// Routing Modules
+import { LoginRoutingModule } from './login/login-routing.module';
 import { AccountsRoutingModule } from './components/main/account/account-routing.module';
 import { CostCentresRoutingModule } from './components/main/costcentres/costcentres-routing.module';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'user', component: UserComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent }
@@ -24,6 +20,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    LoginRoutingModule,
     AccountsRoutingModule,
     CostCentresRoutingModule,
     RouterModule.forRoot(routes)
