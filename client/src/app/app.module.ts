@@ -15,6 +15,7 @@ import { MatCheckboxModule } from '@angular/material'; // Angular material desin
 // App modules
 import { AppRoutingModule } from './/app-routing.module';
 import { AppComponent } from './app.component';
+import { PageNotFoundComponent } from './components/main/not-found/not-found.component';
 
 // Guards
 import { AuthGuard } from './guards/auth.guard';
@@ -27,17 +28,19 @@ import { MessageService } from './services/message/message.service';
 import { GlobalsService } from './globals/globals.service';
 
 // App components
-import { MessagesComponent } from './messages/messages.component';
-import { AccountsComponent } from './components/main/account/accounts/accounts.component';
-import { AccountDetailComponent } from './components/main/account/account-detail/account-detail.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './login/register/register.component';
+import { UserComponent } from './login/user/user.component';
+import { MessagesComponent } from './messages/messages.component';
+
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AccountsComponent } from './components/main/account/accounts/accounts.component';
+import { AccountDetailComponent } from './components/main/account/account-detail/account-detail.component';
 import { CostCentresComponent } from './components/main/costcentres/costcentres/costcentres.component';
 import { CostCentreService } from './services/costcentre/costcentre.service';
 import { CostCentreDetailComponent } from './components/main/costcentres/costcentre-detail/costcentre-detail.component';
 import { MatCheckboxComponent } from './components/grid/checkbox/mat-checkbox.component';
-import { PageNotFoundComponent } from './components/main/not-found/not-found.component';
+
 
 
 @NgModule({
@@ -52,7 +55,8 @@ import { PageNotFoundComponent } from './components/main/not-found/not-found.com
     AccountDetailComponent,
     CostCentresComponent,
     CostCentreDetailComponent,
-    MatCheckboxComponent
+    MatCheckboxComponent,
+    UserComponent
   ],
 
   imports: [

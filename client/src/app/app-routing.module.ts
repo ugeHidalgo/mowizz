@@ -5,6 +5,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './login/register/register.component';
+import { UserComponent } from './login/user/user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './components/main/not-found/not-found.component';
 
@@ -14,6 +15,7 @@ import { CostCentresRoutingModule } from './components/main/costcentres/costcent
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'user', component: UserComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent }
