@@ -31,6 +31,14 @@ export class UserService {
   }
 
   /**.*/
+  updateUser(user: User): Observable<User> {
+    const me = this,
+          httpOptions = me.createHttpOptionsWithToken();
+
+    return me.http.post<User>(me.userUrl, user, httpOptions);
+  }
+
+  /**.*/
   getUser(userName: string): Observable<User> {
     const me = this,
           httpOptions = me.createHttpOptionsWithToken(),

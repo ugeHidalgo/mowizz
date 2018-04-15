@@ -62,8 +62,8 @@ function updateExistingUser (user, callbackFn) {
     var updatedValues = {
         firstName: user.firstName,
         lastName: user.lastName,
-        eMail: user.eMail,
-        password: user.password
+        eMail: user.eMail
+        //password: user.password //Password can only be changed using own process.
     };
 
     User.findOneAndUpdate(
