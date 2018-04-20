@@ -9,6 +9,7 @@ var homeController = require ('./homeController'),
     userController = require ('./userController'),
     accountController = require ('./accountController'),
     costCentreController = require ('./costCentreController'),
+    conceptController = require ('./conceptController'),
     heroController = require ('./heroController');
 
 module.exports.init = function (app){
@@ -18,6 +19,7 @@ module.exports.init = function (app){
     userController.init(app);
     accountController.init(app);
     costCentreController.init(app);
+    conceptController.init(app);
     heroController.init(app);
     
 };
