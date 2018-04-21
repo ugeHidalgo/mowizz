@@ -26,6 +26,8 @@ import { UserService } from './services/user/user.service';
 import { AccountService } from './services/account/account.service';
 import { MessageService } from './services/message/message.service';
 import { GlobalsService } from './globals/globals.service';
+import { CostCentreService } from './services/costcentre/costcentre.service';
+import { ConceptService } from './services/concept/concept.service';
 
 // App components
 import { LoginComponent } from './login/login/login.component';
@@ -38,11 +40,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountsComponent } from './components/main/account/accounts/accounts.component';
 import { AccountDetailComponent } from './components/main/account/account-detail/account-detail.component';
 import { CostCentresComponent } from './components/main/costcentre/costcentres/costcentres.component';
-import { CostCentreService } from './services/costcentre/costcentre.service';
 import { CostCentreDetailComponent } from './components/main/costcentre/costcentre-detail/costcentre-detail.component';
-import { ConceptComponent } from './components/main/concept/concepts/concept.component';
+import { ConceptsComponent } from './components/main/concept/concepts/concepts.component';
 import { ConceptDetailComponent } from './components/main/concept/concept-detail/concept-detail.component';
-
 
 
 @NgModule({
@@ -59,7 +59,7 @@ import { ConceptDetailComponent } from './components/main/concept/concept-detail
     CostCentreDetailComponent,
     MatCheckboxComponent,
     UserComponent,
-    ConceptComponent,
+    ConceptsComponent,
     ConceptDetailComponent
   ],
 
@@ -82,6 +82,7 @@ import { ConceptDetailComponent } from './components/main/concept/concept-detail
     UserService,
     AccountService,
     CostCentreService,
+    ConceptService,
     MessageService,
     {provide: ToastOptions, useClass: ToastrCustomOptions },
     GlobalsService
