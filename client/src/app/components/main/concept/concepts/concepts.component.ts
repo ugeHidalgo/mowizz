@@ -34,6 +34,7 @@ export class ConceptsComponent {
     this.gridOptions = <GridOptions>{};
     this.columnDefs = [
         { headerName: 'On', field: 'active', width: 30, cellRenderer: 'checkboxRenderer' },
+        { headerName: 'Type', field: 'transactionType', width: 25 },
         { headerName: 'Name', field: 'name', width: 50 },
         { headerName: 'Description', field: 'description', width: 120 },
         { headerName: 'Comments', field: 'comments' }
