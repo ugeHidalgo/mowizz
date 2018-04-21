@@ -41,6 +41,7 @@ import { CostCentresComponent } from './components/main/costcentre/costcentres/c
 import { CostCentreService } from './services/costcentre/costcentre.service';
 import { CostCentreDetailComponent } from './components/main/costcentre/costcentre-detail/costcentre-detail.component';
 import { ConceptComponent } from './components/main/concept/concepts/concept.component';
+import { ConceptDetailComponent } from './components/main/concept/concept-detail/concept-detail.component';
 
 
 
@@ -58,7 +59,8 @@ import { ConceptComponent } from './components/main/concept/concepts/concept.com
     CostCentreDetailComponent,
     MatCheckboxComponent,
     UserComponent,
-    ConceptComponent
+    ConceptComponent,
+    ConceptDetailComponent
   ],
 
   imports: [
