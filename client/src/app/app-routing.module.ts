@@ -9,7 +9,9 @@ import { PageNotFoundComponent } from './components/main/not-found/not-found.com
 // Routing Modules
 import { LoginRoutingModule } from './login/login-routing.module';
 import { AccountsRoutingModule } from './components/main/account/account-routing.module';
-import { CostCentresRoutingModule } from './components/main/costcentres/costcentres-routing.module';
+import { CostCentresRoutingModule } from './components/main/costcentre/costcentres-routing.module';
+import { ConceptsRoutingModule } from './components/main/concept/concepts-routing.module';
+
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -23,6 +25,7 @@ const routes: Routes = [
     LoginRoutingModule,
     AccountsRoutingModule,
     CostCentresRoutingModule,
+    ConceptsRoutingModule,
     RouterModule.forRoot(routes)
   ],
 

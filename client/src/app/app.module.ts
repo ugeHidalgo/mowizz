@@ -32,14 +32,15 @@ import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './login/register/register.component';
 import { UserComponent } from './login/user/user.component';
 import { MessagesComponent } from './messages/messages.component';
+import { MatCheckboxComponent } from './components/grid/checkbox/mat-checkbox.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountsComponent } from './components/main/account/accounts/accounts.component';
 import { AccountDetailComponent } from './components/main/account/account-detail/account-detail.component';
-import { CostCentresComponent } from './components/main/costcentres/costcentres/costcentres.component';
+import { CostCentresComponent } from './components/main/costcentre/costcentres/costcentres.component';
 import { CostCentreService } from './services/costcentre/costcentre.service';
-import { CostCentreDetailComponent } from './components/main/costcentres/costcentre-detail/costcentre-detail.component';
-import { MatCheckboxComponent } from './components/grid/checkbox/mat-checkbox.component';
+import { CostCentreDetailComponent } from './components/main/costcentre/costcentre-detail/costcentre-detail.component';
+import { ConceptComponent } from './components/main/concept/concepts/concept.component';
 
 
 
@@ -56,7 +57,8 @@ import { MatCheckboxComponent } from './components/grid/checkbox/mat-checkbox.co
     CostCentresComponent,
     CostCentreDetailComponent,
     MatCheckboxComponent,
-    UserComponent
+    UserComponent,
+    ConceptComponent
   ],
 
   imports: [
