@@ -9,7 +9,7 @@ import { ConceptDetailComponent } from './concept-detail/concept-detail.componen
 
 const conceptsRoutes: Routes = [
   { path: 'concepts', component: ConceptsComponent, canActivate: [AuthGuard]},
-  { path: 'costcentre/:id', component: ConceptDetailComponent, canActivate: [AuthGuard], canDeactivate: [PendingChangesGuard] }
+  { path: 'concept/:id', component: ConceptDetailComponent, canActivate: [AuthGuard], canDeactivate: [PendingChangesGuard] }
 ];
 
 @NgModule({

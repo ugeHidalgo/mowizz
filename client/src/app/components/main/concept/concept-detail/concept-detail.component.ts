@@ -1,15 +1,130 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, OnChanges, HostBinding } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { ComponentCanDeactivate } from '../../../../guards/pending-changes.guard';
+
+import { ToastsManager } from 'ng2-toastr';
+import { Concept } from '../../../../models/concept';
+import { ConceptService } from '../../../../services/concept/concept.service';
+import { GlobalsService } from '../../../../globals/globals.service';
+
+import { slideInDownAnimation } from '../../../../animations';
 
 @Component({
   selector: 'app-concept-detail',
   templateUrl: './concept-detail.component.html',
-  styleUrls: ['./concept-detail.component.scss']
+  styleUrls: ['./concept-detail.component.scss'],
+  animations: [ slideInDownAnimation ]
 })
-export class ConceptDetailComponent implements OnInit {
+export class ConceptDetailComponent implements OnInit, OnChanges, ComponentCanDeactivate {
 
-  constructor() { }
+  @HostBinding('@routeAnimation') routeAnimation = true;
+  @HostBinding('style.display') display = 'block';
+  @HostBinding('style.position') position = 'relative';
+
+  concept: Concept;
+  validatingForm: FormGroup;
+
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    protected globals: GlobalsService,
+    private conceptService: ConceptService,
+    private fb: FormBuilder,
+    public toastr: ToastsManager, vcr: ViewContainerRef) {
+      const me = this;
+
+      me.toastr.setRootViewContainerRef(vcr);
+      me.createForm();
+   }
 
   ngOnInit() {
+    const me = this,
+      id = me.route.snapshot.paramMap.get('id');
+
+    if (id === '-1') {
+      me.concept = new Concept();
+      me.concept.username = me.globals.userNameLogged;
+    } else {
+      me.getConceptById(id);
+    }
   }
 
+  ngOnChanges() {
+    this.rebuildForm();
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+    return this.validatingForm.pristine;
+  }
+
+  // Buttons actions
+  onClickGoBack() {
+    this.location.back();
+  }
+
+  onClickRefresh() {
+    this.rebuildForm();
+  }
+
+  onClickSave(): void {
+    const me = this;
+
+    me.concept = this.getFormData();
+    me.conceptService.updateConcept(me.concept)
+      .subscribe( () => {
+          me.toastr.success('Successfully saved.');
+        }
+      );
+    me.rebuildForm();
+  }
+
+  // FormModel methods
+  createForm() {
+    const me = this;
+
+    me.validatingForm = me.fb.group({
+      active: '',
+      name: [ '', Validators.required ],
+      description: '',
+      comments: ''
+    });
+  }
+
+  rebuildForm() {
+    const me = this;
+
+    me.validatingForm.reset({
+      active: me.concept.active,
+      name: me.concept.name,
+      description: me.concept.description,
+      comments: me.concept.comments
+    });
+  }
+
+  getFormData(): Concept {
+    const me = this,
+          formModel = me.validatingForm.value,
+          newConcept: Concept = me.concept;
+
+    newConcept.active = formModel.active;
+    newConcept.name = formModel.name;
+    newConcept.description = formModel.description;
+    newConcept.comments = formModel.comments;
+
+    return newConcept;
+  }
+
+  // Private Methods
+  getConceptById(id: string): void {
+    const me = this;
+
+    me.conceptService.getConceptById(id)
+      .subscribe( concept => {
+          me.concept = concept[0];
+          me.rebuildForm();
+      });
+  }
 }
