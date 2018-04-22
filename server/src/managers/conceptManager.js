@@ -34,7 +34,7 @@ module.exports.updateConcept = function (concept, callbackFn) {
             name: concept.name,
             description: concept.description,
             transactionType: concept.transactionType,
-            comment: concept.comment,
+            comments: concept.comments,
             updated: new Date,
             active: concept.active
         };

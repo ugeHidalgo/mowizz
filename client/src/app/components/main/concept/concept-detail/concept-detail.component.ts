@@ -79,9 +79,9 @@ export class ConceptDetailComponent implements OnInit, OnChanges, ComponentCanDe
     me.conceptService.updateConcept(me.concept)
       .subscribe( () => {
           me.toastr.success('Successfully saved.');
+          me.rebuildForm();
         }
       );
-    me.rebuildForm();
   }
 
   // FormModel methods
@@ -121,8 +121,7 @@ export class ConceptDetailComponent implements OnInit, OnChanges, ComponentCanDe
           newConcept: Concept = me.concept;
 
     newConcept.active = formModel.active;
-    newConcept.created = formModel.created;
-    newConcept.updated = formModel.updated;
+    newConcept.updated = new Date();
     newConcept.name = formModel.name;
     newConcept.description = formModel.description;
     newConcept.transactionType = formModel.transactionType;
