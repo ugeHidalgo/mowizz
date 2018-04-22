@@ -18,15 +18,23 @@
                         <label for="description">Description: </label>
                     </div>   
                     <div class="md-form form-sm col-md-1">
-                        <input type="checkbox" id="active" class="form-control" formControlName="active" 
-                            value="validatingForm.controls['active'].value">
-                        <label for="active">Active: </label>
+                        <mat-checkbox id="active" class="form-control" formControlName="active" style="border:0px;"
+                                        value="validatingForm.controls['active'].value">Active
+                        </mat-checkbox>
                     </div> 
                 </div>          
         
                 <div class="row">
+                    <div class="md-form form-sm col-md-3">
+                        <input mdbActive type="text" id="created" class="form-control" formControlName="created" readonly>
+                        <label for="created">Created: </label>
+                    </div>
+                    <div class="md-form form-sm col-md-3">
+                        <input mdbActive type="text" id="updated" class="form-control" formControlName="updated" readonly>
+                        <label for="updated">Updated: </label>
+                    </div>
                     <div class="md-form form-sm col-md-8">
-                        <textarea mdbActive type="text" id="comments" class="md-textarea form-control" rows="3"
+                        <textarea mdbActive type="text" id="comments" class="md-textarea form-control noBorder" rows="3"
                             formControlName="comments"></textarea>                
                         <label for="comments">Comments:</label>  
                     </div>                       

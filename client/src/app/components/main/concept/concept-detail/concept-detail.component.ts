@@ -49,7 +49,12 @@ export class ConceptDetailComponent implements OnInit, OnChanges, ComponentCanDe
 
     if (id === '-1') {
       me.concept = new Concept();
+      me.concept.transactionType = 2; // Expense
+      me.concept.created = new Date();
+      me.concept.updated = new Date();
       me.concept.username = me.globals.userNameLogged;
+      me.concept.active = true;
+      me.rebuildForm();
     } else {
       me.getConceptById(id);
     }

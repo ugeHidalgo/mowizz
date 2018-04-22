@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewContainerRef, OnChanges, HostBinding, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { Location } from '@angular/common';
+import { Location, DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentCanDeactivate } from '../../../../guards/pending-changes.guard';
 
@@ -46,7 +46,11 @@ export class AccountDetailComponent implements OnInit, OnChanges, ComponentCanDe
 
     if (id === '-1') {
       me.account = new Account();
+      me.account.created = new Date();
+      me.account.updated = new Date();
       me.account.username = me.globals.userNameLogged;
+      me.account.active = true;
+      me.rebuildForm();
     } else {
       me.getAccountById(id);
     }
@@ -87,6 +91,8 @@ export class AccountDetailComponent implements OnInit, OnChanges, ComponentCanDe
 
     me.validatingForm = me.fb.group({
       active: '',
+      created: '',
+      updated: '',
       name: [ '', Validators.required ],
       description: '',
       iban: '',
@@ -95,10 +101,14 @@ export class AccountDetailComponent implements OnInit, OnChanges, ComponentCanDe
   }
 
   rebuildForm() {
-    const me = this;
+    const me = this,
+          datePipe = new DatePipe(navigator.language),
+          format = 'dd/MM/yyyy';
 
     me.validatingForm.reset({
       active: me.account.active,
+      created: datePipe.transform(me.account.created, format),
+      updated: datePipe.transform(me.account.updated, format),
       name: me.account.name,
       description: me.account.description,
       iban: me.account.iban,

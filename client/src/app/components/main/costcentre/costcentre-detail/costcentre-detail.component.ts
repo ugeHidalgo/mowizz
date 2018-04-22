@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewContainerRef, OnChanges, HostBinding } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { Location } from '@angular/common';
+import { Location, DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentCanDeactivate } from '../../../../guards/pending-changes.guard';
 
@@ -46,7 +46,11 @@ export class CostCentreDetailComponent implements OnInit, OnChanges, ComponentCa
 
     if (id === '-1') {
       me.costCentre = new CostCentre();
+      me.costCentre.created = new Date();
+      me.costCentre.updated = new Date();
       me.costCentre.username = me.globals.userNameLogged;
+      me.costCentre.active = true;
+
     } else {
       me.getCostCentreById(id);
     }
@@ -87,6 +91,8 @@ export class CostCentreDetailComponent implements OnInit, OnChanges, ComponentCa
 
     me.validatingForm = me.fb.group({
       active: '',
+      created: '',
+      updated: '',
       name: [ '', Validators.required ],
       description: '',
       comments: ''
@@ -94,10 +100,14 @@ export class CostCentreDetailComponent implements OnInit, OnChanges, ComponentCa
   }
 
   rebuildForm() {
-    const me = this;
+    const me = this,
+          datePipe = new DatePipe(navigator.language),
+          format = 'dd/MM/yyyy';
 
     me.validatingForm.reset({
       active: me.costCentre.active,
+      created: datePipe.transform(me.costCentre.created, format),
+      updated: datePipe.transform(me.costCentre.updated, format),
       name: me.costCentre.name,
       description: me.costCentre.description,
       comments: me.costCentre.comments
