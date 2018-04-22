@@ -10,7 +10,9 @@ import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr'; // Toaster li
 import { ToastrCustomOptions } from './messages/toastrCustomOptions';
 import { AgGridModule } from 'ag-grid-angular/main'; // AgGrid component library
 import { MDBBootstrapModule } from 'angular-bootstrap-md'; // MDBootstrap
-import { MatCheckboxModule } from '@angular/material'; // Angular material desing components https://material.angular.io/
+import { MatFormFieldModule,
+         MatSelectModule,
+         MatCheckboxModule  } from '@angular/material'; // Angular material desing components https://material.angular.io/
 
 // App modules
 import { AppRoutingModule } from './/app-routing.module';
@@ -72,6 +74,8 @@ import { ConceptDetailComponent } from './components/main/concept/concept-detail
     HttpClientModule,
     ToastModule.forRoot(),
     MDBBootstrapModule.forRoot(),
+    MatFormFieldModule,
+    MatSelectModule,
     MatCheckboxModule,
     AgGridModule.withComponents([MatCheckboxComponent])
   ],

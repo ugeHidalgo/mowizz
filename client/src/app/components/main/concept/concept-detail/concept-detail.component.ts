@@ -4,9 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentCanDeactivate } from '../../../../guards/pending-changes.guard';
+import { DatePipe } from '@angular/common';
 
 import { ToastsManager } from 'ng2-toastr';
 import { Concept } from '../../../../models/concept';
+import { TransactionTypes, TransactionType } from '../../../../models/transactionType';
 import { ConceptService } from '../../../../services/concept/concept.service';
 import { GlobalsService } from '../../../../globals/globals.service';
 
@@ -26,6 +28,7 @@ export class ConceptDetailComponent implements OnInit, OnChanges, ComponentCanDe
 
   concept: Concept;
   validatingForm: FormGroup;
+  transactionTypes: TransactionType[] = TransactionTypes;
 
   constructor(
     private route: ActivatedRoute,
@@ -87,19 +90,27 @@ export class ConceptDetailComponent implements OnInit, OnChanges, ComponentCanDe
 
     me.validatingForm = me.fb.group({
       active: '',
+      created: '',
+      updated: '',
       name: [ '', Validators.required ],
       description: '',
+      transactionType: '',
       comments: ''
     });
   }
 
   rebuildForm() {
-    const me = this;
+    const me = this,
+          datePipe = new DatePipe(navigator.language),
+          format = 'dd/MM/yyyy';
 
     me.validatingForm.reset({
       active: me.concept.active,
+      created: datePipe.transform(me.concept.created, format),
+      updated: datePipe.transform(me.concept.updated, format),
       name: me.concept.name,
       description: me.concept.description,
+      transactionType: me.concept.transactionType,
       comments: me.concept.comments
     });
   }
@@ -110,8 +121,11 @@ export class ConceptDetailComponent implements OnInit, OnChanges, ComponentCanDe
           newConcept: Concept = me.concept;
 
     newConcept.active = formModel.active;
+    newConcept.created = formModel.created;
+    newConcept.updated = formModel.updated;
     newConcept.name = formModel.name;
     newConcept.description = formModel.description;
+    newConcept.transactionType = formModel.transactionType;
     newConcept.comments = formModel.comments;
 
     return newConcept;
