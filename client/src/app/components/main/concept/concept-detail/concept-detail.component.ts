@@ -97,7 +97,7 @@ export class ConceptDetailComponent implements OnInit, OnChanges, ComponentCanDe
       active: '',
       created: '',
       updated: '',
-      name: [ '', Validators.required ],
+      name: ['', [Validators.required ]],
       description: '',
       transactionType: '',
       comments: ''

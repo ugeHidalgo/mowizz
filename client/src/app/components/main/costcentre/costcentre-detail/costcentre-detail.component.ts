@@ -93,7 +93,7 @@ export class CostCentreDetailComponent implements OnInit, OnChanges, ComponentCa
       active: '',
       created: '',
       updated: '',
-      name: [ '', Validators.required ],
+      name: [ '', [Validators.required] ],
       description: '',
       comments: ''
     });

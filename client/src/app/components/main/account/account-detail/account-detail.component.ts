@@ -93,7 +93,7 @@ export class AccountDetailComponent implements OnInit, OnChanges, ComponentCanDe
       active: '',
       created: '',
       updated: '',
-      name: [ '', Validators.required ],
+      name: [ '', [Validators.required] ],
       description: '',
       iban: '',
       comments: ''
