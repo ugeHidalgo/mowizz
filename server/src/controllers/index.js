@@ -10,6 +10,7 @@ var homeController = require ('./homeController'),
     accountController = require ('./accountController'),
     costCentreController = require ('./costCentreController'),
     conceptController = require ('./conceptController'),
+    transactionController = require ('./transactionController'),
     heroController = require ('./heroController');
 
 module.exports.init = function (app){
