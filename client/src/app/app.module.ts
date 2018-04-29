@@ -47,6 +47,7 @@ import { CostCentresComponent } from './components/main/costcentre/costcentres/c
 import { CostCentreDetailComponent } from './components/main/costcentre/costcentre-detail/costcentre-detail.component';
 import { ConceptsComponent } from './components/main/concept/concepts/concepts.component';
 import { ConceptDetailComponent } from './components/main/concept/concept-detail/concept-detail.component';
+import { TransactionsComponent } from './components/main/transaction/transactions/transactions.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { ConceptDetailComponent } from './components/main/concept/concept-detail
     MatCheckboxComponent,
     UserComponent,
     ConceptsComponent,
-    ConceptDetailComponent
+    ConceptDetailComponent,
+    TransactionsComponent
   ],
 
   imports: [

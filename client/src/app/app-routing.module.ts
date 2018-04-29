@@ -11,6 +11,7 @@ import { LoginRoutingModule } from './login/login-routing.module';
 import { AccountsRoutingModule } from './components/main/account/account-routing.module';
 import { CostCentresRoutingModule } from './components/main/costcentre/costcentres-routing.module';
 import { ConceptsRoutingModule } from './components/main/concept/concepts-routing.module';
+import { TransactionsRoutingModule } from './components/main/transaction/transactions-routing.module';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
     AccountsRoutingModule,
     CostCentresRoutingModule,
     ConceptsRoutingModule,
+    TransactionsRoutingModule,
     RouterModule.forRoot(routes)
   ],
 
