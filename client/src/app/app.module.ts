@@ -30,6 +30,8 @@ import { MessageService } from './services/message/message.service';
 import { GlobalsService } from './globals/globals.service';
 import { CostCentreService } from './services/costcentre/costcentre.service';
 import { ConceptService } from './services/concept/concept.service';
+import { TransactionService } from './services/transaction/transaction.service';
+
 
 // App components
 import { LoginComponent } from './login/login/login.component';
@@ -87,6 +89,7 @@ import { ConceptDetailComponent } from './components/main/concept/concept-detail
     AccountService,
     CostCentreService,
     ConceptService,
+    TransactionService,
     MessageService,
     {provide: ToastOptions, useClass: ToastrCustomOptions },
     GlobalsService
