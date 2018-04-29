@@ -10,8 +10,7 @@ var homeController = require ('./homeController'),
     accountController = require ('./accountController'),
     costCentreController = require ('./costCentreController'),
     conceptController = require ('./conceptController'),
-    transactionController = require ('./transactionController'),
-    heroController = require ('./heroController');
+    transactionController = require ('./transactionController');    
 
 module.exports.init = function (app){
     console.log('Main controller initialized');
@@ -21,6 +20,5 @@ module.exports.init = function (app){
     accountController.init(app);
     costCentreController.init(app);
     conceptController.init(app);
-    heroController.init(app);
-    
+    transactionController.init(app);    
 };

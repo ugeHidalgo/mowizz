@@ -13,6 +13,6 @@ module.exports.initialTransactions = [{
     costCentre: '',
     concept: '',
     amount: 1000,
-    comments: '',
+    comments: 'Pago de 1000€ de prueba.',
     username: defaultUserName
 }];
