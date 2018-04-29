@@ -50,6 +50,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
 
     if (id === '-1') {
       me.transaction = new Transaction();
+      me.transaction.username = me.globals.userNameLogged;
       me.transaction.transactionType = 2; // Expense
       me.transaction.date = new Date();
       me.transaction.amount = 0;
