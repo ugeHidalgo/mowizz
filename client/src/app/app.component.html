@@ -19,6 +19,8 @@
                 <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
                 Files<span class="caret"></span></a>
                 <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/transactions']">Transactions</a>
+                    <div class="divider dropdown-divider"></div>
                     <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/accounts']">Accounts</a>
                     <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/costcentres']">Cost centres</a>
                     <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/concepts']">Concepts</a>
