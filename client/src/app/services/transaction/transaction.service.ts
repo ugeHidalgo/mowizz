@@ -38,6 +38,33 @@ export class TransactionService {
               );
   }
 
+  /**.*/
+  getTransactionById(id: string): Observable<Transaction> {
+    const me = this,
+          httpOptions = me.createHttpOptionsWithToken(),
+          getTransactionByIdUrl = `${me.TransactionUrl}/?id=${id}`,
+          transaction = me.http.get<Transaction>(getTransactionByIdUrl, httpOptions)
+                      .pipe(
+                        tap(_ => me.log(`Transaction with id ${id} was fetched.`)),
+                        catchError(me.handleError<Transaction>(`getTransactionById (id:${id}`))
+                      );
+    return transaction;
+  }
+
+  /**.*/
+  updatetransaction(transaction: Transaction): Observable<any> {
+
+    const me = this,
+          httpOptions = me.createHttpOptionsWithToken(),
+          updatedConcept = me.http.post<Transaction>(me.TransactionUrl, transaction, httpOptions)
+                        .pipe(
+                          tap(_ => me.log(`Concept with id ${transaction._id} was updated.`)),
+                          catchError(me.handleError<any>(`updateConcept (id:${transaction._id}`))
+                        );
+
+    return updatedConcept;
+  }
+
 // Private methods -------------
 
    /**

@@ -48,6 +48,7 @@ import { CostCentreDetailComponent } from './components/main/costcentre/costcent
 import { ConceptsComponent } from './components/main/concept/concepts/concepts.component';
 import { ConceptDetailComponent } from './components/main/concept/concept-detail/concept-detail.component';
 import { TransactionsComponent } from './components/main/transaction/transactions/transactions.component';
+import { TransactionDetailComponent } from './components/main/transaction/transaction-detail/transaction-detail.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { TransactionsComponent } from './components/main/transaction/transaction
     UserComponent,
     ConceptsComponent,
     ConceptDetailComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    TransactionDetailComponent
   ],
 
   imports: [
