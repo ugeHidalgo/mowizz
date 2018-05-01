@@ -10,46 +10,10 @@ import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr'; // Toaster li
 import { ToastrCustomOptions } from './messages/toastrCustomOptions';
 import { AgGridModule } from 'ag-grid-angular/main'; // AgGrid component library
 import { MDBBootstrapModule } from 'angular-bootstrap-md'; // MDBootstrap
-
-// Angular material design components https://material.angular.io/
-import {
-          MatAutocompleteModule,
-          MatButtonModule,
-          MatButtonToggleModule,
-          MatCardModule,
-          MatCheckboxModule,
-          MatChipsModule,
-          MatDatepickerModule,
-          MatDialogModule,
-          MatDividerModule,
-          MatExpansionModule,
-          MatFormFieldModule,
-          MatGridListModule,
-          MatIconModule,
-          MatInputModule,
-          MatListModule,
-          MatMenuModule,
-          MatNativeDateModule,
-          MatPaginatorModule,
-          MatProgressBarModule,
-          MatProgressSpinnerModule,
-          MatRadioModule,
-          MatRippleModule,
-          MatSelectModule,
-          MatSidenavModule,
-          MatSliderModule,
-          MatSlideToggleModule,
-          MatSnackBarModule,
-          MatSortModule,
-          MatStepperModule,
-          MatTableModule,
-          MatTabsModule,
-          MatToolbarModule,
-          MatTooltipModule,
-        } from '@angular/material';
+import { AppMaterialsModule } from './app-modules/app-materials.module'; // Angular material design components https://material.angular.io/
 
 // App modules
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-modules/app-routing.module';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './components/main/not-found/not-found.component';
 
@@ -114,39 +78,7 @@ import { TransactionDetailComponent } from './components/main/transaction/transa
     HttpClientModule,
     ToastModule.forRoot(),
     MDBBootstrapModule.forRoot(),
-    MatFormFieldModule,
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
+    AppMaterialsModule,
     AgGridModule.withComponents([MatCheckboxComponent])
   ],
 
