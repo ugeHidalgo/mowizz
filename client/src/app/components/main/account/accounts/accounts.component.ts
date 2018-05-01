@@ -29,25 +29,28 @@ export class AccountsComponent {
     private accountService: AccountService,
     public toastr: ToastsManager,
     vcr: ViewContainerRef ) {
+      const me = this;
 
-    this.toastr.setRootViewContainerRef(vcr);
-    this.getAccounts();
+    me.toastr.setRootViewContainerRef(vcr);
+    me.getAccounts();
 
-    this.gridOptions = <GridOptions>{};
-    this.columnDefs = [
+    me.gridOptions = <GridOptions>{
+      rowSelection: 'single'
+    };
+    me.columnDefs = [
         { headerName: 'On', field: 'active', width: 30, cellRenderer: 'checkboxRenderer' },
         { headerName: 'Name', field: 'name', width: 50 },
         { headerName: 'Description', field: 'description', width: 120 },
         { headerName: 'IBAN', field: 'iban', width: 150 },
         { headerName: 'Comments', field: 'comments' }
     ];
-    this.frameworkComponents = {
+    me.frameworkComponents = {
         checkboxRenderer: MatCheckboxComponent
     };
   }
 
   onGridReady(params) {
-      params.api.sizeColumnsToFit();
+    params.api.sizeColumnsToFit();
   }
 
   // Actions
@@ -65,6 +68,19 @@ export class AccountsComponent {
 
   private onClickRefreshButton() {
     this.getAccounts();
+  }
+
+  private onClickEditButton() {
+    const me = this,
+          selectedRow = this.gridOptions.api.getSelectedRows()[0];
+    let pathToDetail;
+
+    if (selectedRow) {
+      pathToDetail = `/account/${selectedRow._id}`;
+      me.router.navigate([pathToDetail]);
+    } else {
+      me.toastr.warning('No row was selected to edit.');
+    }
   }
 
   private selectAllRows() {

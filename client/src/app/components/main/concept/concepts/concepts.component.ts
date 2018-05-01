@@ -27,19 +27,22 @@ export class ConceptsComponent {
     private conceptService: ConceptService,
     public toastr: ToastsManager,
     vcr: ViewContainerRef ) {
+      const me = this;
 
-    this.toastr.setRootViewContainerRef(vcr);
-    this.getConcepts();
+    me.toastr.setRootViewContainerRef(vcr);
+    me.getConcepts();
 
-    this.gridOptions = <GridOptions>{};
-    this.columnDefs = [
+    me.gridOptions = <GridOptions>{
+      rowSelection: 'single'
+    };
+    me.columnDefs = [
         { headerName: 'On', field: 'active', width: 30, cellRenderer: 'checkboxRenderer' },
         { headerName: 'Type', field: 'transactionType', width: 25 },
         { headerName: 'Name', field: 'name', width: 50 },
         { headerName: 'Description', field: 'description', width: 120 },
         { headerName: 'Comments', field: 'comments' }
     ];
-    this.frameworkComponents = {
+    me.frameworkComponents = {
       checkboxRenderer: MatCheckboxComponent
   };
   }
@@ -63,6 +66,19 @@ export class ConceptsComponent {
 
   private onClickRefreshButton() {
     this.getConcepts();
+  }
+
+  private onClickEditButton() {
+    const me = this,
+          selectedRow = this.gridOptions.api.getSelectedRows()[0];
+    let pathToDetail;
+
+    if (selectedRow) {
+      pathToDetail = `/concept/${selectedRow._id}`;
+      me.router.navigate([pathToDetail]);
+    } else {
+      me.toastr.warning('No row was selected to edit.');
+    }
   }
 
   private selectAllRows() {

@@ -24,12 +24,15 @@ export class TransactionsComponent {
     private transactionService: TransactionService,
     public toastr: ToastsManager,
     vcr: ViewContainerRef ) {
+        const me = this;
 
-      this.toastr.setRootViewContainerRef(vcr);
-      this.getTransactions();
+      me.toastr.setRootViewContainerRef(vcr);
+      me.getTransactions();
 
-      this.gridOptions = <GridOptions>{};
-      this.columnDefs = [
+      me.gridOptions = <GridOptions>{
+        rowSelection: 'single'
+      };
+      me.columnDefs = [
           { headerName: 'Date', field: 'date', width: 30 },
           { headerName: 'Type', field: 'transactionType', width: 25 },
           { headerName: 'Amount', field: 'amount', width: 50 },
@@ -56,6 +59,19 @@ export class TransactionsComponent {
 
   private onClickRefreshButton() {
     this.getTransactions();
+  }
+
+  private onClickEditButton() {
+    const me = this,
+          selectedRow = this.gridOptions.api.getSelectedRows()[0];
+    let pathToDetail;
+
+    if (selectedRow) {
+      pathToDetail = `/transaction/${selectedRow._id}`;
+      me.router.navigate([pathToDetail]);
+    } else {
+      me.toastr.warning('No row was selected to edit.');
+    }
   }
 
   private selectAllRows() {

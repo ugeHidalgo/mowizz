@@ -27,18 +27,21 @@ export class CostCentresComponent {
     private costCentreService: CostCentreService,
     public toastr: ToastsManager,
     vcr: ViewContainerRef ) {
+      const me = this;
 
-    this.toastr.setRootViewContainerRef(vcr);
-    this.getCostCentres();
+    me.toastr.setRootViewContainerRef(vcr);
+    me.getCostCentres();
 
-    this.gridOptions = <GridOptions>{};
-    this.columnDefs = [
+    me.gridOptions = <GridOptions>{
+      rowSelection: 'single'
+    };
+    me.columnDefs = [
         { headerName: 'On', field: 'active', width: 30, cellRenderer: 'checkboxRenderer' },
         { headerName: 'Name', field: 'name', width: 50 },
         { headerName: 'Description', field: 'description', width: 120 },
         { headerName: 'Comments', field: 'comments' }
     ];
-    this.frameworkComponents = {
+    me.frameworkComponents = {
       checkboxRenderer: MatCheckboxComponent
   };
   }
@@ -62,6 +65,19 @@ export class CostCentresComponent {
 
   private onClickRefreshButton() {
     this.getCostCentres();
+  }
+
+  private onClickEditButton() {
+    const me = this,
+          selectedRow = this.gridOptions.api.getSelectedRows()[0];
+    let pathToDetail;
+
+    if (selectedRow) {
+      pathToDetail = `/costcentre/${selectedRow._id}`;
+      me.router.navigate([pathToDetail]);
+    } else {
+      me.toastr.warning('No row was selected to edit.');
+    }
   }
 
   private selectAllRows() {
