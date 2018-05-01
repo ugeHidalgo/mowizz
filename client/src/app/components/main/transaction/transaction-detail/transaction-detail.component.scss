@@ -1,3 +1,10 @@
 .transaction-detail {
     padding: 40px 20px 20px 20px;
 }
+
+.full-width-form-field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+}

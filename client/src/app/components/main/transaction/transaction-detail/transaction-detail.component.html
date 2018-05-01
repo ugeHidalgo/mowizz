@@ -4,31 +4,40 @@
             <h4>Transaction: {{ transaction.comment }}</h4>
         </div>
         <div class="card-body">
-            <form [formGroup]="validatingForm">                        
-                  <div class="row">                          
-                          <div class="md-form form-sm col-md-3">
-                              <input mdbActive type="text" id="date" class="form-control" formControlName="date">
-                              <label for="date">Date: </label>
-                          </div> 
-                          <mat-form-field>
-                              <mat-select placeholder="Transaction type: " formControlName="transactionType">
-                                  <mat-option *ngFor="let transactionType of transactionTypes" [(value)]=transactionType.value>
-                                      {{transactionType.name}}
-                                  </mat-option>
-                              </mat-select>                            
-                          </mat-form-field>
-                          <div class="md-form form-sm col-md-3">
-                              <input mdbActive type="text" id="amount" class="form-control" formControlName="amount">
-                              <label for="amount">Amount: </label>
-                          </div>
-                  </div>                  
-  
-                  <div class="row">
-                      <div class="md-form form-sm col-md-9">
-                          <input mdbActive type="text" id="comments" class="form-control" formControlName="comments">
-                          <label for="comments">Comments:</label>  
-                      </div>                       
-                  </div>
+            <form [formGroup]="validatingForm">  
+              <mat-grid-list cols="3" rowHeight="100px">
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <mat-form-field class="full-width-form-field">
+                      <input matInput [matDatepicker]="picker" placeholder="Date:" formControlName="date" [value]=transaction.date>
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <mat-form-field class="full-width-form-field">
+                    <mat-select placeholder="Transaction type: " formControlName="transactionType">
+                        <mat-option *ngFor="let transactionType of transactionTypes" [(value)]=transactionType.value>
+                            {{transactionType.name}}
+                        </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <mat-form-field class="full-width-form-field" >
+                      <input matInput placeholder="Amount:" formControlName="amount">
+                  </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
+                    <mat-form-field class="full-width-form-field">
+                        <input matInput placeholder="Comments:" formControlName="comments">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+              </mat-grid-list>
             </form>
         <div class="card-footer">
             <button class="btn btn-sm btn-outline-elegant" (click)="onClickGoBack()">
