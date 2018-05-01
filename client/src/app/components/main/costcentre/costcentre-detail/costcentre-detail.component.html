@@ -4,41 +4,49 @@
             <h4>Cost centre: {{ costCentre.name }}</h4>
         </div>
         <div class="card-body">
-            <form [formGroup]="validatingForm">                        
-                <div class="row">
-                    <div class="md-form form-sm col-md-3">
-                        <input mdbActive type="text" id="name" class="form-control" required formControlName="name">
-                        <label for="name">Name:</label>
-                        <div *ngIf="validatingForm.controls.name.touched">
-                            <div class="alert alert-danger" *ngIf="validatingForm.controls.name.invalid">Name is required</div>
-                        </div>
-                    </div>
-                    <div class="md-form form-sm col-md-3">
-                        <input mdbActive type="text" id="description" class="form-control" formControlName="description">
-                        <label for="description">Description: </label>
-                    </div>   
-                    <div class="md-form form-sm col-md-1">
-                        <mat-checkbox id="active" class="form-control" formControlName="active" style="border:0px;"
-                                        value="validatingForm.controls['active'].value">Active
-                        </mat-checkbox>
-                    </div> 
-                </div>          
-        
-                <div class="row">
-                    <div class="md-form form-sm col-md-3">
-                        <input mdbActive type="text" id="created" class="form-control" formControlName="created" readonly>
-                        <label for="created">Created: </label>
-                    </div>
-                    <div class="md-form form-sm col-md-3">
-                        <input mdbActive type="text" id="updated" class="form-control" formControlName="updated" readonly>
-                        <label for="updated">Updated: </label>
-                    </div>
-                    <div class="md-form form-sm col-md-8">
-                        <textarea mdbActive type="text" id="comments" class="md-textarea form-control noBorder" rows="3"
-                            formControlName="comments"></textarea>                
-                        <label for="comments">Comments:</label>  
-                    </div>                       
-                </div>
+            <form [formGroup]="validatingForm">
+                <mat-grid-list cols="3" rowHeight="100px">
+                    
+                   <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <mat-form-field class="full-width-form-field" >
+                            <input matInput placeholder="Name:" formControlName="name">
+                            <div *ngIf="validatingForm.controls.name.touched">
+                                <div class="alert alert-danger" *ngIf="validatingForm.controls.name.invalid">Name is required</div>
+                            </div>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <mat-form-field class="full-width-form-field" >
+                            <input matInput placeholder="Description:" formControlName="description">
+                        </mat-form-field>
+                    </mat-grid-tile>                    
+
+                    <mat-grid-tile [colspan]="1" [rowspan]="1">                        
+                        <mat-checkbox formControlName="active" style="border:0px;"
+                            value="validatingForm.controls['active'].value">Active
+                        </mat-checkbox>                                                    
+                    </mat-grid-tile>
+
+                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <mat-form-field class="full-width-form-field" >
+                            <input matInput placeholder="Created:" formControlName="created" readonly>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <mat-form-field class="full-width-form-field" >
+                            <input matInput placeholder="Updated:" formControlName="updated" readonly>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile [colspan]="3" [rowspan]="1">
+                        <mat-form-field class="full-width-form-field" >
+                            <input matInput placeholder="Comments:" formControlName="comments">
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                </mat-grid-list>               
             </form>
         <div class="card-footer">
             <button class="btn btn-sm btn-outline-elegant" (click)="onClickGoBack()">
