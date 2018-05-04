@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewContainerRef, OnChanges, HostBinding } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { Location } from '@angular/common';
+import { Location, DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentCanDeactivate } from '../../../../guards/pending-changes.guard';
-import { DatePipe } from '@angular/common';
 
 import { ToastsManager } from 'ng2-toastr';
 import { Transaction } from '../../../../models/transaction';
@@ -50,7 +49,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
 
    ngOnInit() {
     const me = this,
-      id = me.route.snapshot.paramMap.get('id');
+          id = me.route.snapshot.paramMap.get('id');
 
     if (id === '-1') {
       me.transaction = new Transaction();
@@ -90,9 +89,9 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     me.transactionService.updatetransaction(me.transaction)
       .subscribe( () => {
           me.toastr.success('Successfully saved.');
-          me.rebuildForm();
         }
       );
+    me.rebuildForm();
   }
 
 
@@ -105,21 +104,19 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
       transactionType: '',
       concept: '',
       comments: '',
-      amount: 0
+      amount: ''
     });
   }
 
   rebuildForm() {
-    const me = this,
-          datePipe = new DatePipe(navigator.language),
-          format = 'dd/MM/yyyy';
+    const me = this;
 
     me.validatingForm.reset({
-      date: datePipe.transform(me.transaction.date, format),
+      date: me.transaction.date,
       transactionType: me.transaction.transactionType,
       concept: me.transaction.concept,
       comments: me.transaction.comments,
-      amount: me.transaction.amount,
+      amount: me.transaction.amount
     });
   }
 
