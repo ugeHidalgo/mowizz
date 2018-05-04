@@ -8,6 +8,8 @@ import { DatePipe } from '@angular/common';
 
 import { ToastsManager } from 'ng2-toastr';
 import { Transaction } from '../../../../models/transaction';
+import { Concept } from '../../../../models/concept';
+import { ConceptService } from '../../../../services/concept/concept.service';
 import { TransactionTypes, TransactionType } from '../../../../models/transactionType';
 import { TransactionService } from '../../../../services/transaction/transaction.service';
 import { GlobalsService } from '../../../../globals/globals.service';
@@ -29,6 +31,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
   transaction: Transaction;
   validatingForm: FormGroup;
   transactionTypes: TransactionType[] = TransactionTypes;
+  concepts: Concept[];
 
 
   constructor(
@@ -36,6 +39,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     private location: Location,
     protected globals: GlobalsService,
     private transactionService: TransactionService,
+    private conceptService: ConceptService,
     private fb: FormBuilder,
     public toastr: ToastsManager, vcr: ViewContainerRef) {
       const me = this;
@@ -52,10 +56,12 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
       me.transaction = new Transaction();
       me.transaction.username = me.globals.userNameLogged;
       me.transaction.transactionType = 2; // Expense
+      me.transaction.concept = '';
       me.transaction.date = new Date();
       me.transaction.amount = 0;
       me.rebuildForm();
     } else {
+      me.getConcepts();
       me.getTransactionById(id);
     }
   }
@@ -97,6 +103,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     me.validatingForm = me.fb.group({
       date: '',
       transactionType: '',
+      concept: '',
       comments: '',
       amount: 0
     });
@@ -110,6 +117,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     me.validatingForm.reset({
       date: datePipe.transform(me.transaction.date, format),
       transactionType: me.transaction.transactionType,
+      concept: me.transaction.concept,
       comments: me.transaction.comments,
       amount: me.transaction.amount,
     });
@@ -122,6 +130,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
 
     newTransaction.date = new Date();
     newTransaction.transactionType = formModel.transactionType;
+    newTransaction.concept = formModel.concept;
     newTransaction.comments = formModel.comments;
     newTransaction.amount = formModel.amount;
 
@@ -139,4 +148,14 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
       });
   }
 
+  getConcepts(): void {
+    const me = this,
+          username = this.globals.userNameLogged;
+
+    me.conceptService.getConcepts(username)
+      .subscribe( concepts => {
+          me.concepts = concepts;
+          return concepts;
+      });
+  }
 }

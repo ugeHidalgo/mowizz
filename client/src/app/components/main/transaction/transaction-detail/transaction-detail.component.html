@@ -31,6 +31,16 @@
                   </mat-form-field>
                 </mat-grid-tile>
 
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width-form-field">
+                        <mat-select placeholder="Concept: " formControlName="concept">
+                            <mat-option *ngFor="let concept of concepts" [(value)]=concept._id>
+                                {{concept.description}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+
                 <mat-grid-tile [colspan]="3" [rowspan]="1">
                     <mat-form-field class="full-width-form-field">
                         <input matInput placeholder="Comments:" formControlName="comments">
