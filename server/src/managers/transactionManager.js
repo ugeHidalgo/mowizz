@@ -10,12 +10,16 @@ var defaultUserName = 'ugehidalgo',
 
 module.exports.getTransactions = function (userName, callbackFn) {
 
-    Transaction.find({username: userName}, callbackFn);
+    Transaction
+        .find({username: userName}, callbackFn)
+        .populate('concept');
 };
 
 module.exports.getTransactionById = function (id, callbackFn) {
 
-    Transaction.find({username: defaultUserName, _id: id}, callbackFn);
+    Transaction
+        .find({username: defaultUserName, _id: id}, callbackFn)
+        .populate('concept');
 };
 
 module.exports.updateTransaction = function (transaction, callbackFn) {
@@ -28,13 +32,15 @@ module.exports.updateTransaction = function (transaction, callbackFn) {
             amount: transaction.amount,
             date: transaction.date,
             transactionType: transaction.transactionType,
+            concept: transaction.concept,
             comments: transaction.comments,
         };
  
          Transaction.findOneAndUpdate(
             {_id: transaction._id}, 
-            { $set: updatedValues },
-            function (error){
+            { $set: updatedValues })
+            .populate('concept')
+            .exec(function (error){
                 if (error){
                     callbackFn(error, null);
                 } else {

@@ -36,6 +36,7 @@ export class TransactionsComponent {
           { headerName: 'Date', field: 'date', width: 30 },
           { headerName: 'Type', field: 'transactionType', width: 25 },
           { headerName: 'Amount', field: 'amount', width: 50 },
+          { headerName: 'Concept', field: 'concept', width: 50 },
           { headerName: 'Comments', field: 'comments' }
       ];
   }

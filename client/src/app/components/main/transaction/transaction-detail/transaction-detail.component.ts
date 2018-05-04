@@ -55,7 +55,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
       me.transaction = new Transaction();
       me.transaction.username = me.globals.userNameLogged;
       me.transaction.transactionType = 2; // Expense
-      me.transaction.concept = '';
+      me.transaction.concept = new Concept();
       me.transaction.date = new Date();
       me.transaction.amount = 0;
       me.rebuildForm();
@@ -114,7 +114,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     me.validatingForm.reset({
       date: me.transaction.date,
       transactionType: me.transaction.transactionType,
-      concept: me.transaction.concept,
+      concept: me.transaction.concept._id,
       comments: me.transaction.comments,
       amount: me.transaction.amount
     });
@@ -127,7 +127,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
 
     newTransaction.date = new Date();
     newTransaction.transactionType = formModel.transactionType;
-    newTransaction.concept = formModel.concept;
+    newTransaction.concept = me.getConceptById(formModel.concept);
     newTransaction.comments = formModel.comments;
     newTransaction.amount = formModel.amount;
 
@@ -154,5 +154,13 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
           me.concepts = concepts;
           return concepts;
       });
+  }
+
+  getConceptById(id): Concept {
+    const me = this;
+
+    return me.concepts.find( function(x) {
+      return x._id === id;
+    });
   }
 }
