@@ -32,15 +32,30 @@ export class TransactionsComponent {
       me.getTransactions();
 
       me.gridOptions = <GridOptions>{
-        rowSelection: 'single'
-      };
-      me.columnDefs = [
-          { headerName: 'Date', field: 'date', width: 30, valueFormatter: me.dateFormatter },
+        rowSelection: 'single',
+        enableColResize: true,
+        enableFilter: true,
+        floatingFilter: true,
+        enableSorting: true,
+        columnDefs: [
+          { headerName: 'Date', field: 'date', type: 'dateColumn' },
           { headerName: 'Type', field: 'transactionType', width: 25, valueFormatter: me.transactionTypeFormatter},
-          { headerName: 'Amount', field: 'amount', width: 25 },
+          { headerName: 'Amount', field: 'amount', type: 'numericColumn', width: 25 },
           { headerName: 'Concept', field: 'concept', width: 40, valueFormatter: me.conceptFormatter },
           { headerName: 'Comments', field: 'comments' }
-      ];
+        ],
+        columnTypes: {
+          numberColumn: {width: 83, filter: 'agNumberColumnFilter'},
+          dateColumn: {
+            width: 55,
+            valueFormatter: me.dateFormatter,
+            filter: 'agDateColumnFilter',
+            filterParams: {
+                comparator: me.dateComparator
+            }
+          }
+      }
+      };
   }
 
   onGridReady(params) {
@@ -53,6 +68,18 @@ export class TransactionsComponent {
           format = 'dd/MM/yyyy';
 
     return datePipe.transform(params.value, format);
+  }
+
+  dateComparator(dateToFilter, cellValue) {
+    const dateToFilterISO = dateToFilter.toISOString();
+
+    if (cellValue < dateToFilterISO) {
+      return -1;
+    } else if (cellValue > dateToFilterISO) {
+          return 1;
+      } else {
+          return 0;
+      }
   }
 
   transactionTypeFormatter(params) {

@@ -7,13 +7,9 @@
             <div class="card-body">
                 <ag-grid-angular style="width: 1000px; height: 400px;"
                     class="ag-fresh"
-                    [rowData]="rowData"
-                    [columnDefs]="columnDefs"
+                    [rowData]="rowData"                    
                     [gridOptions]="gridOptions"
-                    (gridReady)="onGridReady($event)"
-                    [enableColResize]="true"
-                    [enableSorting]="true"
-                    [enableFilter]="true"
+                    (gridReady)="onGridReady($event)"                                                          
                     [frameworkComponents]="frameworkComponents"
                     (cellDoubleClicked)="onRowDoubleClicked($event)">
                 </ag-grid-angular>
