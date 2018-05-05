@@ -51,6 +51,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     const me = this,
           id = me.route.snapshot.paramMap.get('id');
 
+    me.getConcepts();
     if (id === '-1') {
       me.transaction = new Transaction();
       me.transaction.username = me.globals.userNameLogged;
@@ -60,7 +61,6 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
       me.transaction.amount = 0;
       me.rebuildForm();
     } else {
-      me.getConcepts();
       me.getTransactionById(id);
     }
   }
