@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewContainerRef, HostBinding } from '@angular/core';
-import { Location } from '@angular/common';
+import { Location, DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { TransactionService } from '../../../../services/transaction/transaction.service';
 import { ToastsManager } from 'ng2-toastr';
 import { GridOptions } from 'ag-grid/main';
 import { GlobalsService } from '../../../../globals/globals.service';
+import { TransactionType, TransactionTypes } from '../../../../models/transactionType';
 
 @Component({
   selector: 'app-transactions',
@@ -17,6 +18,7 @@ export class TransactionsComponent {
   gridOptions: GridOptions;
   columnDefs: any[];
   rowData: any[];
+  transactionTypes: TransactionType[] = TransactionTypes;
 
   constructor(
     private router: Router,
@@ -33,16 +35,33 @@ export class TransactionsComponent {
         rowSelection: 'single'
       };
       me.columnDefs = [
-          { headerName: 'Date', field: 'date', width: 30 },
-          { headerName: 'Type', field: 'transactionType', width: 25 },
-          { headerName: 'Amount', field: 'amount', width: 50 },
-          { headerName: 'Concept', field: 'concept', width: 50 },
+          { headerName: 'Date', field: 'date', width: 30, valueFormatter: me.dateFormatter },
+          { headerName: 'Type', field: 'transactionType', width: 25, valueFormatter: me.transactionTypeFormatter},
+          { headerName: 'Amount', field: 'amount', width: 25 },
+          { headerName: 'Concept', field: 'concept', width: 40, valueFormatter: me.conceptFormatter },
           { headerName: 'Comments', field: 'comments' }
       ];
   }
 
   onGridReady(params) {
       params.api.sizeColumnsToFit();
+  }
+
+  dateFormatter(params) {
+    const me = this,
+          datePipe = new DatePipe(navigator.language),
+          format = 'dd/MM/yyyy';
+
+    return datePipe.transform(params.value, format);
+  }
+
+  transactionTypeFormatter(params) {
+    const transactionType = TransactionTypes.find(function(x) { return x.value === params.value; });
+    return transactionType.name;
+  }
+
+  conceptFormatter(params) {
+    return params.value.name;
   }
 
   // Actions
