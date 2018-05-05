@@ -39,13 +39,29 @@ export class TransactionsComponent {
         enableSorting: true,
         columnDefs: [
           { headerName: 'Date', field: 'date', type: 'dateColumn' },
-          { headerName: 'Type', field: 'transactionType', width: 25, valueFormatter: me.transactionTypeFormatter},
-          { headerName: 'Amount', field: 'amount', type: 'numericColumn', width: 25 },
-          { headerName: 'Concept', field: 'concept', width: 40, valueFormatter: me.conceptFormatter },
-          { headerName: 'Comments', field: 'comments' }
+          { headerName: 'Type', field: 'transactionType', type: 'transactionTypeColumn' },
+          { headerName: 'Amount', field: 'amount', type: ['numericColumn', 'numberColumn'] },
+          { headerName: 'Concept', field: 'concept', type: 'conceptColumn' },
+          { headerName: 'Comments', field: 'comments', filter: ''}
         ],
         columnTypes: {
-          numberColumn: {width: 83, filter: 'agNumberColumnFilter'},
+          numberColumn: {
+            width: 25,
+            filter: 'agNumberColumnFilter'
+          },
+          transactionTypeColumn: {
+            width: 25,
+            valueFormatter: me.transactionTypeFormatter,
+            filter: 'agTextColumnFilter',
+            filterParams: {
+              filterOptions: ['contains', 'notContains'],
+              textCustomComparator: me.transactionTypeComparator
+            }
+          },
+          conceptColumn: {
+            width: 40,
+            valueFormatter: me.conceptFormatter
+          },
           dateColumn: {
             width: 55,
             valueFormatter: me.dateFormatter,
@@ -85,6 +101,29 @@ export class TransactionsComponent {
   transactionTypeFormatter(params) {
     const transactionType = TransactionTypes.find(function(x) { return x.value === params.value; });
     return transactionType.name;
+  }
+
+  transactionTypeComparator (filter, value, filterText) {
+    const filterTextLowerCase = filterText.toLowerCase(),
+          valueToFilter = TransactionTypes.find(function(x) { return x.value.toString() === value; });
+    let valueLowerCase = '';
+
+    if (valueToFilter) {
+      valueLowerCase = valueToFilter.name.toLowerCase();
+    } else {
+      return false;
+    }
+
+    switch (filter) {
+      case 'contains':
+        return valueLowerCase.indexOf(filterTextLowerCase) >= 0;
+      case 'notContains':
+        return valueLowerCase.indexOf(filterTextLowerCase) === -1;
+      default:
+        // should never happen
+        console.warn('invalid filter type ' + filter);
+        return false;
+    }
   }
 
   conceptFormatter(params) {
