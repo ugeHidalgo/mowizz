@@ -39,7 +39,6 @@ module.exports.updateTransaction = function (transaction, callbackFn) {
          Transaction.findOneAndUpdate(
             {_id: transaction._id}, 
             { $set: updatedValues })
-            .populate('concept')
             .exec(function (error){
                 if (error){
                     callbackFn(error, null);

@@ -125,7 +125,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
           formModel = me.validatingForm.value,
           newTransaction: Transaction = me.transaction;
 
-    newTransaction.date = new Date();
+    newTransaction.date = formModel.date;
     newTransaction.transactionType = formModel.transactionType;
     newTransaction.concept = me.getConceptById(formModel.concept);
     newTransaction.comments = formModel.comments;
