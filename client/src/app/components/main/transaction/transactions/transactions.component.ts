@@ -41,8 +41,8 @@ export class TransactionsComponent {
           { headerName: 'Date', field: 'date', type: 'dateColumn' },
           { headerName: 'Type', field: 'transactionType', type: 'transactionTypeColumn' },
           { headerName: 'Amount', field: 'amount', type: ['numericColumn', 'numberColumn'] },
-          { headerName: 'Concept', field: 'concept', type: 'conceptColumn' },
-          { headerName: 'Comments', field: 'comments', filter: ''}
+          { headerName: 'Concept', field: 'concept.name', type: 'conceptColumn' },
+          { headerName: 'Comments', field: 'comments', suppressFilter: true }
         ],
         columnTypes: {
           numberColumn: {
@@ -60,7 +60,7 @@ export class TransactionsComponent {
           },
           conceptColumn: {
             width: 40,
-            valueFormatter: me.conceptFormatter
+            filter: 'agTextColumnFilter'
           },
           dateColumn: {
             width: 55,
@@ -120,14 +120,9 @@ export class TransactionsComponent {
       case 'notContains':
         return valueLowerCase.indexOf(filterTextLowerCase) === -1;
       default:
-        // should never happen
         console.warn('invalid filter type ' + filter);
         return false;
     }
-  }
-
-  conceptFormatter(params) {
-    return params.value.name;
   }
 
   // Actions
