@@ -17,15 +17,15 @@
             <!-- Files Dropdown -->
             <li class="nav-item dropdown" *ngIf="globals.userNameLogged" dropdown>
                 <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
-                Files<span class="caret"></span></a>
+                Archivos<span class="caret"></span></a>
                 <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/transactions']">Transactions</a>
+                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/transactions']">Movimientos</a>
                     <div class="divider dropdown-divider"></div>
-                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/accounts']">Accounts</a>
-                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/costcentres']">Cost centres</a>
-                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/concepts']">Concepts</a>
+                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/accounts']">Cuentas</a>
+                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/costcentres']">Centros de Coste</a>
+                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/concepts']">Conceptos</a>
                     <div class="divider dropdown-divider"></div>
-                    <a class="dropdown-item waves-light" mdbRippleRadius href="#">Empty link</a>
+                    <a class="dropdown-item waves-light" mdbRippleRadius href="#">Enlace vacío</a>
                 </div>
             </li>
         </ul>
@@ -42,7 +42,7 @@
         <ng-template #notUserLogged>
         <ul class="nav navbar-nav ml-auto">
             <li class="nav-item"><a class="nav-link" [routerLink]="['/login']">Login</a></li>
-            <li class="nav-item"><a class="nav-link" [routerLink]="['/register']">Register</a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/register']">Registrar</a></li>
         </ul>
         </ng-template>
         <!-- Links -->        

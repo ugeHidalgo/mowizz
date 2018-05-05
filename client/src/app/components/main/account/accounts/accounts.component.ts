@@ -38,11 +38,11 @@ export class AccountsComponent {
       rowSelection: 'single'
     };
     me.columnDefs = [
-        { headerName: 'On', field: 'active', width: 30, cellRenderer: 'checkboxRenderer' },
-        { headerName: 'Name', field: 'name', width: 50 },
-        { headerName: 'Description', field: 'description', width: 120 },
+        { headerName: 'Activo', field: 'active', width: 35, cellRenderer: 'checkboxRenderer' },
+        { headerName: 'Nombre', field: 'name', width: 50 },
+        { headerName: 'Descripción', field: 'description', width: 120 },
         { headerName: 'IBAN', field: 'iban', width: 150 },
-        { headerName: 'Comments', field: 'comments' }
+        { headerName: 'Commentarios', field: 'comments' }
     ];
     me.frameworkComponents = {
         checkboxRenderer: MatCheckboxComponent

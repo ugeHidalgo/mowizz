@@ -36,11 +36,11 @@ export class ConceptsComponent {
       rowSelection: 'single'
     };
     me.columnDefs = [
-        { headerName: 'On', field: 'active', width: 30, cellRenderer: 'checkboxRenderer' },
-        { headerName: 'Type', field: 'transactionType', width: 25 },
-        { headerName: 'Name', field: 'name', width: 50 },
-        { headerName: 'Description', field: 'description', width: 120 },
-        { headerName: 'Comments', field: 'comments' }
+        { headerName: 'Activo', field: 'active', width: 30, cellRenderer: 'checkboxRenderer' },
+        { headerName: 'Tipo', field: 'transactionType', width: 25 },
+        { headerName: 'Nombre', field: 'name', width: 50 },
+        { headerName: 'Descripción', field: 'description', width: 120 },
+        { headerName: 'Commentarios', field: 'comments' }
     ];
     me.frameworkComponents = {
       checkboxRenderer: MatCheckboxComponent

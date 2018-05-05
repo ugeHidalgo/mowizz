@@ -1,7 +1,7 @@
 <div *ngIf="account" class="account-detail">
     <div class="card">
         <div class="card-header indigo lighten-1 white-text">
-            <h4>Account: {{ account.name }}</h4>
+            <h4>Cuenta: {{ account.name }}</h4>
         </div>
         <div class="card-body">
             <form [formGroup]="validatingForm">
@@ -9,16 +9,16 @@
 
                     <mat-grid-tile [colspan]="1" [rowspan]="1">
                         <mat-form-field class="full-width-form-field" >
-                            <input matInput placeholder="Name:" formControlName="name">
+                            <input matInput placeholder="Nombre:" formControlName="name">
                             <div *ngIf="validatingForm.controls.name.touched">
-                                <div class="alert alert-danger" *ngIf="validatingForm.controls.name.invalid">Name is required</div>
+                                <div class="alert alert-danger" *ngIf="validatingForm.controls.name.invalid">El nombre es obligatorio</div>
                             </div>
                         </mat-form-field>
                     </mat-grid-tile>
 
                     <mat-grid-tile [colspan]="1" [rowspan]="1">
                         <mat-form-field class="full-width-form-field" >
-                            <input matInput placeholder="Description:" formControlName="description">
+                            <input matInput placeholder="Descripción:" formControlName="description">
                         </mat-form-field>
                     </mat-grid-tile>
 
@@ -30,25 +30,25 @@
 
                     <mat-grid-tile [colspan]="1" [rowspan]="1">
                         <mat-form-field class="full-width-form-field" >
-                            <input matInput placeholder="Created:" formControlName="created" readonly>
+                            <input matInput placeholder="Creado:" formControlName="created" readonly>
                         </mat-form-field>
                     </mat-grid-tile>
 
                     <mat-grid-tile [colspan]="1" [rowspan]="1">
                         <mat-form-field class="full-width-form-field" >
-                            <input matInput placeholder="Updated:" formControlName="updated" readonly>
+                            <input matInput placeholder="Actualizado:" formControlName="updated" readonly>
                         </mat-form-field>
                     </mat-grid-tile>
 
                     <mat-grid-tile [colspan]="1" [rowspan]="1">
                         <mat-checkbox formControlName="active" style="border:0px;"
-                            value="validatingForm.controls['active'].value">Active
+                            value="validatingForm.controls['active'].value">Activo
                         </mat-checkbox>
                     </mat-grid-tile>
 
                     <mat-grid-tile [colspan]="3" [rowspan]="1">
                         <mat-form-field class="full-width-form-field" >
-                            <input matInput placeholder="Comments:" formControlName="comments">
+                            <input matInput placeholder="Commentarios:" formControlName="comments">
                         </mat-form-field>
                     </mat-grid-tile>
                         
@@ -57,13 +57,13 @@
         </div>
         <div class="card-footer">
             <button class="btn btn-sm btn-outline-elegant" (click)="onClickGoBack()">
-                <i class="fa fa-arrow-left ml-1"> Back</i>
+                <i class="fa fa-arrow-left ml-1"> Volver</i>
             </button>
             <button class="btn btn-sm btn-outline-danger" (click)="onClickRefresh()" [disabled]="validatingForm.pristine">
-                <i class="fa fa-refresh ml-1"> Refresh</i>
+                <i class="fa fa-refresh ml-1"> Deshacer</i>
             </button>  
             <button class="btn btn-sm btn-outline-dark-green" (click)="onClickSave()" [disabled]="validatingForm.pristine || validatingForm.invalid">
-                <i class="fa fa-save ml-1"> Save</i>
+                <i class="fa fa-save ml-1"> Grabar</i>
             </button>
         </div>
     </div>

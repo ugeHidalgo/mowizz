@@ -38,15 +38,15 @@ export class TransactionsComponent {
         floatingFilter: true,
         enableSorting: true,
         columnDefs: [
-          { headerName: 'Date', field: 'date', type: 'dateColumn' },
-          { headerName: 'Type', field: 'transactionType', type: 'transactionTypeColumn' },
-          { headerName: 'Amount', field: 'amount', type: ['numericColumn', 'numberColumn'] },
-          { headerName: 'Concept', field: 'concept.name', type: 'conceptColumn' },
-          { headerName: 'Comments', field: 'comments', suppressFilter: true }
+          { headerName: 'Fecha', field: 'date', type: 'dateColumn' },
+          { headerName: 'Tipo', field: 'transactionType', type: 'transactionTypeColumn' },
+          { headerName: 'Cantidad', field: 'amount', type: ['numericColumn', 'numberColumn'] },
+          { headerName: 'Concepto', field: 'concept.name', type: 'conceptColumn' },
+          { headerName: 'Commentarios', field: 'comments', suppressFilter: true }
         ],
         columnTypes: {
           numberColumn: {
-            width: 25,
+            width: 30,
             filter: 'agNumberColumnFilter'
           },
           transactionTypeColumn: {
