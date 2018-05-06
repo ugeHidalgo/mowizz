@@ -1,5 +1,6 @@
 import { Concept } from './concept';
 import { CostCentre } from './costcentre';
+import { Account } from './account';
 
 export class Transaction {
     _id: string;
@@ -7,6 +8,7 @@ export class Transaction {
     transactionType: number;
     concept: Concept;
     costCentre: CostCentre;
+    account: Account;
     comments: string;
     date: Date;
     username: string;

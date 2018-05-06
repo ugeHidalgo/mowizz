@@ -13,7 +13,8 @@ module.exports.getTransactions = function (userName, callbackFn) {
     Transaction
         .find({username: userName}, callbackFn)
         .populate('concept')
-        .populate('costCentre');
+        .populate('costCentre')
+        .populate('account');
 };
 
 module.exports.getTransactionById = function (id, callbackFn) {
@@ -21,7 +22,8 @@ module.exports.getTransactionById = function (id, callbackFn) {
     Transaction
         .find({username: defaultUserName, _id: id}, callbackFn)
         .populate('concept')
-        .populate('costCentre');
+        .populate('costCentre')
+        .populate('account');
 };
 
 module.exports.updateTransaction = function (transaction, callbackFn) {
@@ -36,6 +38,7 @@ module.exports.updateTransaction = function (transaction, callbackFn) {
             transactionType: transaction.transactionType,
             concept: transaction.concept,
             costCentre: transaction.costCentre,
+            account: transaction.account,
             comments: transaction.comments,
         };
  

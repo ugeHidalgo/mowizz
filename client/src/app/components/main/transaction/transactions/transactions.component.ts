@@ -43,7 +43,8 @@ export class TransactionsComponent {
           { headerName: 'Cantidad', field: 'amount', type: ['numericColumn', 'numberColumn'] },
           { headerName: 'Concepto', field: 'concept.name', type: 'textColumn' },
           { headerName: 'Centro de gasto', field: 'costCentre.name', type: 'textColumn'},
-          { headerName: 'Commentarios', field: 'comments', suppressFilter: true }
+          { headerName: 'Cuenta', field: 'account.name', type: 'textColumn'},
+          { headerName: 'Comentarios', field: 'comments', width: 100, suppressFilter: true }
         ],
         columnTypes: {
           numberColumn: {
@@ -51,7 +52,7 @@ export class TransactionsComponent {
             filter: 'agNumberColumnFilter'
           },
           textColumn: {
-            width: 40,
+            width: 50,
             filter: 'agTextColumnFilter'
           },
           transactionTypeColumn: {

@@ -11,11 +11,13 @@ import { Transaction } from '../../../../models/transaction';
 import { TransactionTypes, TransactionType } from '../../../../models/transactionType';
 import { Concept } from '../../../../models/concept';
 import { CostCentre } from '../../../../models/costcentre';
+import { Account } from '../../../../models/account';
 
 import { GlobalsService } from '../../../../globals/globals.service';
 import { TransactionService } from '../../../../services/transaction/transaction.service';
 import { ConceptService } from '../../../../services/concept/concept.service';
 import { CostCentreService } from '../../../../services/costcentre/costcentre.service';
+import { AccountService } from '../../../../services/account/account.service';
 
 
 @Component({
@@ -35,6 +37,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
   transactionTypes: TransactionType[] = TransactionTypes;
   concepts: Concept[];
   costCentres: CostCentre[];
+  accounts: Account[];
 
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +46,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     private transactionService: TransactionService,
     private conceptService: ConceptService,
     private costCentreService: CostCentreService,
+    private accountService: AccountService,
     private fb: FormBuilder,
     public toastr: ToastsManager, vcr: ViewContainerRef) {
       const me = this;
@@ -57,12 +61,15 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
 
     me.getConcepts();
     me.getCostCentres();
+    me.getAccounts();
+
     if (id === '-1') {
       me.transaction = new Transaction();
       me.transaction.username = me.globals.userNameLogged;
       me.transaction.transactionType = 2; // Expense
       me.transaction.concept = new Concept();
       me.transaction.costCentre = new CostCentre();
+      me.transaction.account = new Account();
       me.transaction.date = new Date();
       me.transaction.amount = 0;
       me.rebuildForm();
@@ -110,6 +117,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
       transactionType: '',
       concept: '',
       costCentre: '',
+      account: '',
       comments: '',
       amount: ''
     });
@@ -122,7 +130,8 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
       date: me.transaction.date,
       transactionType: me.transaction.transactionType,
       concept: me.transaction.concept._id,
-      costCentre: me.transaction.costCentre._id, // <------- aquí
+      costCentre: me.transaction.costCentre._id,
+      account: me.transaction.account._id,
       comments: me.transaction.comments,
       amount: me.transaction.amount
     });
@@ -137,6 +146,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     newTransaction.transactionType = formModel.transactionType;
     newTransaction.concept = me.getConceptById(formModel.concept);
     newTransaction.costCentre = me.getCostCentreById(formModel.costCentre);
+    newTransaction.account = me.getAccountById(formModel.account);
     newTransaction.comments = formModel.comments;
     newTransaction.amount = formModel.amount;
 
@@ -156,39 +166,43 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
 
   getConcepts(): void {
     const me = this,
-          username = this.globals.userNameLogged;
+          username = me.globals.userNameLogged;
 
     me.conceptService.getConcepts(username)
       .subscribe( concepts => {
           me.concepts = concepts;
-          return concepts;
       });
   }
 
   getConceptById(id): Concept {
-    const me = this;
-
-    return me.concepts.find( function(x) {
-      return x._id === id;
-    });
+    return this.concepts.find( function(x) { return x._id === id; });
   }
 
   getCostCentres(): void {
     const me = this,
-          username = this.globals.userNameLogged;
+          username = me.globals.userNameLogged;
 
     me.costCentreService.getCostCentres(username)
       .subscribe( costCentres => {
           me.costCentres = costCentres;
-          // return costCentres;
       });
   }
 
   getCostCentreById(id): CostCentre {
-    const me = this;
+    return this.costCentres.find( function(x) { return x._id === id; });
+  }
 
-    return me.costCentres.find( function(x) {
-      return x._id === id;
-    });
+  getAccounts(): void {
+    const me = this,
+          username = me.globals.userNameLogged;
+
+    me.accountService.getAccounts(username)
+      .subscribe( accounts => {
+          me.accounts = accounts;
+      });
+  }
+
+  getAccountById(id): Account {
+    return this.accounts.find( function(x) { return x._id === id; });
   }
 }

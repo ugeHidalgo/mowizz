@@ -4,9 +4,9 @@ var moongoose = require ('mongoose'),
         id : Number,
         transactionType : { type : Number, default : 2 },
         date : { type : Date, default : Date.now },
-        /* account: { type: Schema.Types.ObjectId, ref: 'Accounts' }, */
         concept: { type: Schema.Types.ObjectId, ref: 'Concepts' },
         costCentre: { type: Schema.Types.ObjectId, ref: 'CostCentres' },
+        account: { type: Schema.Types.ObjectId, ref: 'Accounts' },
         amount: Number,
         comments: String,
         username : String
