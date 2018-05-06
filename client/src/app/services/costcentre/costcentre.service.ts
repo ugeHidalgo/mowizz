@@ -38,6 +38,19 @@ export class CostCentreService {
   }
 
   /**.*/
+  getActiveCostCentres(userName: string): Observable<CostCentre[]> {
+    const me = this,
+          getUserNameCostCentresUrl = `${me.costCentresUrl}/?username=${userName}&active=true`,
+          httpOptions = me.createHttpOptionsWithToken();
+
+    return me.http.get<CostCentre[]>(getUserNameCostCentresUrl, httpOptions)
+              .pipe(
+                tap(costCentres => me.log('Active cost Centres fetched.')),
+                catchError(me.handleError('getActiveCostCentres', []))
+              );
+  }
+
+  /**.*/
   addCostCentre(costCentre: CostCentre): Observable<CostCentre> {
     const me = this,
           body = JSON.stringify(costCentre),

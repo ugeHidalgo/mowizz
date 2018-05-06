@@ -13,6 +13,11 @@ module.exports.getAccounts = function (userName, callbackFn) {
     Account.find({username: userName}, callbackFn);
 };
 
+module.exports.getActiveAccounts = function (userName, callbackFn) {
+
+    Account.find({username: userName, active: true}, callbackFn);
+};
+
 module.exports.getAccountById = function (id, callbackFn) {
 
     Account.find({username: defaultUserName, _id: id}, callbackFn);

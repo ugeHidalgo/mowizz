@@ -23,17 +23,22 @@ module.exports.init = function (app) {
         });
     });
 
-    // (GET)http:localhost:3000/api/concepts/?username=pepe
+    // (GET)http:localhost:3000/api/concepts/?username=pepe&active=true
     app.get ('/api/concepts', auth.isUserAuthenticated, function (req, res, next) {
         var queryString = url.parse(req.url, true).query,
-            userName = queryString.username;
+            userName = queryString.username,
+            active = queryString.active;
 
         if (res.error) {
             res.status(401).send(res.error);
         }
 
         if (userName) {
-            getUserConcepts(userName, res)
+            if (active) {
+                getActiveUserConcepts(userName, res)
+            } else {
+                getUserConcepts(userName, res)
+            }
         }
     });
 
@@ -82,6 +87,20 @@ function getUserConcepts(userName, res) {
             res.status(400).send(error);
         } else {
             console.log(`Concepts controller returns ${data.length} concepts successfully`);
+            res.set('Content-Type','application/json');
+            res.status(200).send(data);
+        }
+    });
+}
+
+function getActiveUserConcepts(userName, res) {
+    
+    ConceptManager.getActiveConcepts (userName, function(error, data){
+        if (error){
+            console.log('Concepts controller returns an error (400)');
+            res.status(400).send(error);
+        } else {
+            console.log(`Concepts controller returns ${data.length} active concepts successfully`);
             res.set('Content-Type','application/json');
             res.status(200).send(data);
         }

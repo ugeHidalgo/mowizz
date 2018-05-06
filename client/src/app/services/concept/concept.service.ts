@@ -38,6 +38,19 @@ export class ConceptService {
   }
 
   /**.*/
+  getActiveConcepts(userName: string): Observable<Concept[]> {
+    const me = this,
+          getUserNameConceptsUrl = `${me.conceptsUrl}/?username=${userName}&active=true`,
+          httpOptions = me.createHttpOptionsWithToken();
+
+    return me.http.get<Concept[]>(getUserNameConceptsUrl, httpOptions)
+              .pipe(
+                tap(concepts => me.log('Active concepts fetched.')),
+                catchError(me.handleError('getActiveConcepts', []))
+              );
+  }
+
+  /**.*/
   addConcept(concept: Concept): Observable<Concept> {
     const me = this,
           body = JSON.stringify(Concept),

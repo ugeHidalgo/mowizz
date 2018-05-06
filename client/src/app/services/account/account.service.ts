@@ -38,6 +38,19 @@ export class AccountService {
               );
   }
 
+   /**.*/
+   getActiveAccounts(userName: string): Observable<Account[]> {
+    const me = this,
+          getUserNameAccountsUrl = `${me.accountsUrl}/?username=${userName}&active=true`,
+          httpOptions = me.createHttpOptionsWithToken();
+
+    return me.http.get<Account[]>(getUserNameAccountsUrl, httpOptions)
+              .pipe(
+                tap(accounts => me.log('Active accounts fetched.')),
+                catchError(me.handleError('getActiveAccounts', []))
+              );
+  }
+
   /**.*/
   addAccount(account: Account): Observable<Account> {
     const me = this,

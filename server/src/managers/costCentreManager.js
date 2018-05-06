@@ -13,6 +13,11 @@ module.exports.getCostCentres = function (userName, callbackFn) {
     CostCentre.find({username: defaultUserName}, callbackFn);
 };
 
+module.exports.getActiveCostCentres = function (userName, callbackFn) {
+
+    CostCentre.find({username: defaultUserName, active: true}, callbackFn);
+};
+
 module.exports.getCostCentreById = function (id, callbackFn) {
 
     CostCentre.find({username: defaultUserName, _id: id}, callbackFn);

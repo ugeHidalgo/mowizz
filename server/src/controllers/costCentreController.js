@@ -23,17 +23,22 @@ module.exports.init = function (app) {
         });
     });
 
-    // (GET)http:localhost:3000/api/costCentres/?username=pepe
+    // (GET)http:localhost:3000/api/costCentres/?username=pepe&active=true
     app.get ('/api/costCentres', auth.isUserAuthenticated, function (req, res, next) {
         var queryString = url.parse(req.url, true).query,
-            userName = queryString.username;
+            userName = queryString.username,
+            active = queryString.active;
 
         if (res.error) {
             res.status(401).send(res.error);
         }
 
         if (userName) {
-            getUserCostCentres(userName, res)
+            if (active) {
+                getActiveUserCostCentres(userName, res)
+            } else {
+                getUserCostCentres(userName, res)
+            }
         }
     });
 
@@ -82,6 +87,20 @@ function getUserCostCentres(userName, res) {
             res.status(400).send(error);
         } else {
             console.log(`Cost Centres controller returns ${data.length} Cost Centres successfully`);
+            res.set('Content-Type','application/json');
+            res.status(200).send(data);
+        }
+    });
+}
+
+function getActiveUserCostCentres(userName, res) {
+    
+    costCentreManager.getActiveCostCentres (userName, function(error, data){
+        if (error){
+            console.log('Cost Centres controller returns an error (400)');
+            res.status(400).send(error);
+        } else {
+            console.log(`Cost Centres controller returns ${data.length} active cost Centres successfully`);
             res.set('Content-Type','application/json');
             res.status(200).send(data);
         }

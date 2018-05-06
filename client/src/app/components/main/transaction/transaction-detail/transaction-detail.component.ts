@@ -59,9 +59,9 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     const me = this,
           id = me.route.snapshot.paramMap.get('id');
 
-    me.getConcepts();
-    me.getCostCentres();
-    me.getAccounts();
+    me.getActiveConcepts();
+    me.getActiveCostCentres();
+    me.getActiveAccounts();
 
     if (id === '-1') {
       me.transaction = new Transaction();
@@ -164,11 +164,11 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
       });
   }
 
-  getConcepts(): void {
+  getActiveConcepts(): void {
     const me = this,
           username = me.globals.userNameLogged;
 
-    me.conceptService.getConcepts(username)
+    me.conceptService.getActiveConcepts(username)
       .subscribe( concepts => {
           me.concepts = concepts;
       });
@@ -178,11 +178,11 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     return this.concepts.find( function(x) { return x._id === id; });
   }
 
-  getCostCentres(): void {
+  getActiveCostCentres(): void {
     const me = this,
           username = me.globals.userNameLogged;
 
-    me.costCentreService.getCostCentres(username)
+    me.costCentreService.getActiveCostCentres(username)
       .subscribe( costCentres => {
           me.costCentres = costCentres;
       });
@@ -192,11 +192,11 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     return this.costCentres.find( function(x) { return x._id === id; });
   }
 
-  getAccounts(): void {
+  getActiveAccounts(): void {
     const me = this,
           username = me.globals.userNameLogged;
 
-    me.accountService.getAccounts(username)
+    me.accountService.getActiveAccounts(username)
       .subscribe( accounts => {
           me.accounts = accounts;
       });

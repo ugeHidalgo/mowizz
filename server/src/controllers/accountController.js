@@ -23,17 +23,23 @@ module.exports.init = function (app) {
         });
     });
 
-    // (GET)http:localhost:3000/api/accounts/?username=pepe
+    // (GET)http:localhost:3000/api/accounts/?username=pepe&active=true
     app.get ('/api/accounts', auth.isUserAuthenticated, function (req, res, next) {
         var queryString = url.parse(req.url, true).query,
-            userName = queryString.username;
+            userName = queryString.username,
+            active = queryString.active;
+;
 
         if (res.error) {
             res.status(401).send(res.error);
         }
 
         if (userName) {
-            getUserAccounts(userName, res)
+            if (active) {
+                getActiveUserAccounts(userName, res);
+            } else {
+                getUserAccounts(userName, res);
+            }
         }
     });
 
@@ -82,6 +88,20 @@ function getUserAccounts(userName, res) {
             res.status(400).send(error);
         } else {
             console.log(`accounts controller returns ${data.length} accounts successfully`);
+            res.set('Content-Type','application/json');
+            res.status(200).send(data);
+        }
+    });
+}
+
+function getActiveUserAccounts(userName, res) {
+    
+    accountManager.getActiveAccounts (userName, function(error, data){
+        if (error){
+            console.log('accounts controller returns an error (400)');
+            res.status(400).send(error);
+        } else {
+            console.log(`accounts controller returns ${data.length} active accounts successfully`);
             res.set('Content-Type','application/json');
             res.status(200).send(data);
         }
