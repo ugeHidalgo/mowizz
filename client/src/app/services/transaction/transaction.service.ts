@@ -58,8 +58,8 @@ export class TransactionService {
           httpOptions = me.createHttpOptionsWithToken(),
           updatedConcept = me.http.post<Transaction>(me.TransactionUrl, transaction, httpOptions)
                         .pipe(
-                          tap(_ => me.log(`Concept with id ${transaction._id} was updated.`)),
-                          catchError(me.handleError<any>(`updateConcept (id:${transaction._id}`))
+                          tap(_ => me.log(`Transaction with id ${transaction._id} was updated.`)),
+                          catchError(me.handleError<any>(`updateTransaction (id:${transaction._id}`))
                         );
 
     return updatedConcept;

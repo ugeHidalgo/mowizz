@@ -4,16 +4,19 @@ import { Observable } from 'rxjs/Observable';
 import { Location, DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentCanDeactivate } from '../../../../guards/pending-changes.guard';
-
-import { ToastsManager } from 'ng2-toastr';
-import { Transaction } from '../../../../models/transaction';
-import { Concept } from '../../../../models/concept';
-import { ConceptService } from '../../../../services/concept/concept.service';
-import { TransactionTypes, TransactionType } from '../../../../models/transactionType';
-import { TransactionService } from '../../../../services/transaction/transaction.service';
-import { GlobalsService } from '../../../../globals/globals.service';
-
 import { slideInDownAnimation } from '../../../../animations';
+import { ToastsManager } from 'ng2-toastr';
+
+import { Transaction } from '../../../../models/transaction';
+import { TransactionTypes, TransactionType } from '../../../../models/transactionType';
+import { Concept } from '../../../../models/concept';
+import { CostCentre } from '../../../../models/costcentre';
+
+import { GlobalsService } from '../../../../globals/globals.service';
+import { TransactionService } from '../../../../services/transaction/transaction.service';
+import { ConceptService } from '../../../../services/concept/concept.service';
+import { CostCentreService } from '../../../../services/costcentre/costcentre.service';
+
 
 @Component({
   selector: 'app-transaction-detail',
@@ -31,7 +34,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
   validatingForm: FormGroup;
   transactionTypes: TransactionType[] = TransactionTypes;
   concepts: Concept[];
-
+  costCentres: CostCentre[];
 
   constructor(
     private route: ActivatedRoute,
@@ -39,6 +42,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     protected globals: GlobalsService,
     private transactionService: TransactionService,
     private conceptService: ConceptService,
+    private costCentreService: CostCentreService,
     private fb: FormBuilder,
     public toastr: ToastsManager, vcr: ViewContainerRef) {
       const me = this;
@@ -52,11 +56,13 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
           id = me.route.snapshot.paramMap.get('id');
 
     me.getConcepts();
+    me.getCostCentres();
     if (id === '-1') {
       me.transaction = new Transaction();
       me.transaction.username = me.globals.userNameLogged;
       me.transaction.transactionType = 2; // Expense
       me.transaction.concept = new Concept();
+      me.transaction.costCentre = new CostCentre();
       me.transaction.date = new Date();
       me.transaction.amount = 0;
       me.rebuildForm();
@@ -103,6 +109,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
       date: '',
       transactionType: '',
       concept: '',
+      costCentre: '',
       comments: '',
       amount: ''
     });
@@ -115,6 +122,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
       date: me.transaction.date,
       transactionType: me.transaction.transactionType,
       concept: me.transaction.concept._id,
+      costCentre: me.transaction.costCentre._id, // <------- aquí
       comments: me.transaction.comments,
       amount: me.transaction.amount
     });
@@ -128,6 +136,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     newTransaction.date = formModel.date;
     newTransaction.transactionType = formModel.transactionType;
     newTransaction.concept = me.getConceptById(formModel.concept);
+    newTransaction.costCentre = me.getCostCentreById(formModel.costCentre);
     newTransaction.comments = formModel.comments;
     newTransaction.amount = formModel.amount;
 
@@ -160,6 +169,25 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     const me = this;
 
     return me.concepts.find( function(x) {
+      return x._id === id;
+    });
+  }
+
+  getCostCentres(): void {
+    const me = this,
+          username = this.globals.userNameLogged;
+
+    me.costCentreService.getCostCentres(username)
+      .subscribe( costCentres => {
+          me.costCentres = costCentres;
+          // return costCentres;
+      });
+  }
+
+  getCostCentreById(id): CostCentre {
+    const me = this;
+
+    return me.costCentres.find( function(x) {
       return x._id === id;
     });
   }

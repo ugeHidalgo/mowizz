@@ -41,13 +41,18 @@ export class TransactionsComponent {
           { headerName: 'Fecha', field: 'date', type: 'dateColumn' },
           { headerName: 'Tipo', field: 'transactionType', type: 'transactionTypeColumn' },
           { headerName: 'Cantidad', field: 'amount', type: ['numericColumn', 'numberColumn'] },
-          { headerName: 'Concepto', field: 'concept.name', type: 'conceptColumn' },
+          { headerName: 'Concepto', field: 'concept.name', type: 'textColumn' },
+          { headerName: 'Centro de gasto', field: 'costCentre.name', type: 'textColumn'},
           { headerName: 'Commentarios', field: 'comments', suppressFilter: true }
         ],
         columnTypes: {
           numberColumn: {
             width: 30,
             filter: 'agNumberColumnFilter'
+          },
+          textColumn: {
+            width: 40,
+            filter: 'agTextColumnFilter'
           },
           transactionTypeColumn: {
             width: 25,
@@ -57,10 +62,6 @@ export class TransactionsComponent {
               filterOptions: ['contains', 'notContains'],
               textCustomComparator: me.transactionTypeComparator
             }
-          },
-          conceptColumn: {
-            width: 40,
-            filter: 'agTextColumnFilter'
           },
           dateColumn: {
             width: 55,

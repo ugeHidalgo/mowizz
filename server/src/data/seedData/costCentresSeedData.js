@@ -76,5 +76,12 @@ module.exports.initialCostCentres = [{
     created: new Date('2018-3-30'),
     updated: new Date('2018-3-30'),
     username: defaultUserName
+},{
+    name: 'Casa Otura',
+    description: 'Casa Otura',
+    comments: 'Movimientos asociados a la casa de Otura.',
+    created: new Date('2018-4-28'),
+    updated: new Date('2018-4-29'),
+    username: defaultUserName
 }];
 

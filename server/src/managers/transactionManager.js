@@ -12,14 +12,16 @@ module.exports.getTransactions = function (userName, callbackFn) {
 
     Transaction
         .find({username: userName}, callbackFn)
-        .populate('concept');
+        .populate('concept')
+        .populate('costCentre');
 };
 
 module.exports.getTransactionById = function (id, callbackFn) {
 
     Transaction
         .find({username: defaultUserName, _id: id}, callbackFn)
-        .populate('concept');
+        .populate('concept')
+        .populate('costCentre');
 };
 
 module.exports.updateTransaction = function (transaction, callbackFn) {
@@ -33,6 +35,7 @@ module.exports.updateTransaction = function (transaction, callbackFn) {
             date: transaction.date,
             transactionType: transaction.transactionType,
             concept: transaction.concept,
+            costCentre: transaction.costCentre,
             comments: transaction.comments,
         };
  

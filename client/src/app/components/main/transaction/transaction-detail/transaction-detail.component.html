@@ -41,6 +41,16 @@
                     </mat-form-field>
                 </mat-grid-tile>
 
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-form-field class="full-width-form-field">
+                        <mat-select placeholder="Centro de gasto: " formControlName="costCentre">
+                            <mat-option *ngFor="let costCentre of costCentres" [(value)]=costCentre._id>
+                                {{costCentre.name}}: {{costCentre.description}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+
                 <mat-grid-tile [colspan]="3" [rowspan]="1">
                     <mat-form-field class="full-width-form-field" >
                         <input matInput placeholder="Commentarios:" formControlName="comments">
