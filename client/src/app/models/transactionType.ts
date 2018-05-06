@@ -4,6 +4,6 @@ export class TransactionType {
 }
 
 export const TransactionTypes: TransactionType[] = [
-    { value: 1, name: 'Income' },
-    { value: 2, name: 'Expense' }
+    { value: 1, name: 'Ingreso' },
+    { value: 2, name: 'Gasto' }
 ];
