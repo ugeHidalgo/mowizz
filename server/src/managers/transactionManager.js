@@ -30,6 +30,8 @@ module.exports.updateTransaction = function (transaction, callbackFn) {
 
     var updatedValues = {};
 
+    transaction = setAmountValueAsNegativeForExpenses(transaction);
+
     if (transaction._id) {
         //Update existing.
         updatedValues = {
@@ -67,3 +69,10 @@ module.exports.updateTransaction = function (transaction, callbackFn) {
         });
     } 
 };
+
+function setAmountValueAsNegativeForExpenses(transaction) {
+    if (transaction.transactionType === 2 && transaction.amount > 0) {
+        transaction.amount = transaction.amount * -1;
+    }
+    return transaction;
+}
