@@ -8,6 +8,7 @@ import { GridOptions } from 'ag-grid/main';
 import { GlobalsService } from '../../../../globals/globals.service';
 
 import { MatCheckboxComponent } from '../../../grid/checkbox/mat-checkbox.component';
+import { TransactionTypes } from '../../../../models/transactionType';
 
 @Component({
   selector: 'app-concepts',
@@ -33,22 +34,68 @@ export class ConceptsComponent {
     me.getConcepts();
 
     me.gridOptions = <GridOptions>{
-      rowSelection: 'single'
+      rowSelection: 'single',
+      enableColResize: true,
+      enableSorting: true,
+      enableFilter: true,
+      floatingFilter: true,
+      columnDefs: [
+        { headerName: 'Activo', field: 'active', width: 30, cellRenderer: 'checkboxRenderer', suppressFilter: true  },
+        { headerName: 'Tipo', field: 'transactionType', type: 'transactionTypeColumn' },
+        { headerName: 'Nombre', field: 'name', type: 'textColumn' },
+        { headerName: 'Descripción', field: 'description', type: 'textColumn', width: 120 },
+        { headerName: 'Commentarios', field: 'comments', suppressFilter: true  }
+      ],
+      columnTypes: {
+        textColumn: {
+          width: 50,
+          filter: 'agTextColumnFilter'
+        },
+        transactionTypeColumn: {
+          width: 25,
+          valueFormatter: me.transactionTypeFormatter,
+          filter: 'agTextColumnFilter',
+          filterParams: {
+            filterOptions: ['contains', 'notContains'],
+            textCustomComparator: me.transactionTypeComparator
+          }
+        }
+      },
+      frameworkComponents: {
+        checkboxRenderer: MatCheckboxComponent
+      }
     };
-    me.columnDefs = [
-        { headerName: 'Activo', field: 'active', width: 30, cellRenderer: 'checkboxRenderer' },
-        { headerName: 'Tipo', field: 'transactionType', width: 25 },
-        { headerName: 'Nombre', field: 'name', width: 50 },
-        { headerName: 'Descripción', field: 'description', width: 120 },
-        { headerName: 'Commentarios', field: 'comments' }
-    ];
-    me.frameworkComponents = {
-      checkboxRenderer: MatCheckboxComponent
-  };
   }
 
   onGridReady(params) {
       params.api.sizeColumnsToFit();
+  }
+
+  transactionTypeFormatter(params) {
+    const transactionType = TransactionTypes.find(function(x) { return x.value === params.value; });
+    return transactionType.name;
+  }
+
+  transactionTypeComparator (filter, value, filterText) {
+    const filterTextLowerCase = filterText.toLowerCase(),
+          valueToFilter = TransactionTypes.find(function(x) { return x.value.toString() === value; });
+    let valueLowerCase = '';
+
+    if (valueToFilter) {
+      valueLowerCase = valueToFilter.name.toLowerCase();
+    } else {
+      return false;
+    }
+
+    switch (filter) {
+      case 'contains':
+        return valueLowerCase.indexOf(filterTextLowerCase) >= 0;
+      case 'notContains':
+        return valueLowerCase.indexOf(filterTextLowerCase) === -1;
+      default:
+        console.warn('invalid filter type ' + filter);
+        return false;
+    }
   }
 
   // Actions
