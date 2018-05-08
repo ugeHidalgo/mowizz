@@ -33,17 +33,27 @@ export class CostCentresComponent {
     me.getCostCentres();
 
     me.gridOptions = <GridOptions>{
-      rowSelection: 'single'
+      rowSelection: 'single',
+      enableColResize: true,
+      enableSorting: true,
+      enableFilter: true,
+      floatingFilter: true,
+      columnDefs: [
+        { headerName: 'Activo', field: 'active', width: 30, cellRenderer: 'checkboxRenderer', suppressFilter: true},
+        { headerName: 'Nombre', field: 'name', type: 'textColumn' },
+        { headerName: 'Descripción', field: 'description', type: 'textColumn', width: 120 },
+        { headerName: 'Commentarios', field: 'comments', suppressFilter: true }
+      ],
+      columnTypes: {
+        textColumn: {
+          width: 50,
+          filter: 'agTextColumnFilter'
+        }
+      },
+      frameworkComponents: {
+        checkboxRenderer: MatCheckboxComponent
+      }
     };
-    me.columnDefs = [
-        { headerName: 'Activo', field: 'active', width: 30, cellRenderer: 'checkboxRenderer' },
-        { headerName: 'Nombre', field: 'name', width: 50 },
-        { headerName: 'Descripción', field: 'description', width: 120 },
-        { headerName: 'Commentarios', field: 'comments' }
-    ];
-    me.frameworkComponents = {
-      checkboxRenderer: MatCheckboxComponent
-  };
   }
 
   onGridReady(params) {

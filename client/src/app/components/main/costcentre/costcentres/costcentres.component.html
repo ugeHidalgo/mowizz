@@ -8,13 +8,8 @@
                 <ag-grid-angular style="width: 1000px; height: 400px;"
                     class="ag-fresh"
                     [rowData]="rowData"
-                    [columnDefs]="columnDefs"
                     [gridOptions]="gridOptions"
                     (gridReady)="onGridReady($event)"
-                    [enableColResize]="true"
-                    [enableSorting]="true"
-                    [enableFilter]="true"
-                    [frameworkComponents]="frameworkComponents"
                     (cellDoubleClicked)="onRowDoubleClicked($event)">
                 </ag-grid-angular>
             </div>
