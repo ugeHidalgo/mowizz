@@ -29,6 +29,12 @@ module.exports.getConceptsByName = function (name, callbackFn) {
     Concept.find({username: defaultUserName, name: new RegExp(name, 'i')}, callbackFn);
 };
 
+module.exports.getActiveConceptsByType = function (name, type, callbackFn) {
+
+    var regexString = `/${name}/`;
+    Concept.find({username: defaultUserName, active: true, transactionType: type}, callbackFn);
+};
+
 module.exports.updateConcept = function (concept, callbackFn) {
 
     var updatedValues = {};

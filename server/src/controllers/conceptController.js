@@ -23,10 +23,11 @@ module.exports.init = function (app) {
         });
     });
 
-    // (GET)http:localhost:3000/api/concepts/?username=pepe&active=true
+    // (GET)http:localhost:3000/api/concepts/?username=pepe&active=true&type=expense
     app.get ('/api/concepts', auth.isUserAuthenticated, function (req, res, next) {
         var queryString = url.parse(req.url, true).query,
             userName = queryString.username,
+            type = queryString.type,
             active = queryString.active;
 
         if (res.error) {
@@ -35,7 +36,11 @@ module.exports.init = function (app) {
 
         if (userName) {
             if (active) {
-                getActiveUserConcepts(userName, res)
+                if (type) {
+                    getActiveUserConceptsByType(userName, type, res)
+                } else {
+                    getActiveUserConcepts(userName, res)
+                }
             } else {
                 getUserConcepts(userName, res)
             }
@@ -101,6 +106,24 @@ function getActiveUserConcepts(userName, res) {
             res.status(400).send(error);
         } else {
             console.log(`Concepts controller returns ${data.length} active concepts successfully`);
+            res.set('Content-Type','application/json');
+            res.status(200).send(data);
+        }
+    });
+}
+
+function getActiveUserConceptsByType(userName, type, res) {
+
+var conceptType = 1 // income
+
+    if (type==='expense') conceptType = 2;
+
+    ConceptManager.getActiveConceptsByType (userName, conceptType, function(error, data){
+        if (error){
+            console.log('Concepts controller returns an error (400)');
+            res.status(400).send(error);
+        } else {
+            console.log(`Concepts controller returns ${data.length} active concepts for type ${conceptType} successfully`);
             res.set('Content-Type','application/json');
             res.status(200).send(data);
         }

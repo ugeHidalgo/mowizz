@@ -17,7 +17,7 @@
 
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="full-width-form-field">
-                    <mat-select placeholder="Tipo movimiento: " formControlName="transactionType">
+                    <mat-select placeholder="Tipo movimiento: " formControlName="transactionType" (selectionChange)="onTransactionTypeSelected()">
                         <mat-option *ngFor="let transactionType of transactionTypes" [(value)]=transactionType.value>
                             {{transactionType.name}}
                         </mat-option>

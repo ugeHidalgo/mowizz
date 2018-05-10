@@ -51,6 +51,32 @@ export class ConceptService {
   }
 
   /**.*/
+  getActiveExpenseConcepts(userName: string): Observable<Concept[]> {
+    const me = this,
+          getUserNameConceptsUrl = `${me.conceptsUrl}/?username=${userName}&active=true&type=expense`,
+          httpOptions = me.createHttpOptionsWithToken();
+
+    return me.http.get<Concept[]>(getUserNameConceptsUrl, httpOptions)
+              .pipe(
+                tap(concepts => me.log('Active expense concepts fetched.')),
+                catchError(me.handleError('getActiveExpenseConcepts', []))
+              );
+  }
+
+  /**.*/
+  getActiveIncomeConcepts(userName: string): Observable<Concept[]> {
+    const me = this,
+          getUserNameConceptsUrl = `${me.conceptsUrl}/?username=${userName}&active=true&type=income`,
+          httpOptions = me.createHttpOptionsWithToken();
+
+    return me.http.get<Concept[]>(getUserNameConceptsUrl, httpOptions)
+              .pipe(
+                tap(concepts => me.log('Active income concepts fetched.')),
+                catchError(me.handleError('getActiveIncomeConcepts', []))
+              );
+  }
+
+  /**.*/
   addConcept(concept: Concept): Observable<Concept> {
     const me = this,
           body = JSON.stringify(Concept),

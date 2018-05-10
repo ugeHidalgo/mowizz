@@ -59,7 +59,6 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     const me = this,
           id = me.route.snapshot.paramMap.get('id');
 
-    me.getActiveConcepts();
     me.getActiveCostCentres();
     me.getActiveAccounts();
 
@@ -86,7 +85,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     return this.validatingForm.pristine;
   }
 
-  // Buttons actions
+  // Actions
   onClickGoBack() {
     this.location.back();
   }
@@ -107,6 +106,12 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     me.rebuildForm();
   }
 
+  onTransactionTypeSelected(): void {
+    const me = this,
+          formModel = me.validatingForm.value;
+
+    me.getActiveConceptsByType(formModel.transactionType);
+  }
 
   // FormModel methods
   createForm() {
@@ -126,6 +131,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
   rebuildForm() {
     const me = this;
 
+    me.getActiveConceptsByType(me.transaction.transactionType);
     me.validatingForm.reset({
       date: me.transaction.date,
       transactionType: me.transaction.transactionType,
@@ -172,6 +178,23 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
       .subscribe( concepts => {
           me.concepts = concepts;
       });
+  }
+
+  getActiveConceptsByType(type): void {
+    const me = this,
+          username = me.globals.userNameLogged;
+
+    if (type === 1) {
+      me.conceptService.getActiveIncomeConcepts(username)
+      .subscribe( concepts => {
+          me.concepts = concepts;
+      });
+    } else {
+      me.conceptService.getActiveExpenseConcepts(username)
+      .subscribe( concepts => {
+          me.concepts = concepts;
+      });
+    }
   }
 
   getConceptById(id): Concept {
