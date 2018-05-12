@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { Location } from '@angular/common';
+import { Location, CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { AccountService } from '../../../../services/account/account.service';
@@ -51,6 +51,7 @@ export class AccountsComponent {
       columnTypes: {
         numberColumn: {
           width: 50,
+          valueFormatter: me.currencyFormatter,
           filter: 'agNumberColumnFilter'
         },
         textColumn: {
@@ -67,6 +68,13 @@ export class AccountsComponent {
 
   onGridReady(params) {
     params.api.sizeColumnsToFit();
+  }
+
+  currencyFormatter(params) {
+    const me = this,
+          currencyPipe = new CurrencyPipe(navigator.language);
+
+    return currencyPipe.transform(params.value, 'EUR', 'symbol');
   }
 
   // Actions

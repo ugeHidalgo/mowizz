@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewContainerRef, HostBinding } from '@angular/core';
-import { Location, DatePipe } from '@angular/common';
+import { Location, DatePipe, CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { TransactionService } from '../../../../services/transaction/transaction.service';
@@ -49,6 +49,7 @@ export class TransactionsComponent {
         columnTypes: {
           numberColumn: {
             width: 30,
+            valueFormatter: me.currencyFormatter,
             filter: 'agNumberColumnFilter'
           },
           textColumn: {
@@ -78,6 +79,13 @@ export class TransactionsComponent {
 
   onGridReady(params) {
       params.api.sizeColumnsToFit();
+  }
+
+  currencyFormatter(params) {
+    const me = this,
+          currencyPipe = new CurrencyPipe(navigator.language);
+
+    return currencyPipe.transform(params.value, 'EUR', 'symbol');
   }
 
   dateFormatter(params) {
