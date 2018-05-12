@@ -41,7 +41,7 @@ export class AccountsComponent {
       enableFilter: true,
       floatingFilter: true,
       columnDefs: [
-        { headerName: 'Activo', field: 'active', width: 35, cellRenderer: 'checkboxRenderer', suppressFilter: true },
+        { headerName: 'En uso', field: 'active', width: 35, cellRenderer: 'checkboxRenderer', suppressFilter: true },
         { headerName: 'Cantidad', field: 'amount', type: ['numericColumn', 'numberColumn'] },
         { headerName: 'Nombre', field: 'name', type: 'textColumn' },
         { headerName: 'Descripción', field: 'description', type: 'textColumn', width: 120 },

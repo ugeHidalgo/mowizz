@@ -50,6 +50,7 @@ export class AccountDetailComponent implements OnInit, OnChanges, ComponentCanDe
       me.account.updated = new Date();
       me.account.username = me.globals.userNameLogged;
       me.account.active = true;
+      me.account.amount = 0;
       me.rebuildForm();
     } else {
       me.getAccountById(id);
@@ -96,7 +97,8 @@ export class AccountDetailComponent implements OnInit, OnChanges, ComponentCanDe
       name: [ '', [Validators.required] ],
       description: '',
       iban: '',
-      comments: ''
+      comments: '',
+      amount: ''
     });
   }
 
@@ -112,7 +114,8 @@ export class AccountDetailComponent implements OnInit, OnChanges, ComponentCanDe
       name: me.account.name,
       description: me.account.description,
       iban: me.account.iban,
-      comments: me.account.comments
+      comments: me.account.comments,
+      amount: me.account.amount
     });
   }
 
@@ -126,6 +129,7 @@ export class AccountDetailComponent implements OnInit, OnChanges, ComponentCanDe
     newAccount.description = formModel.description;
     newAccount.iban = formModel.iban;
     newAccount.comments = formModel.comments;
+    newAccount.amount = formModel.amount;
 
     return newAccount;
   }

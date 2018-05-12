@@ -5,7 +5,7 @@
         </div>
         <div class="card-body">
             <form [formGroup]="validatingForm">
-                <mat-grid-list cols="3" rowHeight="100px">
+                <mat-grid-list cols="4" rowHeight="100px">
 
                     <mat-grid-tile [colspan]="1" [rowspan]="1">
                         <mat-form-field class="full-width-form-field" >
@@ -22,9 +22,15 @@
                         </mat-form-field>
                     </mat-grid-tile>
 
-                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
                         <mat-form-field class="full-width-form-field" >
                             <input matInput placeholder="IBAN:" formControlName="iban">
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <mat-form-field class="full-width-form-field" >
+                            <input matInput placeholder="Cantidad:" formControlName="amount">
                         </mat-form-field>
                     </mat-grid-tile>
 
@@ -42,11 +48,11 @@
 
                     <mat-grid-tile [colspan]="1" [rowspan]="1">
                         <mat-checkbox formControlName="active" style="border:0px;"
-                            value="validatingForm.controls['active'].value">Activo
+                            value="validatingForm.controls['active'].value">En uso
                         </mat-checkbox>
                     </mat-grid-tile>
 
-                    <mat-grid-tile [colspan]="3" [rowspan]="1">
+                    <mat-grid-tile [colspan]="4" [rowspan]="1">
                         <mat-form-field class="full-width-form-field" >
                             <input matInput placeholder="Commentarios:" formControlName="comments">
                         </mat-form-field>

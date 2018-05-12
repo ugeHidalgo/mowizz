@@ -39,7 +39,7 @@ export class CostCentresComponent {
       enableFilter: true,
       floatingFilter: true,
       columnDefs: [
-        { headerName: 'Activo', field: 'active', width: 30, cellRenderer: 'checkboxRenderer', suppressFilter: true},
+        { headerName: 'En uso', field: 'active', width: 30, cellRenderer: 'checkboxRenderer', suppressFilter: true},
         { headerName: 'Nombre', field: 'name', type: 'textColumn' },
         { headerName: 'Descripción', field: 'description', type: 'textColumn', width: 120 },
         { headerName: 'Commentarios', field: 'comments', suppressFilter: true }
