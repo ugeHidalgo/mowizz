@@ -94,6 +94,11 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     this.rebuildForm();
   }
 
+  onClickDelete() {
+    // todo: mostrar popup que pregunte si borrar o no la transacción
+    // Borrar la transacción y ajustar el amount de la cuenta.
+  }
+
   onClickSave(): void {
     const me = this;
 

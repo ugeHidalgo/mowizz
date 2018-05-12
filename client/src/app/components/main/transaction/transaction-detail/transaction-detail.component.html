@@ -76,7 +76,10 @@
             </button>
             <button class="btn btn-sm btn-outline-danger" (click)="onClickRefresh()" [disabled]="validatingForm.pristine">
                 <i class="fa fa-refresh ml-1"> Deshacer</i>
-            </button>  
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="onClickDelete()">
+                <i class="fa fa-trash ml-1"> Borrar</i>
+            </button> 
             <button class="btn btn-sm btn-outline-dark-green" (click)="onClickSave()" [disabled]="validatingForm.pristine || validatingForm.invalid">
                 <i class="fa fa-save ml-1"> Grabar</i>
             </button>
