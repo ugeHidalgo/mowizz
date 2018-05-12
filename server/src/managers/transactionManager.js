@@ -6,6 +6,7 @@
  */
 var defaultUserName = 'ugehidalgo',
     mongoose = require ('mongoose'),
+    accountManager = require ('../managers/accountManager'),
     Transaction = require ('../models/transaction');
 
 module.exports.getTransactions = function (userName, callbackFn) {
@@ -64,7 +65,7 @@ module.exports.updateTransaction = function (transaction, callbackFn) {
                 callbackFn(error, null);
             } else {
                 console.log ('New Transaction saved ----->username = ' + newTransaction.username + ' /id = ' + newTransaction._id);
-                callbackFn(null, newTransaction);
+                updateAccountAmount(error, newTransaction, callbackFn);
             }
         });
     } 
@@ -75,4 +76,15 @@ function setAmountValueAsNegativeForExpenses(transaction) {
         transaction.amount = transaction.amount * -1;
     }
     return transaction;
+}
+
+function updateAccountAmount(error, transaction, callbackFn) {
+    accountManager.updateAccountAmount(transaction.account, transaction.amount, function(error){
+        if (error){
+           console.log('Failed to update account amount.');
+       } else {
+            console.log('Updated account amount succesfully.');
+        }
+   });
+    callbackFn(null, transaction);
 }

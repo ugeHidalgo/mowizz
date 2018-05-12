@@ -71,3 +71,18 @@ module.exports.updateAccount = function (account, callbackFn) {
         });
     } 
 };
+
+module.exports.updateAccountAmount = function (accountId, amountToAdd, callbackFn) {
+
+    Account.findOneAndUpdate(
+    {_id: accountId}, 
+    { $inc: { amount: amountToAdd } },
+    function (error, data){
+        if (error){
+            callbackFn(error);
+        } else {
+            console.log ('Account amount updated with' + amountToAdd + ' for account with id ' + accountId);                        
+            callbackFn(null)
+        }
+    }); 
+};
