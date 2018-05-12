@@ -8,5 +8,6 @@ export class Account {
     created: Date;
     updated: Date;
     username: string;
+    amount: number;
     __v: number;
 }

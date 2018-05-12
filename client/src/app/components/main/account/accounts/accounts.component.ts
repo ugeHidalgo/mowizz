@@ -42,12 +42,17 @@ export class AccountsComponent {
       floatingFilter: true,
       columnDefs: [
         { headerName: 'Activo', field: 'active', width: 35, cellRenderer: 'checkboxRenderer', suppressFilter: true },
+        { headerName: 'Cantidad', field: 'amount', type: ['numericColumn', 'numberColumn'] },
         { headerName: 'Nombre', field: 'name', type: 'textColumn' },
         { headerName: 'Descripción', field: 'description', type: 'textColumn', width: 120 },
         { headerName: 'IBAN', field: 'iban', width: 150, suppressFilter: true },
         { headerName: 'Commentarios', field: 'comments', suppressFilter: true }
       ],
       columnTypes: {
+        numberColumn: {
+          width: 50,
+          filter: 'agNumberColumnFilter'
+        },
         textColumn: {
           width: 50,
           filter: 'agTextColumnFilter'

@@ -9,7 +9,8 @@ var moongoose = require ('mongoose'),
         created : { type : Date, default : Date.now },
         updated : { type : Date, default : Date.now },
         comments: String,
-        username : String
+        username : String,
+        amount: { type : Number, default : 0 },
     });
 
 module.exports = moongoose.model ('Accounts', AccountSchema);

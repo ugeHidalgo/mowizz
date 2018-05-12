@@ -42,7 +42,8 @@ module.exports.updateAccount = function (account, callbackFn) {
             description: account.description,
             iban: account.iban,
             comments: account.comments,
-            updated: new Date
+            updated: new Date,
+            amount: account.amount
         };
  
          Account.findOneAndUpdate(
