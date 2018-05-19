@@ -98,7 +98,10 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
   }
 
   onClickDelete() {
-    this.deleteDialog.showModal();
+    const message = 'Va a borrar este movimiento. ¿Está seguro?',
+          title = 'Atención';
+
+    this.deleteDialog.showModal(title, message);
     // todo: mostrar popup que pregunte si borrar o no la transacción
     // Borrar la transacción y ajustar el amount de la cuenta.
   }

@@ -6,12 +6,12 @@
                 <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
-                <p class="heading lead">Atención...</p>
+                <p class="heading lead">{{ title }}</p>
             </div>
             <div class="modal-body">
                 <div class="md-form">
                      <div class="inline dialog-message">
-                        <p>Va a borrar este movimiento. ¿Está seguro?</p>
+                        <p>{{ message }}</p>
                      </div>
                      <div class="inline dialog-icon">
                         <i class="fa fa-question fa-4x mb-3 animated rotateIn"></i>

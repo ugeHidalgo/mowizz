@@ -9,12 +9,20 @@ import { ModalDirective } from 'angular-bootstrap-md';
 
 export class DeleteDialogComponent {
 
+  message: string;
+  title: string;
+
   @ViewChild(ModalDirective) public deleteDialog: ModalDirective;
   public isModalShown = false;
 
-  public showModal(): void {
-      this.deleteDialog.show();
-      this.isModalShown = true;
+  public showModal(title, message): void {
+    const me = this;
+
+    me.message = message;
+    me.title = title;
+
+    me.deleteDialog.show();
+    me.isModalShown = true;
   }
 
   public hideModal(): void {
