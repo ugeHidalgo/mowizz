@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef, OnChanges, HostBinding } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, OnChanges, HostBinding, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Location, DatePipe } from '@angular/common';
@@ -18,6 +18,7 @@ import { TransactionService } from '../../../../services/transaction/transaction
 import { ConceptService } from '../../../../services/concept/concept.service';
 import { CostCentreService } from '../../../../services/costcentre/costcentre.service';
 import { AccountService } from '../../../../services/account/account.service';
+import { DeleteDialogComponent } from '../../../dialogs/delete-dialog/delete-dialog.component';
 
 
 @Component({
@@ -31,6 +32,8 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
   @HostBinding('@routeAnimation') routeAnimation = true;
   @HostBinding('style.display') display = 'block';
   @HostBinding('style.position') position = 'relative';
+
+  @ViewChild(DeleteDialogComponent) public deleteDialog: DeleteDialogComponent;
 
   transaction: Transaction;
   validatingForm: FormGroup;
@@ -95,6 +98,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
   }
 
   onClickDelete() {
+    this.deleteDialog.showModal();
     // todo: mostrar popup que pregunte si borrar o no la transacción
     // Borrar la transacción y ajustar el amount de la cuenta.
   }

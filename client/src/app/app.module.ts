@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr'; // Toaster library used to messaging
 import { ToastrCustomOptions } from './messages/toastrCustomOptions';
 import { AgGridModule } from 'ag-grid-angular/main'; // AgGrid component library
-import { MDBBootstrapModule } from 'angular-bootstrap-md'; // MDBootstrap
+import { MDBBootstrapModule } from 'angular-bootstrap-md'; // MDBootstrap: Used for modals.
 import { AppMaterialsModule } from './app-modules/app-materials.module'; // Angular material design components https://material.angular.io/
 
 // App modules
@@ -47,6 +47,7 @@ import { ConceptsComponent } from './components/main/concept/concepts/concepts.c
 import { ConceptDetailComponent } from './components/main/concept/concept-detail/concept-detail.component';
 import { TransactionsComponent } from './components/main/transaction/transactions/transactions.component';
 import { TransactionDetailComponent } from './components/main/transaction/transaction-detail/transaction-detail.component';
+import { DeleteDialogComponent } from './components/dialogs/delete-dialog/delete-dialog.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { TransactionDetailComponent } from './components/main/transaction/transa
     ConceptsComponent,
     ConceptDetailComponent,
     TransactionsComponent,
-    TransactionDetailComponent
+    TransactionDetailComponent,
+    DeleteDialogComponent
   ],
 
   imports: [

@@ -1,0 +1,25 @@
+<div mdbModal #basicModal="mdb-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true" 
+    [config]="{backdrop: false, ignoreBackdropClick: true, show: false}">
+    <div class="modal-dialog modal-notify modal-warning" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <p class="heading lead">Atención...</p>
+            </div>
+            <div class="modal-body">
+                <div class="md-form">
+                    <i class="fa fa-question fa-4x mb-3 animated rotateIn"></i>                    
+                    <p>Va a borrar este movimiento. ¿Está seguro?</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>No</button>
+                <button type="button" class="btn btn-primary relative waves-light" mdbWavesEffect>Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+                    
+                
