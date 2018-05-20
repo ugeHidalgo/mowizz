@@ -37,10 +37,12 @@ export class DeleteDialogComponent {
   }
 
   private onClickOk() {
+    this.deleteDialog.hide();
     this.clickStream.next(true);
   }
 
   private onClickNo() {
+    this.deleteDialog.hide();
     this.clickStream.next(false);
   }
 }

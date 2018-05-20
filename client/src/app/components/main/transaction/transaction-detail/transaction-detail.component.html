@@ -1,5 +1,6 @@
 
 <app-delete-dialog></app-delete-dialog>
+<app-success-dialog></app-success-dialog>
 <div *ngIf="transaction" class="transaction-detail">
     <div class="card">
         <div class="card-header indigo lighten-1 white-text">
@@ -79,7 +80,7 @@
             <button class="btn btn-sm btn-outline-danger" (click)="onClickRefresh()" [disabled]="validatingForm.pristine">
                 <i class="fa fa-refresh ml-1"> Deshacer</i>
             </button>
-            <button class="btn btn-sm btn-outline-danger" (click)="onClickDelete()">
+            <button class="btn btn-sm btn-outline-danger" (click)="onClickDelete()" [hidden]=!savedTransaction>
                 <i class="fa fa-trash ml-1"> Borrar</i>
             </button> 
             <button class="btn btn-sm btn-outline-dark-green" (click)="onClickSave()" [disabled]="validatingForm.pristine || validatingForm.invalid"

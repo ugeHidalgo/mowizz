@@ -5,6 +5,7 @@ import { Location, DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentCanDeactivate } from '../../../../guards/pending-changes.guard';
 import { slideInDownAnimation } from '../../../../animations';
+import { Subscription } from 'rxjs/Subscription';
 import { ToastsManager } from 'ng2-toastr';
 
 import { Transaction } from '../../../../models/transaction';
@@ -19,7 +20,7 @@ import { ConceptService } from '../../../../services/concept/concept.service';
 import { CostCentreService } from '../../../../services/costcentre/costcentre.service';
 import { AccountService } from '../../../../services/account/account.service';
 import { DeleteDialogComponent } from '../../../dialogs/delete-dialog/delete-dialog.component';
-import { Subscription } from 'rxjs/Subscription';
+import { SuccessDialogComponent } from '../../../dialogs/success-dialog/success-dialog.component';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
   @HostBinding('style.position') position = 'relative';
 
   @ViewChild(DeleteDialogComponent) public deleteDialog: DeleteDialogComponent;
+  @ViewChild(SuccessDialogComponent) public successDialog: SuccessDialogComponent;
 
   transaction: Transaction;
   savedTransaction = true;
@@ -44,6 +46,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
   costCentres: CostCentre[];
   accounts: Account[];
   deleteDialogSubscription: Subscription;
+  successDialogSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -102,11 +105,9 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
   }
 
   onClickDelete() {
-    const me = this,
-          message = 'Va a borrar este movimiento. ¿Está seguro?',
-          title = 'Atención';
+    const me = this;
 
-    me.deleteDialog.showModal(title, message);
+    me.deleteDialog.showModal('Atención', 'Va a borrar este movimiento. ¿Está seguro?');
     me.deleteDialogSubscription = me.deleteDialog.observable.subscribe (clickedOk => {
       if (clickedOk) {
         me.onDeleteConfirmed();
@@ -116,12 +117,16 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
 
   onDeleteConfirmed() {
     const me = this;
+
     me.transactionService.deleteTransactionById(me.transaction._id)
       .subscribe((success) => {
         if (success) {
-          this.location.back();
-          me.toastr.success('Movimiento borrado !!!.');
+          me.successDialog.showModal('Borrado', 'Movimiento borrado correctamente.');
+          me.successDialogSubscription = me.successDialog.observable.subscribe (_ => {
+            me.onClickGoBack();
+          });
         } else {
+          // me.errorDialog.showModal('Error', 'No se pudo borrar el movimiento. Inténtelo de nuevo.');
           me.toastr.error('No se pudo borrar el movimiento. Inténtelo de nuevo.');
         }
       });
@@ -134,7 +139,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     me.transactionService.updatetransaction(me.transaction)
       .subscribe( () => {
           me.savedTransaction = true;
-          me.toastr.success('Successfully saved.');
+          me.successDialog.showModal('Guardado', 'Movimiento guardado correctamente.');
         }
       );
     me.rebuildForm();
