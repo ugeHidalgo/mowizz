@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewContainerRef, OnChanges, HostBinding } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, OnChanges, HostBinding, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Location } from '@angular/common';
@@ -6,13 +6,13 @@ import { ActivatedRoute } from '@angular/router';
 import { ComponentCanDeactivate } from '../../../../guards/pending-changes.guard';
 import { DatePipe } from '@angular/common';
 
-import { ToastsManager } from 'ng2-toastr';
 import { Concept } from '../../../../models/concept';
 import { TransactionTypes, TransactionType } from '../../../../models/transactionType';
 import { ConceptService } from '../../../../services/concept/concept.service';
 import { GlobalsService } from '../../../../globals/globals.service';
 
 import { slideInDownAnimation } from '../../../../animations';
+import { SuccessDialogComponent } from '../../../dialogs/success-dialog/success-dialog.component';
 
 @Component({
   selector: 'app-concept-detail',
@@ -26,6 +26,8 @@ export class ConceptDetailComponent implements OnInit, OnChanges, ComponentCanDe
   @HostBinding('style.display') display = 'block';
   @HostBinding('style.position') position = 'relative';
 
+  @ViewChild(SuccessDialogComponent) public successDialog: SuccessDialogComponent;
+
   concept: Concept;
   validatingForm: FormGroup;
   transactionTypes: TransactionType[] = TransactionTypes;
@@ -35,11 +37,9 @@ export class ConceptDetailComponent implements OnInit, OnChanges, ComponentCanDe
     private location: Location,
     protected globals: GlobalsService,
     private conceptService: ConceptService,
-    private fb: FormBuilder,
-    public toastr: ToastsManager, vcr: ViewContainerRef) {
+    private fb: FormBuilder) {
       const me = this;
 
-      me.toastr.setRootViewContainerRef(vcr);
       me.createForm();
    }
 
@@ -83,7 +83,7 @@ export class ConceptDetailComponent implements OnInit, OnChanges, ComponentCanDe
     me.concept = this.getFormData();
     me.conceptService.updateConcept(me.concept)
       .subscribe( () => {
-          me.toastr.success('Successfully saved.');
+          me.successDialog.showModal('Guardado', 'Concepto guardado correctamente.');
           me.rebuildForm();
         }
       );
