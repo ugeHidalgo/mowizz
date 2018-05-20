@@ -1,16 +1,16 @@
-import { Component, OnInit, ViewContainerRef, OnChanges, HostBinding } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, OnChanges, HostBinding, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Location, DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentCanDeactivate } from '../../../../guards/pending-changes.guard';
 
-import { ToastsManager } from 'ng2-toastr';
 import { CostCentre } from '../../../../models/costcentre';
 import { CostCentreService } from '../../../../services/costcentre/costcentre.service';
 import { GlobalsService } from '../../../../globals/globals.service';
 
 import { slideInDownAnimation } from '../../../../animations';
+import { SuccessDialogComponent } from '../../../dialogs/success-dialog/success-dialog.component';
 
 @Component({
   selector: 'app-costcentre-detail',
@@ -19,6 +19,8 @@ import { slideInDownAnimation } from '../../../../animations';
   animations: [ slideInDownAnimation ]
 })
 export class CostCentreDetailComponent implements OnInit, OnChanges, ComponentCanDeactivate {
+
+  @ViewChild(SuccessDialogComponent) public successDialog: SuccessDialogComponent;
 
   @HostBinding('@routeAnimation') routeAnimation = true;
   @HostBinding('style.display') display = 'block';
@@ -32,11 +34,9 @@ export class CostCentreDetailComponent implements OnInit, OnChanges, ComponentCa
     private location: Location,
     protected globals: GlobalsService,
     private costCentreService: CostCentreService,
-    private fb: FormBuilder,
-    public toastr: ToastsManager, vcr: ViewContainerRef) {
+    private fb: FormBuilder) {
       const me = this;
 
-      me.toastr.setRootViewContainerRef(vcr);
       me.createForm();
    }
 
@@ -79,7 +79,7 @@ export class CostCentreDetailComponent implements OnInit, OnChanges, ComponentCa
     me.costCentre = this.getFormData();
     me.costCentreService.updateCostCentre(me.costCentre)
       .subscribe( () => {
-          me.toastr.success('Successfully saved.');
+        me.successDialog.showModal('Guardado', 'Centro de coste guardado correctamente.');
         }
       );
     me.rebuildForm();
