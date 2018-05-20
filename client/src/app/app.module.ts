@@ -49,6 +49,7 @@ import { TransactionsComponent } from './components/main/transaction/transaction
 import { TransactionDetailComponent } from './components/main/transaction/transaction-detail/transaction-detail.component';
 import { DeleteDialogComponent } from './components/dialogs/delete-dialog/delete-dialog.component';
 import { SuccessDialogComponent } from './components/dialogs/success-dialog/success-dialog.component';
+import { ErrorDialogComponent } from './components/dialogs/error-dialog/error-dialog.component';
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { SuccessDialogComponent } from './components/dialogs/success-dialog/succ
     TransactionsComponent,
     TransactionDetailComponent,
     DeleteDialogComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    ErrorDialogComponent
   ],
 
   imports: [

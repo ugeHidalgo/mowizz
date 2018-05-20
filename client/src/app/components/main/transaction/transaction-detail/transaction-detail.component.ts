@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ComponentCanDeactivate } from '../../../../guards/pending-changes.guard';
 import { slideInDownAnimation } from '../../../../animations';
 import { Subscription } from 'rxjs/Subscription';
-import { ToastsManager } from 'ng2-toastr';
 
 import { Transaction } from '../../../../models/transaction';
 import { TransactionTypes, TransactionType } from '../../../../models/transactionType';
@@ -21,6 +20,7 @@ import { CostCentreService } from '../../../../services/costcentre/costcentre.se
 import { AccountService } from '../../../../services/account/account.service';
 import { DeleteDialogComponent } from '../../../dialogs/delete-dialog/delete-dialog.component';
 import { SuccessDialogComponent } from '../../../dialogs/success-dialog/success-dialog.component';
+import { ErrorDialogComponent } from '../../../dialogs/error-dialog/error-dialog.component';
 
 
 @Component({
@@ -37,6 +37,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
 
   @ViewChild(DeleteDialogComponent) public deleteDialog: DeleteDialogComponent;
   @ViewChild(SuccessDialogComponent) public successDialog: SuccessDialogComponent;
+  @ViewChild(ErrorDialogComponent) public errorDialog: ErrorDialogComponent;
 
   transaction: Transaction;
   savedTransaction = true;
@@ -47,6 +48,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
   accounts: Account[];
   deleteDialogSubscription: Subscription;
   successDialogSubscription: Subscription;
+  errorDialogSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -56,11 +58,9 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     private conceptService: ConceptService,
     private costCentreService: CostCentreService,
     private accountService: AccountService,
-    private fb: FormBuilder,
-    public toastr: ToastsManager, vcr: ViewContainerRef) {
+    private fb: FormBuilder) {
       const me = this;
 
-      me.toastr.setRootViewContainerRef(vcr);
       me.createForm();
    }
 
@@ -126,8 +126,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
             me.onClickGoBack();
           });
         } else {
-          // me.errorDialog.showModal('Error', 'No se pudo borrar el movimiento. Inténtelo de nuevo.');
-          me.toastr.error('No se pudo borrar el movimiento. Inténtelo de nuevo.');
+          me.errorDialog.showModal('Error', 'No se pudo borrar el movimiento. Inténtelo de nuevo.');
         }
       });
   }
