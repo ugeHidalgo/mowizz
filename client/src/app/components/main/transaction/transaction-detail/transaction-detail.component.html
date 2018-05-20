@@ -82,7 +82,8 @@
             <button class="btn btn-sm btn-outline-danger" (click)="onClickDelete()">
                 <i class="fa fa-trash ml-1"> Borrar</i>
             </button> 
-            <button class="btn btn-sm btn-outline-dark-green" (click)="onClickSave()" [disabled]="validatingForm.pristine || validatingForm.invalid">
+            <button class="btn btn-sm btn-outline-dark-green" (click)="onClickSave()" [disabled]="validatingForm.pristine || validatingForm.invalid"
+                    [hidden]=savedTransaction>
                 <i class="fa fa-save ml-1"> Grabar</i>
             </button>
         </div>

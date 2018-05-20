@@ -37,6 +37,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
   @ViewChild(DeleteDialogComponent) public deleteDialog: DeleteDialogComponent;
 
   transaction: Transaction;
+  savedTransaction = true;
   validatingForm: FormGroup;
   transactionTypes: TransactionType[] = TransactionTypes;
   concepts: Concept[];
@@ -68,6 +69,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     me.getActiveAccounts();
 
     if (id === '-1') {
+      me.savedTransaction = false;
       me.transaction = new Transaction();
       me.transaction.username = me.globals.userNameLogged;
       me.transaction.transactionType = 2; // Expense
@@ -131,6 +133,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     me.transaction = this.getFormData();
     me.transactionService.updatetransaction(me.transaction)
       .subscribe( () => {
+          me.savedTransaction = true;
           me.toastr.success('Successfully saved.');
         }
       );
@@ -196,6 +199,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
 
     me.transactionService.getTransactionById(id)
       .subscribe( transaction => {
+          me.savedTransaction = true;
           me.transaction = transaction[0];
           me.rebuildForm();
       });
