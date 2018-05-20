@@ -27,6 +27,18 @@ module.exports.getTransactionById = function (id, callbackFn) {
         .populate('account');
 };
 
+module.exports.deleteTransactionById = function (id, callbackFn) {
+
+    Transaction.findOneAndRemove({username: defaultUserName, _id: id}, function (error, transaction) {
+        if (error) {
+            callbackFn(error, null);
+        } else {
+            transaction.amount = transaction.amount * -1;
+            updateAccountAmount(error, transaction, callbackFn);
+        }
+    });
+};
+
 module.exports.updateTransaction = function (transaction, callbackFn) {
 
     var updatedValues = {};

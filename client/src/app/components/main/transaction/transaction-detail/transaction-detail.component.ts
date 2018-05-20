@@ -114,6 +114,15 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
 
   onDeleteConfirmed() {
     const me = this;
+    me.transactionService.deleteTransactionById(me.transaction._id)
+      .subscribe((success) => {
+        if (success) {
+          this.location.back();
+          me.toastr.success('Movimiento borrado !!!.');
+        } else {
+          me.toastr.error('No se pudo borrar el movimiento. Inténtelo de nuevo.');
+        }
+      });
   }
 
   onClickSave(): void {

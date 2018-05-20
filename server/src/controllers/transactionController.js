@@ -48,6 +48,16 @@ module.exports.init = function (app) {
         }
     });
 
+    // (DELETE)http:localhost:3000/api/transaction/?id=5a78a8fe458a4c457a3b4969    
+    app.delete ('/api/transaction', auth.isUserAuthenticated, function (req, res, next) {
+        var queryString = url.parse(req.url, true).query,
+            id = queryString.id;
+
+        if (id) {
+            deleteTransactionById(id, res);
+        }
+    });
+
     console.log('Transactions controller initialized.');
 };
 
@@ -70,6 +80,28 @@ function getTransactionById(id, res) {
             } else {
                 console.log(`Transactions controller returns Transaction ${id} successfully.`);
                 res.send(transaction);
+            }
+        }
+    });
+}
+
+function deleteTransactionById(id, res) {
+    var msg;
+
+    transactionManager.deleteTransactionById ( id, function(error, transaction){
+        if (error){
+            console.log('Transactions controller returns an error (400)');
+            res.status(400).send(error);
+        } else {
+            res.set('Content-Type','application/json');
+            if (transaction.length === 0 ) {
+                msg = `No Transaction found with id: ${id}`;
+                console.log(msg);
+                res.status(200).send(false);
+            } else {
+                msg = `Transactions controller deleted Transaction ${id} successfully.`;
+                console.log(msg);
+                res.send(true);
             }
         }
     });

@@ -52,6 +52,19 @@ export class TransactionService {
   }
 
   /**.*/
+  deleteTransactionById(id: string): Observable<boolean> {
+    const me = this,
+          httpOptions = me.createHttpOptionsWithToken(),
+          deleteTransactionByIdUrl = `${me.TransactionUrl}/?id=${id}`,
+          success = me.http.delete<boolean>(deleteTransactionByIdUrl, httpOptions)
+                      .pipe(
+                        tap(_ => me.log(`Transaction with id ${id} was deleted.`)),
+                        catchError(me.handleError<boolean>(`deleteTransactionById (id:${id}`))
+                      );
+    return success;
+  }
+
+  /**.*/
   updatetransaction(transaction: Transaction): Observable<any> {
 
     const me = this,
