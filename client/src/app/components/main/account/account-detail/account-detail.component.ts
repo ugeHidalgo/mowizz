@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewContainerRef, OnChanges, HostBinding, HostListener } from '@angular/core';
+import { Component, OnInit, ViewContainerRef, OnChanges, HostBinding, HostListener, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Location, DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentCanDeactivate } from '../../../../guards/pending-changes.guard';
+import { SuccessDialogComponent } from '../../../dialogs/success-dialog/success-dialog.component';
 
-import { ToastsManager } from 'ng2-toastr';
 import { Account } from '../../../../models/account';
 import { AccountService } from '../../../../services/account/account.service';
 import { GlobalsService } from '../../../../globals/globals.service';
@@ -24,6 +24,8 @@ export class AccountDetailComponent implements OnInit, OnChanges, ComponentCanDe
   @HostBinding('style.display') display = 'block';
   @HostBinding('style.position') position = 'relative';
 
+  @ViewChild(SuccessDialogComponent) public successDialog: SuccessDialogComponent;
+
   account: Account;
   validatingForm: FormGroup;
 
@@ -32,11 +34,9 @@ export class AccountDetailComponent implements OnInit, OnChanges, ComponentCanDe
     private location: Location,
     protected globals: GlobalsService,
     private accountService: AccountService,
-    private fb: FormBuilder,
-    public toastr: ToastsManager, vcr: ViewContainerRef) {
+    private fb: FormBuilder) {
       const me = this;
 
-      me.toastr.setRootViewContainerRef(vcr);
       me.createForm();
    }
 
@@ -80,7 +80,7 @@ export class AccountDetailComponent implements OnInit, OnChanges, ComponentCanDe
     me.account = this.getFormData();
     me.accountService.updateAccount(me.account)
       .subscribe( () => {
-          me.toastr.success('Successfully saved.');
+          me.successDialog.showModal('Guardado', 'Cuenta guardada correctamente.');
         }
       );
     me.rebuildForm();
