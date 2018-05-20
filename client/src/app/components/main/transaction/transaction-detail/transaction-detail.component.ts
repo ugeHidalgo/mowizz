@@ -19,6 +19,7 @@ import { ConceptService } from '../../../../services/concept/concept.service';
 import { CostCentreService } from '../../../../services/costcentre/costcentre.service';
 import { AccountService } from '../../../../services/account/account.service';
 import { DeleteDialogComponent } from '../../../dialogs/delete-dialog/delete-dialog.component';
+import { Subscription } from 'rxjs/Subscription';
 
 
 @Component({
@@ -41,6 +42,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
   concepts: Concept[];
   costCentres: CostCentre[];
   accounts: Account[];
+  deleteDialogSubscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -98,12 +100,20 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
   }
 
   onClickDelete() {
-    const message = 'Va a borrar este movimiento. ¿Está seguro?',
+    const me = this,
+          message = 'Va a borrar este movimiento. ¿Está seguro?',
           title = 'Atención';
 
-    this.deleteDialog.showModal(title, message);
-    // todo: mostrar popup que pregunte si borrar o no la transacción
-    // Borrar la transacción y ajustar el amount de la cuenta.
+    me.deleteDialog.showModal(title, message);
+    me.deleteDialogSubscription = me.deleteDialog.observable.subscribe (clickedOk => {
+      if (clickedOk) {
+        me.onDeleteConfirmed();
+      }
+    });
+  }
+
+  onDeleteConfirmed() {
+    const me = this;
   }
 
   onClickSave(): void {

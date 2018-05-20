@@ -1,5 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Output } from '@angular/core';
 import { ModalDirective } from 'angular-bootstrap-md';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-delete-dialog',
@@ -14,6 +15,8 @@ export class DeleteDialogComponent {
 
   @ViewChild(ModalDirective) public deleteDialog: ModalDirective;
   public isModalShown = false;
+  private clickStream = new Subject<boolean>();
+  @Output() observable = this.clickStream.asObservable();
 
   public showModal(title, message): void {
     const me = this;
@@ -33,4 +36,11 @@ export class DeleteDialogComponent {
       this.isModalShown = false;
   }
 
+  private onClickOk() {
+    this.clickStream.next(true);
+  }
+
+  private onClickNo() {
+    this.clickStream.next(false);
+  }
 }
