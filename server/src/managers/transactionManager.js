@@ -13,6 +13,7 @@ module.exports.getTransactions = function (userName, callbackFn) {
 
     Transaction
         .find({username: userName}, callbackFn)
+        .sort({date: 'desc'})
         .populate('concept')
         .populate('costCentre')
         .populate('account');
