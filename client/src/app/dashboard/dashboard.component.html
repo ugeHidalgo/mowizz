@@ -1,3 +1,12 @@
 <div *ngIf="globals.userNameLogged">
-  <h3>{{globals.userNameLogged}} dashboard</h3>
+  <div>
+    <ag-grid-angular style="width: 300px; height: 300px;"
+      class="ag-fresh"
+      [rowData]="rowData"
+      [gridOptions]="gridOptions"
+      (gridReady)="onGridReady($event)"                           
+      [frameworkComponents]="frameworkComponents"
+      (cellDoubleClicked)="onRowDoubleClicked($event)">
+    </ag-grid-angular>
+  </div>
 </div>
