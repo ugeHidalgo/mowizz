@@ -35,6 +35,7 @@ module.exports.deleteTransactionById = function (id, callbackFn) {
             callbackFn(error, null);
         } else {
             transaction.amount = transaction.amount * -1;
+            transaction.accountAmount = transaction.accountAmount - transaction.amount;
             updateAccountAmount(error, transaction, callbackFn);
         }
     });
@@ -42,53 +43,70 @@ module.exports.deleteTransactionById = function (id, callbackFn) {
 
 module.exports.updateTransaction = function (transaction, callbackFn) {
 
-    var updatedValues = {};
-
     transaction = setAmountValueAsNegativeForExpenses(transaction);
 
-    if (transaction._id) {
-        //Update existing.
-        updatedValues = {
-            amount: transaction.amount,
-            date: transaction.date,
-            transactionType: transaction.transactionType,
-            concept: transaction.concept,
-            costCentre: transaction.costCentre,
-            account: transaction.account,
-            comments: transaction.comments,
-        };
- 
-         Transaction.findOneAndUpdate(
-            {_id: transaction._id}, 
-            { $set: updatedValues })
-            .exec(function (error){
-                if (error){
-                    callbackFn(error, null);
-                } else {
-                    console.log ('Transaction data updated -->username = ' + transaction.username + ' /id = ' + transaction._id);                        
-                    callbackFn(null, Transaction)
-                }
-            }); 
-    } else {
-        //Create new.
-        var newTransaction = new Transaction(transaction);
+    accountManager.getAccountById(transaction.username, transaction.account, function (error, accounts) {
+        var account;
 
-        newTransaction.save(function (error) {
-            if (error) {
-                callbackFn(error, null);
+        if (error) {
+            callbackFn(error,null);
+        } else {
+            account = accounts[0];
+            transaction.accountAmount = account.amount + transaction.amount;
+            if (transaction._id) {
+                updateTransaction(transaction, callbackFn);
             } else {
-                console.log ('New Transaction saved ----->username = ' + newTransaction.username + ' /id = ' + newTransaction._id);
-                updateAccountAmount(error, newTransaction, callbackFn);
+                createTransaction(transaction, callbackFn);
             }
-        });
-    } 
+        }
+    });     
 };
+
+// Private methods
 
 function setAmountValueAsNegativeForExpenses(transaction) {
     if (transaction.transactionType === 2 && transaction.amount > 0) {
         transaction.amount = transaction.amount * -1;
     }
     return transaction;
+}
+
+function updateTransaction(transaction, callbackFn) {
+    var updatedValues = {
+        amount: transaction.amount,
+        date: transaction.date,
+        transactionType: transaction.transactionType,
+        concept: transaction.concept,
+        costCentre: transaction.costCentre,
+        account: transaction.account,
+        accountAmount: transaction.accountAmount,
+        comments: transaction.comments,
+    };
+
+    Transaction.findOneAndUpdate(
+        {_id: transaction._id}, 
+        { $set: updatedValues })
+    .exec(function (error){
+        if (error){
+            callbackFn(error, null);
+        } else {
+            console.log ('Transaction data updated -->username = ' + transaction.username + ' /id = ' + transaction._id);                        
+            callbackFn(null, Transaction)
+        }
+    }); 
+}
+
+function createTransaction(transaction, callbackFn) {
+    var newTransaction = new Transaction(transaction);
+    
+    newTransaction.save(function (error) {
+        if (error) {
+            callbackFn(error, null);
+        } else {
+            console.log ('New Transaction saved ----->username = ' + newTransaction.username + ' /id = ' + newTransaction._id);
+            updateAccountAmount(error, newTransaction, callbackFn);
+        }
+    });
 }
 
 function updateAccountAmount(error, transaction, callbackFn) {

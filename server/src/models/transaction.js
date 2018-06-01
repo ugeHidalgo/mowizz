@@ -8,6 +8,7 @@ var moongoose = require ('mongoose'),
         costCentre: { type: Schema.Types.ObjectId, ref: 'CostCentres' },
         account: { type: Schema.Types.ObjectId, ref: 'Accounts' },
         amount: Number,
+        accountAmount: Number,
         comments: String,
         username : String
     });

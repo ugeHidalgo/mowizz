@@ -81,6 +81,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
       me.transaction.account = new Account();
       me.transaction.date = new Date();
       me.transaction.amount = 0;
+      me.transaction.accountAmount = 0;
       me.rebuildForm();
     } else {
       me.getTransactionById(id);
@@ -136,9 +137,14 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
 
     me.transaction = this.getFormData();
     me.transactionService.updatetransaction(me.transaction)
-      .subscribe( () => {
-          me.savedTransaction = true;
-          me.successDialog.showModal('Guardado', 'Movimiento guardado correctamente.');
+      .subscribe( (updatedTransaction) => {
+          if (updatedTransaction) {
+            me.savedTransaction = true;
+            me.successDialog.showModal('Guardado', 'Movimiento guardado correctamente.');
+          } else {
+            me.savedTransaction = false;
+            me.errorDialog.showModal('Error', 'No se puedo salvar el movimiento. Inténtelo de nuevo.');
+          }
         }
       );
     me.rebuildForm();
