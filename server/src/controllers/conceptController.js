@@ -47,13 +47,14 @@ module.exports.init = function (app) {
         }
     });
 
-    // (GET)http:localhost:3000/api/concept/?id=5a78a8fe458a4c457a3b4969    
+    // (GET)http:localhost:3000/api/concept/?id=5a78a8fe458a4c457a3b4969&username=pepe   
     app.get ('/api/concept', auth.isUserAuthenticated, function (req, res, next) {
         var queryString = url.parse(req.url, true).query,
-            id = queryString.id;
+            id = queryString.id,
+            username = queryString.username;
 
         if (id) {
-            getConceptById(id, res);
+            getConceptById(username, id, res);
         }
     });
 
@@ -63,10 +64,10 @@ module.exports.init = function (app) {
 /**
  * Private methods.
  */
-function getConceptById(id, res) {
+function getConceptById(username, id, res) {
     var msg;
 
-    ConceptManager.getConceptById ( id, function(error, concept){
+    ConceptManager.getConceptById (username, id, function(error, concept){
         if (error){
             console.log('Concepts controller returns an error (400)');
             res.status(400).send(error);

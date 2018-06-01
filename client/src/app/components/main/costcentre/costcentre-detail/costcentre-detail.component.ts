@@ -137,7 +137,7 @@ export class CostCentreDetailComponent implements OnInit, OnChanges, ComponentCa
   getCostCentreById(id: string): void {
     const me = this;
 
-    me.costCentreService.getCostCentreById(id)
+    me.costCentreService.getCostCentreById(me.globals.userNameLogged, id)
       .subscribe( costCentre => {
           me.costCentre = costCentre[0];
           me.rebuildForm();

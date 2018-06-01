@@ -91,10 +91,10 @@ export class ConceptService {
   }
 
   /**.*/
-  getConceptById(id: string): Observable<Concept> {
+  getConceptById(username: string, id: string): Observable<Concept> {
     const me = this,
           httpOptions = me.createHttpOptionsWithToken(),
-          getConceptByIdUrl = `${me.conceptUrl}/?id=${id}`,
+          getConceptByIdUrl = `${me.conceptUrl}/?id=${id}&username=${username}`,
           concept = me.http.get<Concept>(getConceptByIdUrl, httpOptions)
                       .pipe(
                         tap(_ => me.log(`Concept with id ${id} was fetched.`)),

@@ -66,10 +66,10 @@ export class AccountService {
   }
 
   /**.*/
-  getAccountById(id: string): Observable<Account> {
+  getAccountById(username: string, id: string): Observable<Account> {
     const me = this,
           httpOptions = me.createHttpOptionsWithToken(),
-          getAccountByIdUrl = `${me.accountUrl}/?id=${id}`,
+          getAccountByIdUrl = `${me.accountUrl}/?id=${id}&username=${username}`,
           account = me.http.get<Account>(getAccountByIdUrl, httpOptions)
                       .pipe(
                         tap(_ => me.log(`Account with id ${id} was fetched.`)),

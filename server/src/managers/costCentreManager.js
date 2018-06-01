@@ -18,9 +18,9 @@ module.exports.getActiveCostCentres = function (userName, callbackFn) {
     CostCentre.find({username: defaultUserName, active: true}, callbackFn);
 };
 
-module.exports.getCostCentreById = function (id, callbackFn) {
+module.exports.getCostCentreById = function (username, id, callbackFn) {
 
-    CostCentre.find({username: defaultUserName, _id: id}, callbackFn);
+    CostCentre.find({username: username, _id: id}, callbackFn);
 };
 
 module.exports.getCostCentresByName = function (name, callbackFn) {

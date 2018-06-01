@@ -145,7 +145,7 @@ export class ConceptDetailComponent implements OnInit, OnChanges, ComponentCanDe
   getConceptById(id: string): void {
     const me = this;
 
-    me.conceptService.getConceptById(id)
+    me.conceptService.getConceptById(me.globals.userNameLogged, id)
       .subscribe( concept => {
           me.concept = concept[0];
           me.rebuildForm();

@@ -42,13 +42,14 @@ module.exports.init = function (app) {
         }
     });
 
-    // (GET)http:localhost:3000/api/costCentre/?id=5a78a8fe458a4c457a3b4969    
+    // (GET)http:localhost:3000/api/costCentre/?id=5a78a8fe458a4c457a3b4969?username=pepe   
     app.get ('/api/costCentre', auth.isUserAuthenticated, function (req, res, next) {
         var queryString = url.parse(req.url, true).query,
-            id = queryString.id;
+            id = queryString.id,
+            username = queryString.username;
 
         if (id) {
-            getcostCentreById(id, res);
+            getcostCentreById(username, id, res);
         }
     });
 
@@ -58,10 +59,10 @@ module.exports.init = function (app) {
 /**
  * Private methods.
  */
-function getcostCentreById(id, res) {
+function getcostCentreById(username, id, res) {
     var msg;
 
-    costCentreManager.getCostCentreById ( id, function(error, costCentre){
+    costCentreManager.getCostCentreById (username, id, function(error, costCentre){
         if (error){
             console.log('Cost Centres controller returns an error (400)');
             res.status(400).send(error);

@@ -145,7 +145,7 @@ export class AccountDetailComponent implements OnInit, OnChanges, ComponentCanDe
   getAccountById(id: string): void {
     const me = this;
 
-    me.accountService.getAccountById(id)
+    me.accountService.getAccountById(me.globals.userNameLogged, id)
       .subscribe( account => {
           me.account = account[0];
           me.rebuildForm();

@@ -65,10 +65,10 @@ export class CostCentreService {
   }
 
   /**.*/
-  getCostCentreById(id: string): Observable<CostCentre> {
+  getCostCentreById(username: string, id: string): Observable<CostCentre> {
     const me = this,
           httpOptions = me.createHttpOptionsWithToken(),
-          getcostCentreByIdUrl = `${me.costCentreUrl}/?id=${id}`,
+          getcostCentreByIdUrl = `${me.costCentreUrl}/?id=${id}&username=${username}`,
           costCentre = me.http.get<CostCentre>(getcostCentreByIdUrl, httpOptions)
                       .pipe(
                         tap(_ => me.log(`costCentre with id ${id} was fetched.`)),

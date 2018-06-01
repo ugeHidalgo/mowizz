@@ -18,9 +18,9 @@ module.exports.getActiveConcepts = function (userName, callbackFn) {
     Concept.find({username: defaultUserName, active: true}, callbackFn);
 };
 
-module.exports.getConceptById = function (id, callbackFn) {
+module.exports.getConceptById = function (username, id, callbackFn) {
 
-    Concept.find({username: defaultUserName, _id: id}, callbackFn);
+    Concept.find({username: username, _id: id}, callbackFn);
 };
 
 module.exports.getConceptsByName = function (name, callbackFn) {
