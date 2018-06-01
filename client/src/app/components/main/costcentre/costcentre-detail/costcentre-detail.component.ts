@@ -11,6 +11,7 @@ import { GlobalsService } from '../../../../globals/globals.service';
 
 import { slideInDownAnimation } from '../../../../animations';
 import { SuccessDialogComponent } from '../../../dialogs/success-dialog/success-dialog.component';
+import { ErrorDialogComponent } from '../../../dialogs/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-costcentre-detail',
@@ -21,6 +22,7 @@ import { SuccessDialogComponent } from '../../../dialogs/success-dialog/success-
 export class CostCentreDetailComponent implements OnInit, OnChanges, ComponentCanDeactivate {
 
   @ViewChild(SuccessDialogComponent) public successDialog: SuccessDialogComponent;
+  @ViewChild(ErrorDialogComponent) public errorDialog: ErrorDialogComponent;
 
   @HostBinding('@routeAnimation') routeAnimation = true;
   @HostBinding('style.display') display = 'block';
@@ -78,8 +80,12 @@ export class CostCentreDetailComponent implements OnInit, OnChanges, ComponentCa
 
     me.costCentre = this.getFormData();
     me.costCentreService.updateCostCentre(me.costCentre)
-      .subscribe( () => {
-        me.successDialog.showModal('Guardado', 'Centro de coste guardado correctamente.');
+      .subscribe( (updated) => {
+          if (updated) {
+            me.successDialog.showModal('Guardado', 'Centro de coste guardado correctamente.');
+          } else {
+            me.errorDialog.showModal('Error', 'No se pudo borrar el movimiento. Inténtelo de nuevo.');
+          }
         }
       );
     me.rebuildForm();

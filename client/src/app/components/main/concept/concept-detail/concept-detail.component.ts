@@ -13,6 +13,7 @@ import { GlobalsService } from '../../../../globals/globals.service';
 
 import { slideInDownAnimation } from '../../../../animations';
 import { SuccessDialogComponent } from '../../../dialogs/success-dialog/success-dialog.component';
+import { ErrorDialogComponent } from '../../../dialogs/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-concept-detail',
@@ -27,6 +28,7 @@ export class ConceptDetailComponent implements OnInit, OnChanges, ComponentCanDe
   @HostBinding('style.position') position = 'relative';
 
   @ViewChild(SuccessDialogComponent) public successDialog: SuccessDialogComponent;
+  @ViewChild(ErrorDialogComponent) public errorDialog: ErrorDialogComponent;
 
   concept: Concept;
   validatingForm: FormGroup;
@@ -82,9 +84,13 @@ export class ConceptDetailComponent implements OnInit, OnChanges, ComponentCanDe
 
     me.concept = this.getFormData();
     me.conceptService.updateConcept(me.concept)
-      .subscribe( () => {
-          me.successDialog.showModal('Guardado', 'Concepto guardado correctamente.');
-          me.rebuildForm();
+      .subscribe( (updated) => {
+          if (updated) {
+            me.successDialog.showModal('Guardado', 'Concepto guardado correctamente.');
+            me.rebuildForm();
+          } else {
+            me.errorDialog.showModal('Error', 'No se puedo salvar. Inténtelo de nuevo.');
+          }
         }
       );
   }

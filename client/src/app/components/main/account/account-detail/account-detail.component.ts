@@ -5,6 +5,8 @@ import { Location, DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentCanDeactivate } from '../../../../guards/pending-changes.guard';
 import { SuccessDialogComponent } from '../../../dialogs/success-dialog/success-dialog.component';
+import { ErrorDialogComponent } from '../../../dialogs/error-dialog/error-dialog.component';
+
 
 import { Account } from '../../../../models/account';
 import { AccountService } from '../../../../services/account/account.service';
@@ -25,6 +27,7 @@ export class AccountDetailComponent implements OnInit, OnChanges, ComponentCanDe
   @HostBinding('style.position') position = 'relative';
 
   @ViewChild(SuccessDialogComponent) public successDialog: SuccessDialogComponent;
+  @ViewChild(ErrorDialogComponent) public errorDialog: ErrorDialogComponent;
 
   account: Account;
   validatingForm: FormGroup;
@@ -79,8 +82,12 @@ export class AccountDetailComponent implements OnInit, OnChanges, ComponentCanDe
 
     me.account = this.getFormData();
     me.accountService.updateAccount(me.account)
-      .subscribe( () => {
-          me.successDialog.showModal('Guardado', 'Cuenta guardada correctamente.');
+      .subscribe( (updated) => {
+          if (updated) {
+            me.successDialog.showModal('Guardado', 'Cuenta guardada correctamente.');
+          } else {
+            me.errorDialog.showModal('Error', 'No se puedo salvar. Inténtelo de nuevo.');
+          }
         }
       );
     me.rebuildForm();
