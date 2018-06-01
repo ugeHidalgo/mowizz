@@ -1,12 +1,15 @@
-<div *ngIf="globals.userNameLogged">
-  <div>
-    <ag-grid-angular style="width: 300px; height: 300px;"
-      class="ag-fresh"
-      [rowData]="rowData"
-      [gridOptions]="gridOptions"
-      (gridReady)="onGridReady($event)"                           
-      [frameworkComponents]="frameworkComponents"
-      (cellDoubleClicked)="onRowDoubleClicked($event)">
-    </ag-grid-angular>
+<div *ngIf="globals.userNameLogged" class="dashboard">
+
+  <div class="dashboard-panel">
+    <app-accounts-panel></app-accounts-panel>
   </div>
+
+  <div class="dashboard-panel">
+    <app-accounts-panel></app-accounts-panel>
+  </div>
+
+  <div class="dashboard-panel">
+    <app-accounts-panel></app-accounts-panel>
+  </div>
+
 </div>
