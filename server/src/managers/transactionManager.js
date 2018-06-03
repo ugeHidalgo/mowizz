@@ -52,7 +52,7 @@ module.exports.updateTransaction = function (transaction, callbackFn) {
             callbackFn(error,null);
         } else {
             account = accounts[0];
-            transaction.accountAmount = account.amount + transaction.amount;
+            transaction.accountAmount = Number(account.amount) + Number(transaction.amount);
             if (transaction._id) {
                 updateTransaction(transaction, callbackFn);
             } else {

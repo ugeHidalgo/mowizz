@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewContainerRef, OnChanges, HostBinding, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { Location, DatePipe } from '@angular/common';
+import { Location, DatePipe, DecimalPipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ComponentCanDeactivate } from '../../../../guards/pending-changes.guard';
 import { slideInDownAnimation } from '../../../../animations';
@@ -198,7 +198,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     newTransaction.costCentre = me.getCostCentreById(formModel.costCentre);
     newTransaction.account = me.getAccountById(formModel.account);
     newTransaction.comments = formModel.comments;
-    newTransaction.amount = formModel.amount;
+    newTransaction.amount = me.decimalFormatter(formModel.amount);
 
     return newTransaction;
   }
@@ -272,5 +272,12 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
 
   getAccountById(id): Account {
     return this.accounts.find( function(x) { return x._id === id; });
+  }
+
+  decimalFormatter(value) {
+    const me = this,
+          decimalPipe = new DecimalPipe(navigator.language);
+
+    return Number(decimalPipe.transform(value));
   }
 }
