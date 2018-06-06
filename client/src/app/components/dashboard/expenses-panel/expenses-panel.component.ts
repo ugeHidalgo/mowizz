@@ -5,6 +5,7 @@ import { GlobalsService } from '../../../globals/globals.service';
 import { AccountService } from '../../../services/account/account.service';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { TransactionService } from '../../../services/transaction/transaction.service';
+import { TransactionTypes } from '../../../models/transactionType';
 
 @Component({
   selector: 'app-expenses-panel',
@@ -26,8 +27,8 @@ export class ExpensesPanelComponent {
     private transactionService: TransactionService ) {
       const me = this;
 
-      me.panelTitle = 'Gasto Mes: ';
-      me.getAccounts();
+      me.panelTitle = 'Gasto Mes';
+      me.getExpenses();
 
       me.gridOptions = <GridOptions>{
         rowSelection: 'single',
@@ -64,10 +65,13 @@ export class ExpensesPanelComponent {
     }
 
   // Private Methods
-  private getAccounts(): void {
-    const me = this;
+  private getExpenses(): void {
+    const me = this,
+          dateFrom = new Date(),
+          dateTo = new Date();
 
-    me.transactionService.getTransactions(me.globals.userNameLogged)
+
+    me.transactionService.getTransactionsOnDates(me.globals.userNameLogged, TransactionTypes[1], dateFrom, dateTo)
       .subscribe(transactions => {
         me.rowData = transactions;
         me.expensesTotal = me.getTotalExpenses(transactions);

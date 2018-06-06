@@ -8,6 +8,7 @@ import { of } from 'rxjs/observable/of';
 import { MessageService } from '../message/message.service';
 import { GlobalsService } from '../../globals/globals.service';
 import { Transaction } from '../../models/transaction';
+import { TransactionType } from '../../models/transactionType';
 
 @Injectable()
 export class TransactionService {
@@ -35,6 +36,18 @@ export class TransactionService {
               .pipe(
                 tap(Transactions => me.log('Transactions fetched.')),
                 catchError(me.handleError('getTransactions', []))
+              );
+  }
+
+  getTransactionsOnDates(userName: string, transactionType: TransactionType, dateFrom: Date, dateTo: Date): Observable<Transaction[]> {
+    const me = this,
+          getTransactionsUrl = `${me.transactionsUrl}/?username=${userName}&transtype=${transactionType.value}`,
+          httpOptions = me.createHttpOptionsWithToken();
+
+    return me.http.get<Transaction[]>(getTransactionsUrl, httpOptions)
+              .pipe(
+                tap(Transactions => me.log('Transactions fetched.')),
+                catchError(me.handleError('getTransactionsOnDates', []))
               );
   }
 

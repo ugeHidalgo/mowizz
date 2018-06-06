@@ -19,6 +19,16 @@ module.exports.getTransactions = function (userName, callbackFn) {
         .populate('account');
 };
 
+module.exports.getTransactionsByType = function (userName, transactionType, callbackFn) {
+
+    Transaction
+        .find({username: userName, transactionType: transactionType}, callbackFn)
+        .sort({date: 'desc'})
+        .populate('concept')
+        .populate('costCentre')
+        .populate('account');
+};
+
 module.exports.getTransactionById = function (id, callbackFn) {
 
     Transaction
