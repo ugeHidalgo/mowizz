@@ -51,6 +51,7 @@ import { DeleteDialogComponent } from './components/dialogs/delete-dialog/delete
 import { SuccessDialogComponent } from './components/dialogs/success-dialog/success-dialog.component';
 import { ErrorDialogComponent } from './components/dialogs/error-dialog/error-dialog.component';
 import { AccountsPanelComponent } from './components/dashboard/accounts-panel/accounts-panel.component';
+import { ExpensesPanelComponent } from './components/dashboard/expenses-panel/expenses-panel.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { AccountsPanelComponent } from './components/dashboard/accounts-panel/ac
     DeleteDialogComponent,
     SuccessDialogComponent,
     ErrorDialogComponent,
-    AccountsPanelComponent
+    AccountsPanelComponent,
+    ExpensesPanelComponent
   ],
 
   imports: [
