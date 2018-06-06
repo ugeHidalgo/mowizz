@@ -17,6 +17,7 @@ export class AccountsPanelComponent {
   columnDefs: any[];
   rowData: any[];
   frameworkComponents: any;
+  accountsTotal: any;
 
   constructor(
     private router: Router,
@@ -57,7 +58,18 @@ export class AccountsPanelComponent {
     me.accountService.getAccounts(me.globals.userNameLogged)
       .subscribe(accounts => {
         me.rowData = accounts;
+        me.accountsTotal = me.getAccountsTotal(accounts);
       });
+  }
+
+  private getAccountsTotal(accounts): any {
+    let result = 0;
+    const currencyPipe = new CurrencyPipe(navigator.language);
+
+    accounts.forEach(account => {
+      result += account.amount;
+    });
+    return currencyPipe.transform(result, 'EUR', 'symbol');
   }
 
   private currencyFormatter(params) {
