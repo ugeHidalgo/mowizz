@@ -53,7 +53,7 @@ export class ExpensesPanelComponent {
             filter: 'agTextColumnFilter'
           },
           dateColumn: {
-            width: 55,
+            width: 33,
             valueFormatter: me.dateFormatter,
             filter: 'agDateColumnFilter',
             filterParams: {
@@ -67,11 +67,13 @@ export class ExpensesPanelComponent {
   // Private Methods
   private getExpenses(): void {
     const me = this,
-          dateFrom = new Date(2018, 5, 1),
-          dateTo = new Date(2018, 5, 31);
+          today = new Date(),
+          year = today.getFullYear(),
+          month = today.getMonth(),
+          firstDayOfMonth = new Date(year, month, 1),
+          lastDayOfMonth = new Date(year, month + 1, 0);
 
-
-    me.transactionService.getTransactionsOnDates(me.globals.userNameLogged, TransactionTypes[1], dateFrom, dateTo)
+    me.transactionService.getTransactionsOnDates(me.globals.userNameLogged, TransactionTypes[1], firstDayOfMonth, lastDayOfMonth)
       .subscribe(transactions => {
         me.rowData = transactions;
         me.expensesTotal = me.getTotalExpenses(transactions);
