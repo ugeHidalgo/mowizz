@@ -19,10 +19,14 @@ module.exports.getTransactions = function (userName, callbackFn) {
         .populate('account');
 };
 
-module.exports.getTransactionsByType = function (userName, transactionType, callbackFn) {
+module.exports.getTransactionsByType = function (userName, transactionType, dateFrom, dateTo, callbackFn) {
 
     Transaction
-        .find({username: userName, transactionType: transactionType}, callbackFn)
+        .find({
+                username: userName, 
+                transactionType: transactionType,
+                date: {'$gte': dateFrom, '$lte': dateTo }
+            }, callbackFn)
         .sort({date: 'desc'})
         .populate('concept')
         .populate('costCentre')

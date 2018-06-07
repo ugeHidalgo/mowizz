@@ -25,19 +25,21 @@ module.exports.init = function (app) {
     });
 
     // (GET)http:localhost:3000/api/transactions/?username=pepe
-    // (GET)http:localhost:3000/api/transactions/?username=pepe&transtype=2
+    // (GET)http:localhost:3000/api/transactions/?username=pepe&transtype=2&datefrom=fhfh&dateto=2871298
     app.get ('/api/transactions', auth.isUserAuthenticated, function (req, res, next) {
         var queryString = url.parse(req.url, true).query,
             userName = queryString.username,
-            transactionType = queryString.transtype;
+            transactionType = queryString.transtype,
+            dateFrom = queryString.datefrom,
+            dateTo = queryString.dateto;
 
         if (res.error) {
             res.status(401).send(res.error);
         }
 
         if (userName) {
-            if (transactionType) {
-                getUserTransactionsByType(userName, transactionType, res)
+            if (transactionType && dateFrom && dateTo) {
+                getUserTransactionsByType(userName, transactionType, dateFrom, dateTo, res)
             } else {
                 getUserTransactions(userName, res);
             }
@@ -127,14 +129,14 @@ function getUserTransactions(userName, res) {
     });
 }
 
-function getUserTransactionsByType(userName, transactionType, res) {
+function getUserTransactionsByType(userName, transactionType, dateFrom, dateTo, res) {
     
-    transactionManager.getTransactionsByType (userName, transactionType, function(error, data){
+    transactionManager.getTransactionsByType (userName, transactionType, dateFrom, dateTo, function(error, data){
         if (error){
             console.log('Transactions controller returns an error (400)');
             res.status(400).send(error);
         } else {
-            console.log(`Transactions controller returns ${data.length} Transactions successfully of type ${transactionType}`);
+            console.log(`Transactions controller returns ${data.length} Transactions successfully of type ${transactionType} between ${dateFrom} and ${dateTo}`);
             res.set('Content-Type','application/json');
             res.status(200).send(data);
         }

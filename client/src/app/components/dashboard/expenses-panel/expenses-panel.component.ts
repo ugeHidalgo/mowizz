@@ -67,8 +67,8 @@ export class ExpensesPanelComponent {
   // Private Methods
   private getExpenses(): void {
     const me = this,
-          dateFrom = new Date(),
-          dateTo = new Date();
+          dateFrom = new Date(2018, 5, 1),
+          dateTo = new Date(2018, 5, 31);
 
 
     me.transactionService.getTransactionsOnDates(me.globals.userNameLogged, TransactionTypes[1], dateFrom, dateTo)

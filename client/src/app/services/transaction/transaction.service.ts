@@ -41,7 +41,8 @@ export class TransactionService {
 
   getTransactionsOnDates(userName: string, transactionType: TransactionType, dateFrom: Date, dateTo: Date): Observable<Transaction[]> {
     const me = this,
-          getTransactionsUrl = `${me.transactionsUrl}/?username=${userName}&transtype=${transactionType.value}`,
+          getTransactionsUrl = `${me.transactionsUrl}/?username=${userName}&transtype=${transactionType.value}` +
+                              `&datefrom=${dateFrom}&dateto=${dateTo}`,
           httpOptions = me.createHttpOptionsWithToken();
 
     return me.http.get<Transaction[]>(getTransactionsUrl, httpOptions)
