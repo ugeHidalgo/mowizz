@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { catchError, map, tap } from 'rxjs/operators';
 
 import { User } from '../../models/user';
 import { GlobalsService } from '../../globals/globals.service';
@@ -10,10 +9,6 @@ import { GlobalsService } from '../../globals/globals.service';
 @Injectable()
 export class UserService {
 
-  // private server = 'http://192.168.1.104:3000/';
-  // private server = 'http://localhost:3000/';
-  // private userUrl  = this.server + 'api/user';
-  // private authUserUrl  = this.server + 'api/auth';
   private userUrl: string;
   private authUserUrl: string;
 

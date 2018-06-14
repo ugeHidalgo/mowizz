@@ -12,10 +12,6 @@ import { CostCentre } from '../../models/costcentre';
 @Injectable()
 export class CostCentreService {
 
-  // private server = 'http://192.168.1.104:3000/';
-  // private server = 'http://localhost:3000/';
-  // private costCentresUrl  = this.server + 'api/costCentres';
-  // private costCentreUrl  = this.server + 'api/costCentre';
   private costCentresUrl: string;
   private costCentreUrl: string;
 

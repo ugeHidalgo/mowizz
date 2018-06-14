@@ -13,10 +13,6 @@ import { TransactionType } from '../../models/transactionType';
 @Injectable()
 export class TransactionService {
 
-  // private server = 'http://192.168.1.104:3000/';
-  // private server = 'http://localhost:3000/';
-  // private transactionsUrl  = this.server + 'api/transactions';
-  // private TransactionUrl  = this.server + 'api/transaction';
   private transactionsUrl: string;
   private TransactionUrl: string;
 
