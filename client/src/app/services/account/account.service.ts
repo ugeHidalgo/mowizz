@@ -13,17 +13,23 @@ import { Account } from '../../models/account';
 @Injectable()
 export class AccountService {
 
-  private server = 'http://192.168.1.104:3000/';
+  // private server = 'http://192.168.1.104:3000/';
   // private server = 'http://localhost:3000/';
-  private accountsUrl  = this.server + 'api/accounts';
-  private accountUrl  = this.server + 'api/account';
+  // private accountsUrl  = this.server + 'api/accounts';
+  // private accountUrl  = this.server + 'api/account';
+
+  private accountsUrl;
+  private accountUrl;
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
     private globals: GlobalsService,
     private router: Router
-  ) { }
+  ) {
+    this.accountsUrl  = globals.server + 'api/accounts';
+    this.accountUrl  = globals.server + 'api/account';
+  }
 
   /**.*/
   getAccounts(userName: string): Observable<Account[]> {

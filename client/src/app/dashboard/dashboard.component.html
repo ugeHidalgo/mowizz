@@ -1,10 +1,15 @@
 <div *ngIf="globals.userNameLogged" class="dashboard">
 
-  <div class="dashboard-panel" style="width: 300px; height: 300px;">
-    <app-accounts-panel></app-accounts-panel>
+  <div class="dashboard-panel" style="width: 450px; height: 300px;">
+    <app-expenses-panel></app-expenses-panel>
   </div>
 
   <div class="dashboard-panel" style="width: 450px; height: 300px;">
     <app-expenses-panel></app-expenses-panel>
   </div>
+
+  <div class="dashboard-panel" style="width: 300px; height: 300px;">
+    <app-accounts-panel></app-accounts-panel>
+  </div>
+
 </div>

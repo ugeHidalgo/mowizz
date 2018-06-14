@@ -12,17 +12,24 @@ import { Concept } from '../../models/concept';
 @Injectable()
 export class ConceptService {
 
-  private server = 'http://192.168.1.104:3000/';
+  // private server = 'http://192.168.1.104:3000/';
   // private server = 'http://localhost:3000/';
-  private conceptsUrl  = this.server + 'api/concepts';
-  private conceptUrl  = this.server + 'api/concept';
+  // private conceptsUrl  = this.server + 'api/concepts';
+  // private conceptUrl  = this.server + 'api/concept';
+  private conceptsUrl: string;
+  private conceptUrl: string;
+
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
     private globals: GlobalsService,
     private router: Router
-  ) { }
+  ) {
+    this.conceptsUrl = globals.server + 'api/concepts';
+    this.conceptUrl = globals.server + 'api/concept';
+
+  }
 
   /**.*/
   getConcepts(userName: string): Observable<Concept[]> {

@@ -12,17 +12,22 @@ import { CostCentre } from '../../models/costcentre';
 @Injectable()
 export class CostCentreService {
 
-  private server = 'http://192.168.1.104:3000/';
+  // private server = 'http://192.168.1.104:3000/';
   // private server = 'http://localhost:3000/';
-  private costCentresUrl  = this.server + 'api/costCentres';
-  private costCentreUrl  = this.server + 'api/costCentre';
+  // private costCentresUrl  = this.server + 'api/costCentres';
+  // private costCentreUrl  = this.server + 'api/costCentre';
+  private costCentresUrl: string;
+  private costCentreUrl: string;
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
     private globals: GlobalsService,
     private router: Router
-  ) { }
+  ) {
+    this.costCentresUrl  = globals.server + 'api/costCentres';
+    this.costCentreUrl  = globals.server + 'api/costCentre';
+  }
 
   /**.*/
   getCostCentres(userName: string): Observable<CostCentre[]> {

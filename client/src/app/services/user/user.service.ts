@@ -10,15 +10,20 @@ import { GlobalsService } from '../../globals/globals.service';
 @Injectable()
 export class UserService {
 
-  private server = 'http://192.168.1.104:3000/';
+  // private server = 'http://192.168.1.104:3000/';
   // private server = 'http://localhost:3000/';
-  private userUrl  = this.server + 'api/user';
-  private authUserUrl  = this.server + 'api/auth';
+  // private userUrl  = this.server + 'api/user';
+  // private authUserUrl  = this.server + 'api/auth';
+  private userUrl: string;
+  private authUserUrl: string;
 
   constructor(
     private http: HttpClient,
     private globals: GlobalsService
-  ) { }
+  ) {
+    this.userUrl  = globals.server + 'api/user';
+    this.authUserUrl  = globals.server + 'api/auth';
+  }
 
   /**.*/
   isUserAuthenticated(userData: any): Observable<any> {
