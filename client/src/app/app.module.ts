@@ -52,6 +52,7 @@ import { SuccessDialogComponent } from './components/dialogs/success-dialog/succ
 import { ErrorDialogComponent } from './components/dialogs/error-dialog/error-dialog.component';
 import { AccountsPanelComponent } from './components/dashboard/accounts-panel/accounts-panel.component';
 import { ExpensesPanelComponent } from './components/dashboard/expenses-panel/expenses-panel.component';
+import { IncomesPanelComponent } from './components/dashboard/incomes-panel/incomes-panel.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { ExpensesPanelComponent } from './components/dashboard/expenses-panel/ex
     SuccessDialogComponent,
     ErrorDialogComponent,
     AccountsPanelComponent,
-    ExpensesPanelComponent
+    ExpensesPanelComponent,
+    IncomesPanelComponent
   ],
 
   imports: [
