@@ -53,6 +53,7 @@ import { ErrorDialogComponent } from './components/dialogs/error-dialog/error-di
 import { AccountsPanelComponent } from './components/dashboard/accounts-panel/accounts-panel.component';
 import { ExpensesPanelComponent } from './components/dashboard/expenses-panel/expenses-panel.component';
 import { IncomesPanelComponent } from './components/dashboard/incomes-panel/incomes-panel.component';
+import { MonthlyBalancePanelComponent } from './components/dashboard/monthly-balance-panel/monthly-balance-panel.component';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { IncomesPanelComponent } from './components/dashboard/incomes-panel/inco
     ErrorDialogComponent,
     AccountsPanelComponent,
     ExpensesPanelComponent,
-    IncomesPanelComponent
+    IncomesPanelComponent,
+    MonthlyBalancePanelComponent
   ],
 
   imports: [
