@@ -13,8 +13,8 @@ Other used:
 
 - gulp
 - gulp-jshint
-- nodemon   
-- underscore       
+- nodemon
+- underscore
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 -1 Clone repository:
 
-    git clone https://github.com/ugeHidalgo/mowizz.git mowizz 
+    git clone https://github.com/ugeHidalgo/mowizz.git mowizz
     (This will clone the repository to a mowizz folder)
 
 -2 Install:
@@ -55,7 +55,7 @@ ___
     </code>
     Launch server side with any of these options:
     ```
-        - npm start 
+        - npm start
         - gulp
         - gulp default
         - gulp develop
@@ -65,7 +65,7 @@ ___
     Launch client side with any of these:
     ```
         - ng serve
-        - ng serve --host 0.0.0.0  (If you one to connect to your client side server from other machine different than localhost)
+        - ng serve --host 0.0.0.0  (If you want to connect to your client side server from other machine different than localhost)
         - ng serve --proxy-config proxy.config.json --host 0.0.0.0 (Uses the proxy.config.json to send all api requests to the server side at http://localhost:3000 )
     ```
 
