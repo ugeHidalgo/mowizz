@@ -7,19 +7,20 @@ var _ = require('lodash'),
     jshint = require('gulp-jshint');;
 
 // Develop task with nodemon to relaunch when changes in files.
-gulp.task('develop', function(){
-    nodemon({ 
+gulp.task('develop', function(done){
+    nodemon({
       script: './server.js',
       env: { 'NODE_ENV': 'development' },
-      ignore: ['public/dist/']
+      ignore: ['public/dist/'],
+      done: done
     })
 });
 
 // Lint JS server side files.
 gulp.task('lint', function() {
-  var serverJsFiles = [ 
-        'server.js',  
-        './config/**/*.js', 
+  var serverJsFiles = [
+        'server.js',
+        './config/**/*.js',
         './server/**/*.js' ],
 
       clientJsFiles = [
@@ -36,4 +37,4 @@ gulp.task('lint', function() {
 });
 
 // Default Task
-gulp.task('default', ['develop', 'lint']);
+gulp.task('default', gulp.parallel('develop','lint'));
