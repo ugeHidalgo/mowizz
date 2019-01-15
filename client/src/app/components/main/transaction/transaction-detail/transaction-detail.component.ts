@@ -198,7 +198,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
     newTransaction.costCentre = me.getCostCentreById(formModel.costCentre);
     newTransaction.account = me.getAccountById(formModel.account);
     newTransaction.comments = formModel.comments;
-    newTransaction.amount = me.decimalFormatter(formModel.amount);
+    newTransaction.amount = formModel.amount;
 
     return newTransaction;
   }
