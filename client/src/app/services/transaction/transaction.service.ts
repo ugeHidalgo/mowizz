@@ -54,27 +54,27 @@ export class TransactionService {
   }
 
   /**.*/
-  getTransactionById(id: string): Observable<Transaction> {
+  getTransactionById(userName: string, id: string): Observable<Transaction> {
     const me = this,
           httpOptions = me.createHttpOptionsWithToken(),
-          getTransactionByIdUrl = `${me.TransactionUrl}/?id=${id}`,
+          getTransactionByIdUrl = `${me.TransactionUrl}/?username=${userName}&id=${id}`,
           transaction = me.http.get<Transaction>(getTransactionByIdUrl, httpOptions)
                       .pipe(
-                        tap(_ => me.log(`Transaction with id ${id} was fetched.`)),
-                        catchError(me.handleError<Transaction>(`getTransactionById (id:${id}`))
+                        tap(_ => me.log(`Transaction with id ${id} for user ${userName} was fetched.`)),
+                        catchError(me.handleError<Transaction>(`getTransactionById (userName:${userName}, id:${id})`))
                       );
     return transaction;
   }
 
   /**.*/
-  deleteTransactionById(id: string): Observable<boolean> {
+  deleteTransactionById(userName: string, id: string): Observable<boolean> {
     const me = this,
           httpOptions = me.createHttpOptionsWithToken(),
-          deleteTransactionByIdUrl = `${me.TransactionUrl}/?id=${id}`,
+          deleteTransactionByIdUrl = `${me.TransactionUrl}/?username=${userName}&id=${id}`,
           success = me.http.delete<boolean>(deleteTransactionByIdUrl, httpOptions)
                       .pipe(
-                        tap(_ => me.log(`Transaction with id ${id} was deleted.`)),
-                        catchError(me.handleError<boolean>(`deleteTransactionById (id:${id}`))
+                        tap(_ => me.log(`Transaction with id ${id} for user ${userName} was deleted.`)),
+                        catchError(me.handleError<boolean>(`deleteTransactionById (userName:${userName}, id:${id})`))
                       );
     return success;
   }
@@ -86,7 +86,7 @@ export class TransactionService {
           httpOptions = me.createHttpOptionsWithToken(),
           updatedConcept = me.http.post<Transaction>(me.TransactionUrl, transaction, httpOptions)
                         .pipe(
-                          tap(_ => me.log(`Transaction with id ${transaction._id} was updated.`)),
+                          tap(_ => me.log(`Transaction with id ${transaction._id} for user ${transaction.username} was updated.`)),
                           catchError(me.handleError<any>(`updateTransaction (id:${transaction._id}`))
                         );
 

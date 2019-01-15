@@ -4,9 +4,7 @@
 /**
  * Module dependencies.
  */
-var defaultUserName = 'ugehidalgo',
-    mongoose = require ('mongoose'),
-    accountManager = require ('../managers/accountManager'),
+var accountManager = require ('../managers/accountManager'),
     Transaction = require ('../models/transaction');
 
 module.exports.getTransactions = function (userName, callbackFn) {
@@ -23,7 +21,7 @@ module.exports.getTransactionsByType = function (userName, transactionType, date
 
     Transaction
         .find({
-                username: userName, 
+                username: userName,
                 transactionType: transactionType,
                 date: {'$gte': dateFrom, '$lte': dateTo }
             }, callbackFn)
@@ -33,18 +31,18 @@ module.exports.getTransactionsByType = function (userName, transactionType, date
         .populate('account');
 };
 
-module.exports.getTransactionById = function (id, callbackFn) {
+module.exports.getTransactionById = function (userName, id, callbackFn) {
 
     Transaction
-        .find({username: defaultUserName, _id: id}, callbackFn)
+        .find({username: userName, _id: id}, callbackFn)
         .populate('concept')
         .populate('costCentre')
         .populate('account');
 };
 
-module.exports.deleteTransactionById = function (id, callbackFn) {
+module.exports.deleteTransactionById = function (userName, id, callbackFn) {
 
-    Transaction.findOneAndRemove({username: defaultUserName, _id: id}, function (error, transaction) {
+    Transaction.findOneAndRemove({username: userName, _id: id}, function (error, transaction) {
         if (error) {
             callbackFn(error, null);
         } else {
@@ -73,7 +71,7 @@ module.exports.updateTransaction = function (transaction, callbackFn) {
                 createTransaction(transaction, callbackFn);
             }
         }
-    });     
+    });
 };
 
 // Private methods
@@ -98,26 +96,27 @@ function updateTransaction(transaction, callbackFn) {
     };
 
     Transaction.findOneAndUpdate(
-        {_id: transaction._id}, 
+        {_id: transaction._id },
+        { username: transaction.username },
         { $set: updatedValues })
     .exec(function (error){
         if (error){
             callbackFn(error, null);
         } else {
-            console.log ('Transaction data updated -->username = ' + transaction.username + ' /id = ' + transaction._id);                        
+            console.log ('Transaction data updated -->username: ' + transaction.username + ' /id: ' + transaction._id);
             callbackFn(null, Transaction)
         }
-    }); 
+    });
 }
 
 function createTransaction(transaction, callbackFn) {
     var newTransaction = new Transaction(transaction);
-    
+
     newTransaction.save(function (error) {
         if (error) {
             callbackFn(error, null);
         } else {
-            console.log ('New Transaction saved ----->username = ' + newTransaction.username + ' /id = ' + newTransaction._id);
+            console.log ('New Transaction saved ----->username: ' + newTransaction.username + ' /id: ' + newTransaction._id);
             updateAccountAmount(error, newTransaction, callbackFn);
         }
     });

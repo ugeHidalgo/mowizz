@@ -119,7 +119,7 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
   onDeleteConfirmed() {
     const me = this;
 
-    me.transactionService.deleteTransactionById(me.transaction._id)
+    me.transactionService.deleteTransactionById(me.transaction.username, me.transaction._id)
       .subscribe((success) => {
         if (success) {
           me.successDialog.showModal('Borrado', 'Movimiento borrado correctamente.');
@@ -205,9 +205,10 @@ export class TransactionDetailComponent implements OnInit, OnChanges, ComponentC
 
   // Private Methods
   getTransactionById(id: string): void {
-    const me = this;
+    const me = this,
+          userName = me.globals.userNameLogged;
 
-    me.transactionService.getTransactionById(id)
+    me.transactionService.getTransactionById(userName, id)
       .subscribe( transaction => {
           me.savedTransaction = true;
           me.transaction = transaction[0];
