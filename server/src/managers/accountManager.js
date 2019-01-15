@@ -4,8 +4,8 @@
 /**
  * Module dependencies.
  */
-var defaultUserName = 'ugehidalgo',
-    mongoose = require ('mongoose'),
+var //defaultUserName = 'ugehidalgo',
+    //mongoose = require ('mongoose'),
     Account = require ('../models/account');
 
 module.exports.getAccounts = function (userName, callbackFn) {
@@ -23,10 +23,10 @@ module.exports.getAccountById = function (userName, id, callbackFn) {
     Account.find({username: userName, _id: id}, callbackFn);
 };
 
-module.exports.getAccountsByName = function (name, callbackFn) {
+module.exports.getAccountsByName = function (userName, name, callbackFn) {
 
-    var regexString = `/${name}/`;
-    Account.find({username: defaultUserName, name: new RegExp(name, 'i')}, callbackFn);
+    //var regexString = `/${name}/`;
+    Account.find({username: userName, name: new RegExp(name, 'i')}, callbackFn);
 };
 
 
@@ -45,18 +45,18 @@ module.exports.updateAccount = function (account, callbackFn) {
             updated: new Date,
             amount: account.amount
         };
- 
+
          Account.findOneAndUpdate(
-            {_id: account._id}, 
+            {_id: account._id},
             { $set: updatedValues },
             function (error){
                 if (error){
                     callbackFn(error, null);
                 } else {
-                    console.log ('Account data updated -->username = ' + account.username + ' /id = ' + account._id);                        
+                    console.log ('Account data updated -->username = ' + account.username + ' /id = ' + account._id);
                     callbackFn(null, account)
                 }
-            }); 
+            });
     } else {
         //Create new.
         var newAccount = new Account(account);
@@ -69,20 +69,20 @@ module.exports.updateAccount = function (account, callbackFn) {
                 callbackFn(null, newAccount);
             }
         });
-    } 
+    }
 };
 
 module.exports.updateAccountAmount = function (accountId, amountToAdd, callbackFn) {
 
     Account.findOneAndUpdate(
-    {_id: accountId}, 
+    {_id: accountId},
     { $inc: { amount: amountToAdd } },
     function (error, data){
         if (error){
             callbackFn(error);
         } else {
-            console.log ('Account amount updated with' + amountToAdd + ' for account with id ' + accountId);                        
+            console.log ('Account amount updated with' + amountToAdd + ' for account with id ' + accountId);
             callbackFn(null)
         }
-    }); 
+    });
 };

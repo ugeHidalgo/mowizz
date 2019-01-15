@@ -43,7 +43,7 @@ module.exports.init = function (app) {
         }
     });
 
-    // (GET)http:localhost:3000/api/account/?id=5a78a8fe458a4c457a3b4969&username=pepe   
+    // (GET)http:localhost:3000/api/account/?id=5a78a8fe458a4c457a3b4969&username=pepe
     app.get ('/api/account', auth.isUserAuthenticated, function (req, res, next) {
         var queryString = url.parse(req.url, true).query,
             id = queryString.id,
@@ -54,7 +54,7 @@ module.exports.init = function (app) {
         }
     });
 
-    console.log('accounts controller initialized');
+    console.log('Accounts controller initialized.');
 };
 
 /**
@@ -65,7 +65,7 @@ function getAccountById(username, id, res) {
 
     accountManager.getAccountById (username, id, function(error, account){
         if (error){
-            console.log('accounts controller returns an error (400)');
+            console.log('Accounts controller returns an error (400)');
             res.status(400).send(error);
         } else {
             res.set('Content-Type','application/json');
@@ -74,7 +74,7 @@ function getAccountById(username, id, res) {
                 console.log(msg);
                 res.status(200).send([msg]);
             } else {
-                console.log(`accounts controller returns account ${id} successfully.`);
+                console.log(`Accounts controller returns account ${id} for user "${userName}" successfully.`);
                 res.send(account);
             }
         }
@@ -82,13 +82,13 @@ function getAccountById(username, id, res) {
 }
 
 function getUserAccounts(userName, res) {
-    
+
     accountManager.getAccounts (userName, function(error, data){
         if (error){
-            console.log('accounts controller returns an error (400)');
+            console.log('Accounts controller returns an error (400).');
             res.status(400).send(error);
         } else {
-            console.log(`accounts controller returns ${data.length} accounts successfully`);
+            console.log(`Accounts controller returns ${data.length} accounts for user "${userName}" successfully.`);
             res.set('Content-Type','application/json');
             res.status(200).send(data);
         }
@@ -96,13 +96,13 @@ function getUserAccounts(userName, res) {
 }
 
 function getActiveUserAccounts(userName, res) {
-    
+
     accountManager.getActiveAccounts (userName, function(error, data){
         if (error){
-            console.log('accounts controller returns an error (400)');
+            console.log('Accounts controller returns an error (400)');
             res.status(400).send(error);
         } else {
-            console.log(`accounts controller returns ${data.length} active accounts successfully`);
+            console.log(`Accounts controller returns ${data.length} active accounts for user "${userName}" successfully.`);
             res.set('Content-Type','application/json');
             res.status(200).send(data);
         }
