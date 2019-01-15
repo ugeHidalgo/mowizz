@@ -53,7 +53,7 @@ module.exports.updateAccount = function (account, callbackFn) {
                 if (error){
                     callbackFn(error, null);
                 } else {
-                    console.log ('Account data updated -->username = ' + account.username + ' /id = ' + account._id);
+                    console.log ('Account data updated -->username: ' + account.username + ' /id: ' + account._id);
                     callbackFn(null, account)
                 }
             });
@@ -65,7 +65,7 @@ module.exports.updateAccount = function (account, callbackFn) {
             if (error) {
                 callbackFn(error, null);
             } else {
-                console.log ('New account saved ----->username = ' + newAccount.username + ' /id = ' + newAccount._id);
+                console.log ('New account saved ----->username: ' + newAccount.username + ' /id: ' + newAccount._id);
                 callbackFn(null, newAccount);
             }
         });

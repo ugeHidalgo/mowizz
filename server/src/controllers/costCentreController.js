@@ -42,14 +42,14 @@ module.exports.init = function (app) {
         }
     });
 
-    // (GET)http:localhost:3000/api/costCentre/?id=5a78a8fe458a4c457a3b4969?username=pepe   
+    // (GET)http:localhost:3000/api/costCentre/?id=5a78a8fe458a4c457a3b4969?username=pepe
     app.get ('/api/costCentre', auth.isUserAuthenticated, function (req, res, next) {
         var queryString = url.parse(req.url, true).query,
             id = queryString.id,
-            username = queryString.username;
+            userName = queryString.username;
 
         if (id) {
-            getcostCentreById(username, id, res);
+            getcostCentreById(userName, id, res);
         }
     });
 
@@ -59,12 +59,12 @@ module.exports.init = function (app) {
 /**
  * Private methods.
  */
-function getcostCentreById(username, id, res) {
+function getcostCentreById(userName, id, res) {
     var msg;
 
-    costCentreManager.getCostCentreById (username, id, function(error, costCentre){
+    costCentreManager.getCostCentreById (userName, id, function(error, costCentre){
         if (error){
-            console.log('Cost Centres controller returns an error (400)');
+            console.log('Cost Centres controller returns an error (400).');
             res.status(400).send(error);
         } else {
             res.set('Content-Type','application/json');
@@ -73,7 +73,7 @@ function getcostCentreById(username, id, res) {
                 console.log(msg);
                 res.status(200).send([msg]);
             } else {
-                console.log(`Cost Centres controller returns costCentre ${id} successfully.`);
+                console.log(`Cost Centres controller returns costCentre ${id} for user "${userName}" successfully.`);
                 res.send(costCentre);
             }
         }
@@ -81,13 +81,13 @@ function getcostCentreById(username, id, res) {
 }
 
 function getUserCostCentres(userName, res) {
-    
+
     costCentreManager.getCostCentres (userName, function(error, data){
         if (error){
-            console.log('Cost Centres controller returns an error (400)');
+            console.log('Cost Centres controller returns an error (400).');
             res.status(400).send(error);
         } else {
-            console.log(`Cost Centres controller returns ${data.length} Cost Centres successfully`);
+            console.log(`Cost Centres controller returns ${data.length} Cost Centres for user "${userName}" successfully.`);
             res.set('Content-Type','application/json');
             res.status(200).send(data);
         }
@@ -95,13 +95,13 @@ function getUserCostCentres(userName, res) {
 }
 
 function getActiveUserCostCentres(userName, res) {
-    
+
     costCentreManager.getActiveCostCentres (userName, function(error, data){
         if (error){
-            console.log('Cost Centres controller returns an error (400)');
+            console.log('Cost Centres controller returns an error (400).');
             res.status(400).send(error);
         } else {
-            console.log(`Cost Centres controller returns ${data.length} active cost Centres successfully`);
+            console.log(`Cost Centres controller returns ${data.length} active cost Centres for user "${userName}" successfully.`);
             res.set('Content-Type','application/json');
             res.status(200).send(data);
         }

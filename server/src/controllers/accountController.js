@@ -47,10 +47,10 @@ module.exports.init = function (app) {
     app.get ('/api/account', auth.isUserAuthenticated, function (req, res, next) {
         var queryString = url.parse(req.url, true).query,
             id = queryString.id,
-            username = queryString.username;
+            userName = queryString.username;
 
         if (id) {
-            getAccountById(username, id, res);
+            getAccountById(userName, id, res);
         }
     });
 
@@ -60,10 +60,10 @@ module.exports.init = function (app) {
 /**
  * Private methods.
  */
-function getAccountById(username, id, res) {
+function getAccountById(userName, id, res) {
     var msg;
 
-    accountManager.getAccountById (username, id, function(error, account){
+    accountManager.getAccountById (userName, id, function(error, account){
         if (error){
             console.log('Accounts controller returns an error (400)');
             res.status(400).send(error);
