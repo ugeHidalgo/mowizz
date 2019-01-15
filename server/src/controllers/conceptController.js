@@ -47,7 +47,7 @@ module.exports.init = function (app) {
         }
     });
 
-    // (GET)http:localhost:3000/api/concept/?id=5a78a8fe458a4c457a3b4969&username=pepe   
+    // (GET)http:localhost:3000/api/concept/?id=5a78a8fe458a4c457a3b4969&username=pepe
     app.get ('/api/concept', auth.isUserAuthenticated, function (req, res, next) {
         var queryString = url.parse(req.url, true).query,
             id = queryString.id,
@@ -58,7 +58,7 @@ module.exports.init = function (app) {
         }
     });
 
-    console.log('Concepts controller initialized');
+    console.log('Concepts controller initialized.');
 };
 
 /**
@@ -69,16 +69,16 @@ function getConceptById(username, id, res) {
 
     ConceptManager.getConceptById (username, id, function(error, concept){
         if (error){
-            console.log('Concepts controller returns an error (400)');
+            console.log('Concepts controller returns an error (400).');
             res.status(400).send(error);
         } else {
             res.set('Content-Type','application/json');
             if (concept.length === 0 ) {
-                msg = `No Concept found with id: ${id}`;
+                msg = `No Concept found with id: ${id} for user "${userName}".`;
                 console.log(msg);
                 res.status(200).send([msg]);
             } else {
-                console.log(`Concepts controller returns concept ${id} successfully.`);
+                console.log(`Concepts controller returns concept ${id} for user "${userName}" successfully.`);
                 res.send(concept);
             }
         }
@@ -86,13 +86,13 @@ function getConceptById(username, id, res) {
 }
 
 function getUserConcepts(userName, res) {
-    
+
     ConceptManager.getConcepts (userName, function(error, data){
         if (error){
-            console.log('Concepts controller returns an error (400)');
+            console.log('Concepts controller returns an error (400).');
             res.status(400).send(error);
         } else {
-            console.log(`Concepts controller returns ${data.length} concepts successfully`);
+            console.log(`Concepts controller returns ${data.length} concepts for user "${userName}" successfully.`);
             res.set('Content-Type','application/json');
             res.status(200).send(data);
         }
@@ -100,13 +100,13 @@ function getUserConcepts(userName, res) {
 }
 
 function getActiveUserConcepts(userName, res) {
-    
+
     ConceptManager.getActiveConcepts (userName, function(error, data){
         if (error){
-            console.log('Concepts controller returns an error (400)');
+            console.log('Concepts controller returns an error (400).');
             res.status(400).send(error);
         } else {
-            console.log(`Concepts controller returns ${data.length} active concepts successfully`);
+            console.log(`Concepts controller returns ${data.length} active concepts for user "${userName}" successfully.`);
             res.set('Content-Type','application/json');
             res.status(200).send(data);
         }
@@ -121,10 +121,10 @@ var conceptType = 1 // income
 
     ConceptManager.getActiveConceptsByType (userName, conceptType, function(error, data){
         if (error){
-            console.log('Concepts controller returns an error (400)');
+            console.log('Concepts controller returns an error (400).');
             res.status(400).send(error);
         } else {
-            console.log(`Concepts controller returns ${data.length} active concepts for type ${conceptType} successfully`);
+            console.log(`Concepts controller returns ${data.length} active concepts for type ${conceptType} and user "${userName}" successfully.`);
             res.set('Content-Type','application/json');
             res.status(200).send(data);
         }
