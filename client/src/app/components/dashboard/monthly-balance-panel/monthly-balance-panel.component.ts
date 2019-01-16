@@ -57,8 +57,8 @@ export class MonthlyBalancePanelComponent {
     me.transactionService.getTransactionsOnDates(me.globals.userNameLogged, TransactionTypes[1], firstDayOfMonth, lastDayOfMonth)
       .subscribe(transactions => {
         me.expenses = me.getTotals(transactions);
-        me.formattedExpenses = currencyPipe.transform(me.expenses, 'EUR', 'symbol');
-        me.formattedBalance = currencyPipe.transform(me.incomes - me.expenses, 'EUR', 'symbol');
+        me.formattedExpenses = currencyPipe.transform(me.expenses * -1, 'EUR', 'symbol');
+        me.formattedBalance = currencyPipe.transform(me.incomes + me.expenses, 'EUR', 'symbol');
       });
   }
 
