@@ -3,3 +3,19 @@
     padding: 20px;
     border: 1px;
 }
+
+.balance-panel-row {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+}
+
+.balance-panel-row-left-block {
+    width: 100%;
+    text-align: left;
+}
+
+.balance-panel-row-right-block {
+    width: 100%;
+    text-align: right;
+}
