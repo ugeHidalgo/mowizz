@@ -2,15 +2,22 @@
 <div class="balance-panel">
   <div class="balance-panel-row">
       <div class="balance-panel-row-left-block">Ingresos:</div>
-      <div class="balance-panel-row-right-block">{{formattedIncomes}}</div>
+      <div class="balance-panel-row-right-block">
+        {{formattedIncomes}}
+      </div>
   </div>
   <div class="balance-panel-row">
       <div class="balance-panel-row-left-block">Gastos:</div>
-      <div class="balance-panel-row-right-block">{{formattedExpenses}}</div>
+      <div class="balance-panel-row-right-block expense-field">
+        {{formattedExpenses}}
+      </div>
   </div>
   <div>_________________________</div>
   <div class="balance-panel-row">
       <div class="balance-panel-row-left-block">Diferencia:</div>
-      <div class="balance-panel-row-right-block">{{formattedBalance}}</div>
+      <div class="balance-panel-row-right-block"
+           [ngStyle]="{'color': getBalanceFieldColor()}">
+        {{formattedBalance}}
+      </div>
   </div>
 </div>

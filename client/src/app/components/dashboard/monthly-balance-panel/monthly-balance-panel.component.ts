@@ -28,6 +28,13 @@ export class MonthlyBalancePanelComponent {
     this.getMonthlyExpenses();
   }
 
+  public getBalanceFieldColor(){
+    const me = this,
+          balance = me.incomes + me.expenses
+
+    return ( balance < 0 ) ? "#FF0000" : "#000000";
+  }
+
   // Private Methods
   private getMonthlyIncomes(): void {
     const me = this,
