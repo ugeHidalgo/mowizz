@@ -9,8 +9,8 @@ var url = require ('url'),
     auth = require ('../auth/authMiddleware');
 
 module.exports.init = function (app) {
-    // (POST)http:localhost:3000/api/budgets body: {name: 'a name', username:'ugeHidalgo'}
-    app.post('/api/Budget', auth.isUserAuthenticated, function(req, res, next){
+    // (POST)http:localhost:3000/api/budget body: {name: 'a name', username:'ugeHidalgo'}
+    app.post('/api/budget', auth.isUserAuthenticated, function(req, res, next){
         var budgetToUpdate =  req.body;
 
         BudgetManager.updateBudget ( budgetToUpdate, function(error, updatedBudget){
