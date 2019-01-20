@@ -26,43 +26,43 @@ module.exports.getBudgetsByName = function (userName, name, callbackFn) {
     Budget.find({username: userName, name: new RegExp(name, 'i')}, callbackFn);
 };
 
-module.exports.updateBudget = function (Budget, callbackFn) {
+module.exports.updateBudget = function (budget, callbackFn) {
 
     var updatedValues = {};
 
-    if (Budget._id) {
+    if (budget._id) {
         //Update existing.
         updatedValues = {
-            name: Budget.name,
-            description: Budget.description,
-            comment: Budget.comment,
+            name: budget.name,
+            description: budget.description,
+            comment: budget.comment,
             updated: new Date,
-            active: Budget.active,
-            startDate: Budget.startDate,
-            endDate: Budget.endDate,
-            concepts: Budget.concepts
+            active: budget.active,
+            startDate: budget.startDate,
+            endDate: budget.endDate,
+            concepts: budget.concepts
         };
 
          Budget.findOneAndUpdate(
-            {_id: Budget._id},
+            {_id: budget._id},
             { $set: updatedValues },
             function (error){
                 if (error){
                     callbackFn(error, null);
                 } else {
-                    console.log ('Budget data updated -->username: ' + Budget.username + ' /id: ' + Budget._id);
-                    callbackFn(null, Budget)
+                    console.log ('Budget data updated -->username: ' + budget.username + ' /id: ' + budget._id);
+                    callbackFn(null, budget)
                 }
             });
     } else {
         //Create new.
-        var newBudget = new Budget(Budget);
+        var newBudget = new Budget(budget);
 
         newBudget.save(function (error) {
             if (error) {
                 callbackFn(error, null);
             } else {
-                console.log ('New Budget saved ----->username: ' + newBudget.username + ' /id: ' + newBudget._id);
+                console.log ('New budget saved ----->username: ' + newBudget.username + ' /id: ' + newBudget._id);
                 callbackFn(null, newBudget);
             }
         });

@@ -83,7 +83,7 @@ export class BudgetsComponent {
   }
 
   private onClickAddButton() {
-    const pathToBudgetDetail = `/budgett/-1`;
+    const pathToBudgetDetail = `/budget/-1`;
 
     this.router.navigate([pathToBudgetDetail]);
   }
