@@ -10,6 +10,7 @@ var moongoose = require ('mongoose'),
         username: String,
         startDate: { type : Date, default : Date.now },
         endDate: { type : Date, default : Date.now },
+        amount: Number,
         concepts: [ { type: Schema.Types.ObjectId, ref: 'Concepts' } ]
     });
 

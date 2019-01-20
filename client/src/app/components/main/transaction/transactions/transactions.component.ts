@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewContainerRef, HostBinding } from '@angular/core';
-import { Location, DatePipe, CurrencyPipe } from '@angular/common';
+import { Component, ViewContainerRef } from '@angular/core';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { TransactionService } from '../../../../services/transaction/transaction.service';

@@ -11,6 +11,7 @@ export class Budget {
   username: string;
   startDate: Date;
   endDate: Date;
+  amount: number;
   concepts: [ Concept ];
   __v: number;
 }

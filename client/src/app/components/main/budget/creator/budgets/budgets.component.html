@@ -1,3 +1,29 @@
-<p>
-  budgets works!
-</p>
+<div class="budgets-grid">
+    <div class="center">
+        <div class="card">
+            <div class="card-header indigo lighten-1 white-text">
+                <h4>Presupuestos</h4>
+            </div>
+            <div class="card-body">
+                <ag-grid-angular style="width: 1000px; height: 400px;"
+                    class="ag-fresh"
+                    [rowData]="rowData"
+                    [gridOptions]="gridOptions"
+                    (gridReady)="onGridReady($event)"
+                    (cellDoubleClicked)="onRowDoubleClicked($event)">
+                </ag-grid-angular>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-sm btn-outline-danger" (click)="onClickRefreshButton()">
+                    <i class="fa fa-refresh ml-1"> Deshacer</i>
+                </button>
+                <button class="btn btn-sm btn-outline-dark-green" (click)="onClickAddButton()">
+                    <i class="fa fa-plus ml-1"> Crear presupuesto</i>
+                </button>
+                <button class="btn btn-sm btn-outline-dark-green" (click)="onClickEditButton()">
+                    <i class="fa fa-pencil ml-1"> Editar Presupuesto</i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

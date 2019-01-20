@@ -29,6 +29,7 @@ import { GlobalsService } from './globals/globals.service';
 import { CostCentreService } from './services/costcentre/costcentre.service';
 import { ConceptService } from './services/concept/concept.service';
 import { TransactionService } from './services/transaction/transaction.service';
+import { BudgetService } from './services/budget/budget.service';
 
 
 // App components
@@ -106,6 +107,7 @@ import { BudgetsComponent } from './components/main/budget/creator/budgets/budge
     CostCentreService,
     ConceptService,
     TransactionService,
+    BudgetService,
     MessageService,
     {provide: ToastOptions, useClass: ToastrCustomOptions },
     GlobalsService
