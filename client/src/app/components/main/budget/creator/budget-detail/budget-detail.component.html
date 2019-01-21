@@ -30,14 +30,18 @@
                     </mat-grid-tile>
 
                     <mat-grid-tile [colspan]="1" [rowspan]="1">
-                        <mat-form-field class="full-width-form-field" >
-                            <input matInput placeholder="Inicio:" formControlName="startDate" readonly>
+                        <mat-form-field class="full-width-form-field">
+                            <input matInput [matDatepicker]="startDatePicker" placeholder="Inicio:" formControlName="startDate" [value]=budget.startDate>
+                            <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #startDatePicker></mat-datepicker>
                         </mat-form-field>
                     </mat-grid-tile>
 
                     <mat-grid-tile [colspan]="1" [rowspan]="1">
-                        <mat-form-field class="full-width-form-field" >
-                            <input matInput placeholder="Fin:" formControlName="endDate" readonly>
+                        <mat-form-field class="full-width-form-field">
+                            <input matInput [matDatepicker]="endDatePicker" placeholder="Fin:" formControlName="endDate" [value]=budget.endDate>
+                            <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #endDatePicker></mat-datepicker>
                         </mat-form-field>
                     </mat-grid-tile>
 

@@ -121,8 +121,8 @@ export class BudgetDetailComponent implements OnInit, OnChanges, ComponentCanDea
       active: me.budget.active,
       created: datePipe.transform(me.budget.created, format),
       updated: datePipe.transform(me.budget.updated, format),
-      startDate: datePipe.transform(me.budget.startDate, format),
-      endDate: datePipe.transform(me.budget.endDate, format),
+      startDate: me.budget.startDate,
+      endDate: me.budget.endDate,
       name: me.budget.name,
       description: me.budget.description,
       comments: me.budget.comments
@@ -136,8 +136,8 @@ export class BudgetDetailComponent implements OnInit, OnChanges, ComponentCanDea
 
     newbudget.active = formModel.active;
     newbudget.updated = new Date();
-    newbudget.startDate = new Date();
-    newbudget.endDate = new Date();
+    newbudget.startDate = formModel.startDate;
+    newbudget.endDate = formModel.endDate;
     newbudget.name = formModel.name;
     newbudget.description = formModel.description;
     newbudget.comments = formModel.comments;
