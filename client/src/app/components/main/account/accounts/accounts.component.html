@@ -5,19 +5,19 @@
               <h4>Cuentas</h4>
           </div>
           <div class="card-body">
-            <ag-grid-angular style="width: 1000px; height: 400px;"
+            <ag-grid-angular style="width: 900px; height: 350px;"
                 class="ag-fresh"
                 [rowData]="rowData"
                 [gridOptions]="gridOptions"
-                (gridReady)="onGridReady($event)"                           
+                (gridReady)="onGridReady($event)"
                 [frameworkComponents]="frameworkComponents"
                 (cellDoubleClicked)="onRowDoubleClicked($event)">
             </ag-grid-angular>
           </div>
-          <div class="card-footer">      
+          <div class="card-footer">
             <button class="btn btn-sm btn-outline-danger" (click)="onClickRefreshButton()">
                 <i class="fa fa-refresh ml-1"> Deshacer</i>
-            </button>  
+            </button>
             <button class="btn btn-sm btn-outline-dark-green" (click)="onClickAddButton()">
                 <i class="fa fa-plus ml-1"> Añadir Cuenta</i>
             </button>

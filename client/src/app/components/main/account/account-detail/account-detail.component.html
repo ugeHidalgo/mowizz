@@ -1,12 +1,12 @@
 <app-success-dialog></app-success-dialog>
-<div *ngIf="account" class="account-detail">
+<div *ngIf="account" class="account-detail center">
     <div class="card">
         <div class="card-header indigo lighten-1 white-text">
             <h4>Cuenta: {{ account.name }}</h4>
         </div>
         <div class="card-body">
             <form [formGroup]="validatingForm">
-                <mat-grid-list cols="4" rowHeight="100px">
+                <mat-grid-list cols="5" rowHeight="65px">
 
                     <mat-grid-tile [colspan]="1" [rowspan]="1">
                         <mat-form-field class="full-width-form-field" >
@@ -17,7 +17,7 @@
                         </mat-form-field>
                     </mat-grid-tile>
 
-                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
                         <mat-form-field class="full-width-form-field" >
                             <input matInput placeholder="Descripción:" formControlName="description">
                         </mat-form-field>
@@ -53,12 +53,12 @@
                         </mat-checkbox>
                     </mat-grid-tile>
 
-                    <mat-grid-tile [colspan]="4" [rowspan]="1">
+                    <mat-grid-tile [colspan]="5" [rowspan]="1">
                         <mat-form-field class="full-width-form-field" >
                             <input matInput placeholder="Commentarios:" formControlName="comments">
                         </mat-form-field>
                     </mat-grid-tile>
-                        
+
                 </mat-grid-list>
             </form>
         </div>
@@ -68,7 +68,7 @@
             </button>
             <button class="btn btn-sm btn-outline-danger" (click)="onClickRefresh()" [disabled]="validatingForm.pristine">
                 <i class="fa fa-refresh ml-1"> Deshacer</i>
-            </button>  
+            </button>
             <button class="btn btn-sm btn-outline-dark-green" (click)="onClickSave()" [disabled]="validatingForm.pristine || validatingForm.invalid">
                 <i class="fa fa-save ml-1"> Grabar</i>
             </button>

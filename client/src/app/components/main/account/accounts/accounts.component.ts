@@ -46,7 +46,7 @@ export class AccountsComponent {
         { headerName: 'Nombre', field: 'name', type: 'textColumn' },
         { headerName: 'Descripción', field: 'description', type: 'textColumn', width: 120 },
         { headerName: 'IBAN', field: 'iban', width: 150, suppressFilter: true },
-        { headerName: 'Commentarios', field: 'comments', suppressFilter: true }
+        { headerName: 'Comentarios', field: 'comments', suppressFilter: true }
       ],
       columnTypes: {
         numberColumn: {

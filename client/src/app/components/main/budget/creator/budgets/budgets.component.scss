@@ -1,6 +1,17 @@
+div.center {
+  display: table;
+  text-align: left;
+  margin: 5px auto;
+}
+
+.component-title {
+  background-color: #d1c1c1;
+  padding: 0px 20px 0px 20px;
+}
+
 .component-footer {
+  padding: 10px;
   width: 100%;
-  /* Set the fixed height of the footer here */
   height: 60px;
-  background-color: #faf3f3ad;
+  background-color: #f3eaeaed;
 }

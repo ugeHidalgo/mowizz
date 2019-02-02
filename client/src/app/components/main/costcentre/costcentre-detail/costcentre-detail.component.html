@@ -1,13 +1,13 @@
 <app-success-dialog></app-success-dialog>
-<div *ngIf="costCentre" class="costcentre-detail">
+<div *ngIf="costCentre" class="costcentre-detail center">
     <div class="card">
         <div class="card-header indigo lighten-1 white-text">
             <h4>Centro de coste: {{ costCentre.name }}</h4>
         </div>
         <div class="card-body">
             <form [formGroup]="validatingForm">
-                <mat-grid-list cols="3" rowHeight="100px">
-                    
+                <mat-grid-list cols="3" rowHeight="65px">
+
                    <mat-grid-tile [colspan]="1" [rowspan]="1">
                         <mat-form-field class="full-width-form-field" >
                             <input matInput placeholder="Nombre:" formControlName="name">
@@ -17,16 +17,10 @@
                         </mat-form-field>
                     </mat-grid-tile>
 
-                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
                         <mat-form-field class="full-width-form-field" >
                             <input matInput placeholder="Descripción:" formControlName="description">
                         </mat-form-field>
-                    </mat-grid-tile>                    
-
-                    <mat-grid-tile [colspan]="1" [rowspan]="1">                        
-                        <mat-checkbox formControlName="active" style="border:0px;"
-                            value="validatingForm.controls['active'].value">En uso
-                        </mat-checkbox>                                                    
                     </mat-grid-tile>
 
                     <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -41,13 +35,19 @@
                         </mat-form-field>
                     </mat-grid-tile>
 
+                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <mat-checkbox formControlName="active" style="border:0px;"
+                            value="validatingForm.controls['active'].value">En uso
+                        </mat-checkbox>
+                    </mat-grid-tile>
+
                     <mat-grid-tile [colspan]="3" [rowspan]="1">
                         <mat-form-field class="full-width-form-field" >
-                            <input matInput placeholder="Commentarios:" formControlName="comments">
+                            <input matInput placeholder="Comentarios:" formControlName="comments">
                         </mat-form-field>
                     </mat-grid-tile>
 
-                </mat-grid-list>               
+                </mat-grid-list>
             </form>
         <div class="card-footer">
             <button class="btn btn-sm btn-outline-elegant" (click)="onClickGoBack()">
@@ -55,7 +55,7 @@
             </button>
             <button class="btn btn-sm btn-outline-danger" (click)="onClickRefresh()" [disabled]="validatingForm.pristine">
                 <i class="fa fa-refresh ml-1"> Deshacer</i>
-            </button>  
+            </button>
             <button class="btn btn-sm btn-outline-dark-green" (click)="onClickSave()" [disabled]="validatingForm.pristine || validatingForm.invalid">
                 <i class="fa fa-save ml-1"> Grabar</i>
             </button>

@@ -1,16 +1,16 @@
 <app-delete-dialog></app-delete-dialog>
 <app-success-dialog></app-success-dialog>
 <app-error-dialog></app-error-dialog>
-<div *ngIf="transaction" class="transaction-detail">
+<div *ngIf="transaction" class="transaction-detail center">
     <div class="card">
         <div class="card-header indigo lighten-1 white-text">
             <h4>Movimiento: {{ transaction.comment }}</h4>
         </div>
         <div class="card-body">
-            <form [formGroup]="validatingForm">  
-              <mat-grid-list cols="3" rowHeight="100px">
+            <form [formGroup]="validatingForm">
+              <mat-grid-list cols="9" rowHeight="80px">
 
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
                   <mat-form-field class="full-width-form-field">
                       <input matInput [matDatepicker]="picker" placeholder="Fecha:" formControlName="date" [value]=transaction.date>
                       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -18,7 +18,7 @@
                   </mat-form-field>
                 </mat-grid-tile>
 
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-grid-tile [colspan]="4" [rowspan]="1">
                   <mat-form-field class="full-width-form-field">
                     <mat-select placeholder="Tipo movimiento: " formControlName="transactionType" (selectionChange)="onTransactionTypeSelected()">
                         <mat-option *ngFor="let transactionType of transactionTypes" [(value)]=transactionType.value>
@@ -28,13 +28,13 @@
                   </mat-form-field>
                 </mat-grid-tile>
 
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
                   <mat-form-field class="full-width-form-field" >
                       <input matInput placeholder="Cantidad:" formControlName="amount" type="number">
                   </mat-form-field>
                 </mat-grid-tile>
 
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
                     <mat-form-field class="full-width-form-field">
                         <mat-select placeholder="Concepto: " formControlName="concept">
                             <mat-option *ngFor="let concept of concepts" [(value)]=concept._id>
@@ -44,7 +44,7 @@
                     </mat-form-field>
                 </mat-grid-tile>
 
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
                     <mat-form-field class="full-width-form-field">
                         <mat-select placeholder="Centro de gasto: " formControlName="costCentre">
                             <mat-option *ngFor="let costCentre of costCentres" [(value)]=costCentre._id>
@@ -54,7 +54,7 @@
                     </mat-form-field>
                 </mat-grid-tile>
 
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
                     <mat-form-field class="full-width-form-field">
                         <mat-select placeholder="Cuenta: " formControlName="account">
                             <mat-option *ngFor="let account of accounts" [(value)]=account._id>
@@ -64,9 +64,9 @@
                     </mat-form-field>
                 </mat-grid-tile>
 
-                <mat-grid-tile [colspan]="3" [rowspan]="1">
+                <mat-grid-tile [colspan]="9" [rowspan]="1">
                     <mat-form-field class="full-width-form-field" >
-                        <input matInput placeholder="Commentarios:" formControlName="comments">
+                        <input matInput placeholder="Comentarios:" formControlName="comments">
                     </mat-form-field>
                 </mat-grid-tile>
 
@@ -82,7 +82,7 @@
             </button>
             <button class="btn btn-sm btn-outline-danger" (click)="onClickDelete()" [hidden]=!savedTransaction>
                 <i class="fa fa-trash ml-1"> Borrar</i>
-            </button> 
+            </button>
             <button class="btn btn-sm btn-outline-dark-green" (click)="onClickSave()" [disabled]="validatingForm.pristine || validatingForm.invalid"
                     [hidden]=savedTransaction>
                 <i class="fa fa-save ml-1"> Grabar</i>
@@ -90,4 +90,4 @@
         </div>
     </div>
 </div>
-  
+
