@@ -4,7 +4,6 @@ export class Budget {
   _id: string;
   name: string;
   description: string;
-  comments: string;
   active: boolean;
   created: Date;
   updated: Date;
