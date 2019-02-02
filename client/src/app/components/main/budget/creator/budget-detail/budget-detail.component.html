@@ -3,7 +3,7 @@
     <div class="budget-detail-form">
         <h4>Presupuesto: {{ budget.name }}</h4>
         <form [formGroup]="validatingForm">
-            <mat-grid-list cols="4" rowHeight="100px">
+            <mat-grid-list cols="5" rowHeight="100px">
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     <mat-form-field class="full-width-form-field" >
                         <input matInput placeholder="Nombre:" formControlName="name">
@@ -13,16 +13,10 @@
                     </mat-form-field>
                 </mat-grid-tile>
 
-                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
                     <mat-form-field class="full-width-form-field" >
                         <input matInput placeholder="Descripción:" formControlName="description">
                     </mat-form-field>
-                </mat-grid-tile>
-
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                    <mat-checkbox formControlName="active" style="border:0px;"
-                        value="validatingForm.controls['active'].value">En uso
-                    </mat-checkbox>
                 </mat-grid-tile>
 
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -42,23 +36,10 @@
                 </mat-grid-tile>
 
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
-                    <mat-form-field class="full-width-form-field" >
-                        <input matInput placeholder="Creado:" formControlName="created" readonly>
-                    </mat-form-field>
+                    <mat-checkbox formControlName="active" style="border:0px;"
+                        value="validatingForm.controls['active'].value">En uso
+                    </mat-checkbox>
                 </mat-grid-tile>
-
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                    <mat-form-field class="full-width-form-field" >
-                        <input matInput placeholder="Actualizado:" formControlName="updated" readonly>
-                    </mat-form-field>
-                </mat-grid-tile>
-
-                <mat-grid-tile [colspan]="2" [rowspan]="1">
-                    <mat-form-field class="full-width-form-field" >
-                        <input matInput placeholder="Comentarios:" formControlName="comments">
-                    </mat-form-field>
-                </mat-grid-tile>
-
             </mat-grid-list>
         </form>
     </div>
