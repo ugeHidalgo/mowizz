@@ -1,68 +1,67 @@
 <!--Navbar-->
 <div class="mat-app-background">
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
+    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
 
-    <!-- Navbar brand -->
-    <logo><a class="navbar-brand" href="#">MoWizz</a></logo>
+        <!-- Navbar brand -->
+        <logo><a class="navbar-brand" href="#">MoWizz</a></logo>
 
-    <!-- Collapsible content -->
-    <links>
+        <!-- Collapsible content -->
+        <links>
 
-        <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item" *ngIf="globals.userNameLogged">
-                <a class="nav-link waves-light" mdbRippleRadius [routerLink]="['/dashboard']">Dashboard</a>
-            </li>
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" *ngIf="globals.userNameLogged">
+                    <a class="nav-link waves-light" mdbRippleRadius [routerLink]="['/dashboard']">Dashboard</a>
+                </li>
 
-            <!-- Files Dropdown -->
-            <li class="nav-item dropdown" *ngIf="globals.userNameLogged" dropdown>
-                <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
-                Archivos<span class="caret"></span></a>
-                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/transactions']">Movimientos</a>
-                    <div class="divider dropdown-divider"></div>
-                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/accounts']">Cuentas</a>
-                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/costcentres']">Centros de Coste</a>
-                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/concepts']">Conceptos</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown" *ngIf="globals.userNameLogged" dropdown>
-                <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
-                Presupuestos<span class="caret"></span></a>
-                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/budgets']">Crear presupuesto</a>
-                    <div class="divider dropdown-divider"></div>
-                    <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/budget']">Consultar presupuesto</a>
-                </div>
-            </li>
-        </ul>
+                <!-- Files Dropdown -->
+                <li class="nav-item dropdown" *ngIf="globals.userNameLogged" dropdown>
+                    <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
+                    Archivos<span class="caret"></span></a>
+                    <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                        <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/transactions']">Movimientos</a>
+                        <div class="divider dropdown-divider"></div>
+                        <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/accounts']">Cuentas</a>
+                        <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/costcentres']">Centros de Coste</a>
+                        <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/concepts']">Conceptos</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown" *ngIf="globals.userNameLogged" dropdown>
+                    <a dropdownToggle mdbRippleRadius type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
+                    Presupuestos<span class="caret"></span></a>
+                    <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                        <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/budgets']">Crear presupuesto</a>
+                        <div class="divider dropdown-divider"></div>
+                        <a class="dropdown-item waves-light" mdbRippleRadius [routerLink]="['/budget']">Consultar presupuesto</a>
+                    </div>
+                </li>
+            </ul>
 
-        <!-- Login links-->
-        <ul *ngIf="globals.userNameLogged else notUserLogged" class="nav navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" [routerLink]="['/user']">{{globals.userNameLogged}}</a></li>
-            <li class="nav-item">
-                <a class="nav-link"
-                    [routerLink]="['/']"
-                    (click)="logout()">Logout</a>
-            </li>
-        </ul>
-        <ng-template #notUserLogged>
-        <ul class="nav navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" [routerLink]="['/login']">Login</a></li>
-            <li class="nav-item"><a class="nav-link" [routerLink]="['/register']">Registrar</a></li>
-        </ul>
-        </ng-template>
-        <!-- Links -->
-    </links>
-    <!-- Collapsible content -->
+            <!-- Login links-->
+            <ul *ngIf="globals.userNameLogged else notUserLogged" class="nav navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" [routerLink]="['/user']">{{globals.userNameLogged}}</a></li>
+                <li class="nav-item">
+                    <a class="nav-link"
+                        [routerLink]="['/']"
+                        (click)="logout()">Logout</a>
+                </li>
+            </ul>
+            <ng-template #notUserLogged>
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" [routerLink]="['/login']">Login</a></li>
+                <li class="nav-item"><a class="nav-link" [routerLink]="['/register']">Registrar</a></li>
+            </ul>
+            </ng-template>
+            <!-- Links -->
+        </links>
+        <!-- Collapsible content -->
+    </mdb-navbar>
+    <!--/.Navbar-->
 
-</mdb-navbar>
-<!--/.Navbar-->
-
-<div class="container">
-    <app-messages></app-messages>
-    <router-outlet></router-outlet>
-</div>
+    <div>
+        <app-messages></app-messages>
+        <router-outlet></router-outlet>
+    </div>
 </div>
 
 
