@@ -107,8 +107,7 @@ export class BudgetDetailComponent implements OnInit, OnChanges, ComponentCanDea
       endDate: '',
       name: ['', [Validators.required ]],
       description: '',
-      transactionType: '',
-      comments: ''
+      transactionType: ''
     });
   }
 
@@ -125,7 +124,6 @@ export class BudgetDetailComponent implements OnInit, OnChanges, ComponentCanDea
       endDate: me.budget.endDate,
       name: me.budget.name,
       description: me.budget.description,
-      comments: me.budget.comments
     });
   }
 
@@ -140,7 +138,6 @@ export class BudgetDetailComponent implements OnInit, OnChanges, ComponentCanDea
     newbudget.endDate = formModel.endDate;
     newbudget.name = formModel.name;
     newbudget.description = formModel.description;
-    newbudget.comments = formModel.comments;
 
     return newbudget;
   }
