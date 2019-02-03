@@ -38,6 +38,7 @@ import { RegisterComponent } from './login/register/register.component';
 import { UserComponent } from './login/user/user.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MatCheckboxComponent } from './components/grid/checkbox/mat-checkbox.component';
+import { MainFooterComponent } from './components/main/main-footer/main-footer.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountsComponent } from './components/main/account/accounts/accounts.component';
@@ -57,7 +58,7 @@ import { IncomesPanelComponent } from './components/dashboard/incomes-panel/inco
 import { MonthlyBalancePanelComponent } from './components/dashboard/monthly-balance-panel/monthly-balance-panel.component';
 import { BudgetsComponent } from './components/main/budget/creator/budgets/budgets.component';
 import { BudgetDetailComponent } from './components/main/budget/creator/budget-detail/budget-detail.component';
-import { MainFooterComponent } from './components/main/main-footer/main-footer.component';
+import { BudgetDetailsComponent } from './components/main/budget/creator/budget-details/budget-details.component';
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import { MainFooterComponent } from './components/main/main-footer/main-footer.c
     MonthlyBalancePanelComponent,
     BudgetsComponent,
     BudgetDetailComponent,
+    BudgetDetailsComponent,
     MainFooterComponent
   ],
 

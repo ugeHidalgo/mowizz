@@ -3,9 +3,10 @@
     <div class="component-title">
         <h4>Presupuesto: {{ budget.name }}</h4>
     </div>
+
     <div class="budget-detail-form">
         <form [formGroup]="validatingForm">
-            <mat-grid-list cols="8" rowHeight="80px">
+            <mat-grid-list cols="9" rowHeight="80px">
                 <mat-grid-tile [colspan]="2" [rowspan]="1">
                     <mat-form-field class="full-width-form-field" >
                         <input matInput placeholder="Nombre:" formControlName="name">
@@ -38,12 +39,22 @@
                 </mat-grid-tile>
 
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <mat-form-field class="full-width-form-field" >
+                            <input matInput placeholder="Cantidad:" formControlName="amount" readonly>
+                        </mat-form-field>
+                    </mat-grid-tile>
+
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
                     <mat-checkbox formControlName="active" style="border:0px;"
                         value="validatingForm.controls['active'].value">En uso
                     </mat-checkbox>
                 </mat-grid-tile>
             </mat-grid-list>
         </form>
+    </div>
+
+    <div class="budget-details-list">
+        <app-budget-details></app-budget-details>
     </div>
 
     <div class="card-footer">
