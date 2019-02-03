@@ -57,6 +57,7 @@ import { IncomesPanelComponent } from './components/dashboard/incomes-panel/inco
 import { MonthlyBalancePanelComponent } from './components/dashboard/monthly-balance-panel/monthly-balance-panel.component';
 import { BudgetsComponent } from './components/main/budget/creator/budgets/budgets.component';
 import { BudgetDetailComponent } from './components/main/budget/creator/budget-detail/budget-detail.component';
+import { MainFooterComponent } from './components/main/main-footer/main-footer.component';
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import { BudgetDetailComponent } from './components/main/budget/creator/budget-d
     IncomesPanelComponent,
     MonthlyBalancePanelComponent,
     BudgetsComponent,
-    BudgetDetailComponent
+    BudgetDetailComponent,
+    MainFooterComponent
   ],
 
   imports: [
