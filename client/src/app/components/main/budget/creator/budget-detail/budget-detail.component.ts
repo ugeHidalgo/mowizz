@@ -6,6 +6,7 @@ import { SuccessDialogComponent } from '../../../../dialogs/success-dialog/succe
 import { ErrorDialogComponent } from '../../../../dialogs/error-dialog/error-dialog.component';
 
 import { Budget } from '../../../../../models/budget';
+import { BudgetDetail } from '../../../../../models/budgetDetail';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -46,7 +47,7 @@ export class BudgetDetailComponent implements OnInit, OnChanges, ComponentCanDea
 
   ngOnInit() {
     const me = this,
-      id = me.route.snapshot.paramMap.get('id');
+          id = me.route.snapshot.paramMap.get('id');
 
     if (id === '-1') {
       me.budget = new Budget();
@@ -56,6 +57,7 @@ export class BudgetDetailComponent implements OnInit, OnChanges, ComponentCanDea
       me.budget.endDate = new Date();
       me.budget.username = me.globals.userNameLogged;
       me.budget.active = true;
+      me.budget.budgetDetails = [] as BudgetDetail[];
       me.rebuildForm();
     } else {
       me.getBudgetById(id);

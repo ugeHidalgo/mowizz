@@ -4,26 +4,34 @@
 /**
  * Module dependencies.
  */
-var Budget = require ('../models/Budget');
+var Budget = require ('../models/Budget'),
+    BudgetDetail = require ('../models/budgetDetail');
 
 module.exports.getBudgets = function (userName, callbackFn) {
 
-    Budget.find({username: userName}, callbackFn);
+    Budget.find({username: userName}, callbackFn)
+        .sort({startDate: 'desc'})
+        .populate('budgetDetails');
 };
 
 module.exports.getActiveBudgets = function (userName, callbackFn) {
 
-    Budget.find({username: userName, active: true}, callbackFn);
+    Budget.find({username: userName, active: true}, callbackFn)
+        .sort({startDate: 'desc'})
+        .populate('budgetDetails');
 };
 
 module.exports.getBudgetById = function (userName, id, callbackFn) {
 
-    Budget.find({username: userName, _id: id}, callbackFn);
+    Budget.find({username: userName, _id: id}, callbackFn)
+        .populate('budgetDetails');
 };
 
 module.exports.getBudgetsByName = function (userName, name, callbackFn) {
 
-    Budget.find({username: userName, name: new RegExp(name, 'i')}, callbackFn);
+    Budget.find({username: userName, name: new RegExp(name, 'i')}, callbackFn)
+        .populate('budgetDetails');
+
 };
 
 module.exports.updateBudget = function (budget, callbackFn) {
@@ -40,7 +48,7 @@ module.exports.updateBudget = function (budget, callbackFn) {
             active: budget.active,
             startDate: budget.startDate,
             endDate: budget.endDate,
-            concepts: budget.concepts
+            budgetDetails: budget.budgetDetails
         };
 
          Budget.findOneAndUpdate(

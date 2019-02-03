@@ -1,4 +1,5 @@
 import { Concept } from './concept';
+import { BudgetDetail } from './budgetDetail';
 
 export class Budget {
   _id: string;
@@ -11,6 +12,6 @@ export class Budget {
   startDate: Date;
   endDate: Date;
   amount: number;
-  concepts: [ Concept ];
+  budgetDetails: BudgetDetail[];
   __v: number;
 }

@@ -11,7 +11,7 @@ var moongoose = require ('mongoose'),
         startDate: { type : Date, default : Date.now },
         endDate: { type : Date, default : Date.now },
         amount: Number,
-        concepts: [ { type: Schema.Types.ObjectId, ref: 'Concepts' } ]
+        budgetDetails: [ { type: Schema.Types.ObjectId, ref: 'BudgetDetails' } ]
     });
 
 module.exports = moongoose.model ('Budgets', BudgetSchema);
